@@ -1,5 +1,4 @@
-$(document)
-  .ready(function() {
+document.addEventListener("turbolinks:load", function() {
 
     // fix main menu to page on passing
     $('.main.menu').visibility({
@@ -7,7 +6,7 @@ $(document)
     });
     $('.overlay').visibility({
       type: 'fixed',
-      offset: 80
+      // offset: 80
     });
 
     // lazy load images

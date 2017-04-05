@@ -1,0 +1,17 @@
+//// Base
+
+//Overrides for imported libraries
+@import "base/variables.scss";
+
+// Semantic UI
+@import "base/semantic.scss";
+
+// Globals
+@import "base/mixins.scss";
+
+// Layouts
+@import "base/layout-application.scss";
+@import "base/layout-client.scss";
+
+//// templates
+@import "styles/**/*";

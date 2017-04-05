@@ -1,0 +1,36 @@
+.latest-charges{
+  padding-left: 0;
+  border-left: 1px solid #f2f5f7;
+  border-right: 1px solid #f2f5f7;
+  border-bottom: 1px solid #f2f5f7;
+}
+
+.charge {
+    box-shadow: $box-shadow;
+    padding: 16px !important;
+    border-radius: 0;
+    background: white;
+    list-style-type: none;
+    &.active-charge{
+      border-left: 3px solid#48dc5b;
+    }
+    &.latest{
+
+    }
+    &.inactive{
+      background-color: transparent;
+      border-top: 1px solid #e2e6e8;
+      margin-top: 0;
+      box-shadow: none;      
+    }
+}
+@media (min-width: 576px){
+  .charge {
+      padding: 24px !important;
+  }
+}
+@media (min-width: 992px){
+  .charge {
+      padding: 32px !important;
+  }
+}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403033646) do
+ActiveRecord::Schema.define(version: 20170403183839) do
 
   create_table "clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "", null: false
@@ -27,6 +27,37 @@ ActiveRecord::Schema.define(version: 20170403033646) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_clients_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "coupons", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "code"
+    t.string   "free_trial_length"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "stripe_id"
+    t.float    "price",         limit: 24
+    t.string   "interval"
+    t.text     "features",      limit: 65535
+    t.boolean  "highlight"
+    t.integer  "display_order"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  create_table "subscriptions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "stripe_id"
+    t.integer  "plan_id"
+    t.string   "last_four"
+    t.integer  "coupon_id"
+    t.string   "card_type"
+    t.float    "current_price", limit: 24
+    t.integer  "client_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
 end

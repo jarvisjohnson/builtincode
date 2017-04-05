@@ -1,0 +1,49 @@
+nav {
+    z-index: 100;
+
+    ul, ol {
+        list-style: none;
+        list-style-image: none;
+    }
+}
+
+@media only screen and (min-width: 569px) {
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(29, 30, 34, 0.15);
+        padding-right: 60px;
+        -moz-transition: background-color 0.12s ease-in-out;
+        -o-transition: background-color 0.12s ease-in-out;
+        -webkit-transition: background-color 0.12s ease-in-out;
+        transition: background-color 0.12s ease-in-out;
+
+        ul {
+            float: right;
+            padding: 0;
+            margin: 0;
+
+            li {
+                float: left;
+
+                a {
+                    display: block;
+                    padding-top: 20px;
+                    font-family: 'gt_walsheim_medium', "Helvetica Neue", Helvetica, Arial, sans-serif;
+                    text-transform: uppercase;
+                    font-size: 11px;
+                    letter-spacing: 2px;
+                    color: #fff;
+                    padding-right: 15px;
+                    padding-left: 15px;
+                }
+            }
+        }
+
+        &:hover {
+            background-color: rgba(29, 30, 34, 0.6);
+        }
+    }
+}
