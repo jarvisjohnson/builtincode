@@ -36,9 +36,11 @@ gem "haml-rails", "~> 0.9"
 
 gem "figaro"
 
-gem 'simple_form', "~> 3.4"
+gem "stripe"
+gem "stripe_event"
+gem "money"
 
-gem 'koudoku'
+gem 'simple_form', "~> 3.4"
 
 gem 'semantic-ui-sass', '~> 2.2', '>= 2.2.9.0'
 

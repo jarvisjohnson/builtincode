@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :plan do
     name "MyString"
-    stripe_id "MyString"
+    stripe_account_id "MyString"
     price 1.5
     interval "MyString"
     features "MyText"
