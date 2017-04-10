@@ -47,6 +47,13 @@ body {
   margin: 2em -4em 2em 2em;
 }
 
+footer{
+  margin-top: 3rem;
+  // position: absolute;
+  // width: 100%;
+  // bottom: 2rem;
+}
+
 .ui.footer.segment {
   margin: 5em 0em 0em;
   padding: 5em 0em;
@@ -119,4 +126,8 @@ body {
   .ui.visible.left.sidebar ~ .pusher {
     margin-left: 260px;  
   }  
+}
+
+.ui.divider {
+    width: 100%;
 }

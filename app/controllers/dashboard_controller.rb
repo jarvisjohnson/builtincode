@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class DashboardController < ApplicationController
 
   before_action :set_client, only: [:show, :edit, :update, :destroy, :index]
 
@@ -11,7 +11,7 @@ class HomeController < ApplicationController
       @subscription = Stripe::Subscription.retrieve(@client.stripe_subscription_id)
       @status = @subscription.status
 
-      # Talk to Stripe API to retrieve their invoices 
+      # Talk to Stripe API to retreivetrieve their invoices 
 
       @invoices = Stripe::Invoice.list(:customer => @client.stripe_account_id)
 

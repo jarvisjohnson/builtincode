@@ -1,9 +1,0 @@
-= form_tag subscriptions_path do
-  %article
-    - if flash[:error].present?
-      #error_explanation
-        %p= flash[:error]
-    %label.amount
-      %span Amount: #{@amount}
-  %script.stripe-button{"data-amount" => @amount, "data-description" => "A month's subscription", "data-key" => "#{Rails.configuration.stripe[:publishable_key]}", "data-description" => "#{@description}", "data-email" => "#{current_client.email}",  "data-locale" => "auto", :src => "https://checkout.stripe.com/checkout.js"}
-  = link_to(image_tag("logos/powered_by_stripe.svg"), "https://www.stripe.com", :target => "_blank")

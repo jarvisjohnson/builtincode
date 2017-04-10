@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :clients
-  root to: "home#index"
+  root to: "dashboard#index"
 
   resources :clients
   resources :subscriptions
