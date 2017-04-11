@@ -131,3 +131,11 @@ footer{
 .ui.divider {
     width: 100%;
 }
+abbr[title] {
+    border-bottom: none;
+}
+
+.ui.dropdown .menu {
+    right: 0px;
+    left: auto;
+}

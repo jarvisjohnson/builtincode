@@ -15,7 +15,9 @@
   %body
 
     %main
-
-      / https://github.com/doabit/semantic-ui-sass  
-      = semantic_flash
-      = yield
+      .ui.middle.aligned.center.aligned.grid.full-height
+        .column.devise-wrapper
+          = semantic_flash
+          .ui.segment
+            / https://github.com/doabit/semantic-ui-sass  
+            = yield

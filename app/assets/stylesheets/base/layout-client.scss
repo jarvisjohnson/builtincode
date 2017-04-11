@@ -19,3 +19,15 @@
 .ui.checkbox label {
   color: #ddd;
 }
+
+.full-height{
+  height: 100%;
+}
+
+.devise-wrapper{
+  max-width: 700px;
+  .segment{
+    padding: 2rem 2.5rem;
+    box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
+  }
+}

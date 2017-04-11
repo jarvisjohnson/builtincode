@@ -8,4 +8,8 @@ document.addEventListener("turbolinks:load", function() {
     $(this).closest('.message').fadeOut();
   });
 
+  $('.ui.dropdown')
+    .dropdown()
+  ;  
+
 });

@@ -24,7 +24,7 @@
         Friends
       %a.item
         Settings
-      = link_to "Sign Out", destroy_client_session_path, :method => :delete
+
 
 
     %main.pusher
@@ -32,7 +32,34 @@
       .header
         .ui.vertical.segment
           .ui.container    
-            %h1.ui Client Dashboard
+            .ui.two.column.grid
+              .column
+                %h1.ui Client Dashboard
+              .right.aligned.column
+                .ui.inline.dropdown
+                  .text
+                    - if @client.avatar.present?
+                      = image_tag @client.avatar.url(:thumb), class: " ui avatar image"
+                    - elsif @client.oauth_avatar
+                      = image_tag @client.oauth_avatar, class: "ui avatar image"
+                    Jenny Hess
+                  %i.dropdown.icon
+                  .menu
+                    .header
+                      - if @client.avatar.present?
+                        = image_tag @client.avatar.url(:thumb), class: " ui avatar image"
+                      - elsif @client.oauth_avatar
+                        = image_tag @client.oauth_avatar, class: "ui avatar image"
+                      Jenny Hess
+                    .divider
+                    = link_to(destroy_client_session_path, :method => :delete, class: "item") do
+                      Sign Out
+                      %i.icon.lock.left.floated
+                    = link_to(edit_client_registration_path, class: "item") do
+                      Edit your Account
+                      %i.icon.configure.left.floated
+
+
             = semantic_flash
             %p This example shows how to use lazy loaded images, a sticky menu, and a simple text container
         .ui.vertical.segment

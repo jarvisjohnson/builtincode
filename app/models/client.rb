@@ -1,21 +1,70 @@
+# == Schema Information
+#
+# Table name: clients
+#
+#  id                     :integer          not null, primary key
+#  email                  :string(255)      default(""), not null
+#  encrypted_password     :string(255)      default(""), not null
+#  reset_password_token   :string(255)
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default("0"), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  stripe_account_id      :string(255)
+#  paid                   :boolean
+#  stripe_subscription_id :string(255)
+#  hosting_units          :string(255)
+#  billing_currency       :string(255)      default("AUD")
+#  provider               :string(255)
+#  uid                    :string(255)
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string(255)
+#  avatar_file_name       :string(255)
+#  avatar_content_type    :string(255)
+#  avatar_file_size       :integer
+#  avatar_updated_at      :datetime
+#  oauth_avatar           :string(255)
+#
+# Indexes
+#
+#  index_clients_on_confirmation_token    (confirmation_token) UNIQUE
+#  index_clients_on_email                 (email) UNIQUE
+#  index_clients_on_reset_password_token  (reset_password_token) UNIQUE
+#
+
 class Client < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+  devise :database_authenticatable, :registerable, :confirmable,
+         :recoverable, :rememberable, :trackable, :omniauthable,
+         :omniauth_providers => [:facebook, :google_oauth2]
+
+  #paperclip
+  has_attached_file :avatar, styles: { medium: "300x300#", thumb: "100x100#" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/         
   
   # Omniauth login
   # https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview
-    def self.from_omniauth(auth)
+    def self.from_facebook_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |client|
-        client.email = auth.info.email
+        if auth.info.email?
+          client.email = auth.info.email
+        else
+          client.email = "facebook_user: #{auth.info.name}"
+        end
         client.password = Devise.friendly_token[0,20]
         # client.name = auth.info.name   # assuming the client model has a name
-        # client.avatar = auth.info.image # assuming the client model has an image
+        client.oauth_avatar = auth.info.image # assuming the client model has an image
         # If you are using confirmable and the provider(s) you use validate emails, 
         # uncomment the line below to skip the confirmation emails.
-        # client.skip_confirmation!
-        # raise
+        client.skip_confirmation!
       end
     end         
 
@@ -27,7 +76,9 @@ class Client < ApplicationRecord
         unless client
             client = Client.create(
               email: data["email"],
-              password: Devise.friendly_token[0,20]
+              password: Devise.friendly_token[0,20],
+              provider: "google",
+              oauth_avatar: data["image"]
             )
         end
         client
@@ -41,5 +92,11 @@ class Client < ApplicationRecord
         end
       end
     end  
+
+  protected
+
+    # def email_required?
+    #   false
+    # end
 
 end

@@ -1,14 +1,21 @@
-.ui.one.column.center.aligned.grid
-  .column.six.wide.form-holder
-    %h2.center.aligned.header.form-head Sign in
+%h2 Log in
+.ui.two.column.grid
+  .column
+    = render "devise/shared/omniauth_links"
+  .column
     = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-      = f.input :email, required: false, autofocus: true, label: false, placeholder: 'email'
-      = f.input :password, required: false, label: false, placeholder: "password"
-      .field
-        = f.button :submit, "Log in"
-      / = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
-      .inline.field
-        .ui.checkbox
-          %input{name: :remember_me, :type => "checkbox"}/
-          %label Remember me
+      .form-inputs
+        = f.input :email, required: false, autofocus: true, label: false, placeholder: "You email address"
+        = f.input :password, required: false, label: false, placeholder: "Password"
+        / = f.input :remember_me, as: :boolean
+        / - if devise_mapping.rememberable?
+        /   .inline.field
+        /     .ui.checkbox
+        /       %input.hidden{:tabindex => "0", :type => "checkbox", :name => "remember_me"}
+        /       %label I agree to the Terms and Conditions
+
+        .field     
+          = f.button :submit, "Log in"
+.ui.one.column.grid          
+  .column
     = render "devise/shared/links"

@@ -52,6 +52,11 @@ gem 'whenever', :require => false
 gem 'devise'
 gem 'omniauth-facebook'
 gem "omniauth-google-oauth2"
+# gem 'google-api-client', require: 'google/api_client'
+gem 'activerecord-session_store'
+
+#IMages
+gem "paperclip", "~> 5.0.0"
 
 gem 'annotate'
 
