@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170410200039) do
+ActiveRecord::Schema.define(version: 20170411012139) do
 
   create_table "clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "",    null: false
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 20170410200039) do
     t.string   "stripe_subscription_id"
     t.string   "hosting_units"
     t.string   "billing_currency",       default: "AUD"
+    t.string   "provider"
+    t.string   "uid"
     t.index ["email"], name: "index_clients_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true, using: :btree
   end

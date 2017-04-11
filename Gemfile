@@ -48,7 +48,10 @@ gem 'mina-whenever', require: false
 gem 'mina-scp', require: false
 gem 'whenever', :require => false
 
+#User login
 gem 'devise'
+gem 'omniauth-facebook'
+gem "omniauth-google-oauth2"
 
 gem 'annotate'
 

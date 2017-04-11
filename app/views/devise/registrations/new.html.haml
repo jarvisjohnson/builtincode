@@ -1,6 +1,8 @@
 .ui.one.column.center.aligned.grid
   .column.six.wide.form-holder
     %h2.center.aligned.header.form-head Sign up
+    = link_to "Sign in with Facebook", client_facebook_omniauth_authorize_path
+    = link_to "Sign in with Google", client_google_oauth2_omniauth_authorize_path
     = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
       = f.error_notification
       = f.input :email, required: true, autofocus: true, label: false, placeholder: 'email'
