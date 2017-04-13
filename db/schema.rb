@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170411164923) do
+ActiveRecord::Schema.define(version: 20170413230456) do
 
   create_table "clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "",    null: false
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20170411164923) do
     t.string   "stripe_account_id"
     t.boolean  "paid"
     t.string   "stripe_subscription_id"
-    t.string   "hosting_units"
+    t.integer  "hosting_units"
     t.string   "billing_currency",       default: "AUD"
     t.string   "provider"
     t.string   "uid"
@@ -41,40 +41,62 @@ ActiveRecord::Schema.define(version: 20170411164923) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.string   "oauth_avatar"
+    t.string   "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.string   "invited_by_type"
+    t.integer  "invited_by_id"
+    t.integer  "invitations_count",      default: 0
+    t.string   "contact_name"
+    t.string   "business_name"
     t.index ["confirmation_token"], name: "index_clients_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_clients_on_email", unique: true, using: :btree
+    t.index ["invitation_token"], name: "index_clients_on_invitation_token", unique: true, using: :btree
+    t.index ["invitations_count"], name: "index_clients_on_invitations_count", using: :btree
+    t.index ["invited_by_id"], name: "index_clients_on_invited_by_id", using: :btree
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true, using: :btree
   end
 
-  create_table "coupons", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "code"
-    t.string   "free_trial_length"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+  create_table "clients_websites", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "client_id",  null: false
+    t.integer "website_id", null: false
+    t.index ["client_id"], name: "index_clients_websites_on_client_id", using: :btree
+    t.index ["website_id"], name: "index_clients_websites_on_website_id", using: :btree
   end
 
-  create_table "plans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "features", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "website_id"
+    t.integer  "billing_units", default: 2
+    t.integer  "quantity",      default: 1
     t.string   "name"
-    t.string   "stripe_id"
-    t.float    "price",         limit: 24
-    t.string   "interval"
-    t.text     "features",      limit: 65535
-    t.boolean  "highlight"
-    t.integer  "display_order"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["website_id"], name: "index_features_on_website_id", using: :btree
   end
 
-  create_table "subscriptions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "stripe_id"
-    t.integer  "plan_id"
-    t.string   "last_four"
-    t.integer  "coupon_id"
-    t.string   "card_type"
-    t.float    "current_price", limit: 24
+  create_table "features_websites", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "website_id", null: false
+    t.integer "feature_id", null: false
+    t.index ["feature_id"], name: "index_features_websites_on_feature_id", using: :btree
+    t.index ["website_id"], name: "index_features_websites_on_website_id", using: :btree
+  end
+
+  create_table "websites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "client_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "features_id"
+    t.integer  "billing_units", default: 30
+    t.string   "name"
+    t.string   "app_type"
+    t.boolean  "ssl",           default: false
+    t.boolean  "cdn",           default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["client_id"], name: "index_websites_on_client_id", using: :btree
+    t.index ["features_id"], name: "index_websites_on_features_id", using: :btree
   end
 
+  add_foreign_key "features", "websites"
+  add_foreign_key "websites", "clients"
 end

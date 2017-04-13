@@ -1,0 +1,11 @@
+= simple_form_for(@feature) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :website
+    = f.input :billing_units
+    = f.input :quantity
+    = f.input :name
+
+  .form-actions
+    = f.button :submit

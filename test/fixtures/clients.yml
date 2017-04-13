@@ -18,7 +18,7 @@
 #  stripe_account_id      :string(255)
 #  paid                   :boolean
 #  stripe_subscription_id :string(255)
-#  hosting_units          :string(255)
+#  hosting_units          :integer
 #  billing_currency       :string(255)      default("AUD")
 #  provider               :string(255)
 #  uid                    :string(255)
@@ -31,11 +31,24 @@
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
 #  oauth_avatar           :string(255)
+#  invitation_token       :string(255)
+#  invitation_created_at  :datetime
+#  invitation_sent_at     :datetime
+#  invitation_accepted_at :datetime
+#  invitation_limit       :integer
+#  invited_by_type        :string(255)
+#  invited_by_id          :integer
+#  invitations_count      :integer          default("0")
+#  contact_name           :string(255)
+#  business_name          :string(255)
 #
 # Indexes
 #
 #  index_clients_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_clients_on_email                 (email) UNIQUE
+#  index_clients_on_invitation_token      (invitation_token) UNIQUE
+#  index_clients_on_invitations_count     (invitations_count)
+#  index_clients_on_invited_by_id         (invited_by_id)
 #  index_clients_on_reset_password_token  (reset_password_token) UNIQUE
 #
 

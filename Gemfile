@@ -50,7 +50,8 @@ gem 'whenever', :require => false
 
 #User login
 gem 'devise'
-gem 'omniauth-facebook'
+gem 'devise_invitable', '~> 1.7.2'
+gem 'omniauth-facebook', "~> 4.0.0"
 gem "omniauth-google-oauth2"
 # gem 'google-api-client', require: 'google/api_client'
 gem 'activerecord-session_store'

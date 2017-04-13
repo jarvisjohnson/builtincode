@@ -38,19 +38,19 @@
               .right.aligned.column
                 .ui.inline.dropdown
                   .text
-                    - if @client.avatar.present?
-                      = image_tag @client.avatar.url(:thumb), class: " ui avatar image"
-                    - elsif @client.oauth_avatar
+                    - if @client.oauth_avatar?
                       = image_tag @client.oauth_avatar, class: "ui avatar image"
-                    Jenny Hess
+                    - else
+                      = image_tag @client.avatar.url(:thumb), class: " ui avatar image"
+                    = @client.business_name ? @client.business_name : @client.contact_name
                   %i.dropdown.icon
                   .menu
                     .header
-                      - if @client.avatar.present?
-                        = image_tag @client.avatar.url(:thumb), class: " ui avatar image"
-                      - elsif @client.oauth_avatar
+                      - if @client.oauth_avatar?
                         = image_tag @client.oauth_avatar, class: "ui avatar image"
-                      Jenny Hess
+                      - else
+                        = image_tag @client.avatar.url(:thumb), class: " ui avatar image"
+                      = @client.business_name ? @client.business_name : @client.contact_name
                     .divider
                     = link_to(destroy_client_session_path, :method => :delete, class: "item") do
                       Sign Out

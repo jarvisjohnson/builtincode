@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # before_action :authenticate_client!
   protect_from_forgery with: :exception
-  before_action :set_client
+  # before_action :set_client
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   # https://github.com/plataformatec/devise/wiki/How-To:-Create-custom-layouts
@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
     attributes = [:email, :avatar]
     devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
     devise_parameter_sanitizer.permit(:account_update, keys: attributes)
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:email, :contact_name, :business_name, :billing_currency, :hosting_units])
   end  
 
   private
@@ -25,11 +26,11 @@ class ApplicationController < ActionController::Base
     end
   end  
 
-  def set_client
-    @client = current_client
-    @subscribed = @client.stripe_subscription_id? if @client
-    @no_email = @client.email.exclude?('@') if @client
-    @client_currency = @client.billing_currency if @client
-  end    
+  # def set_client
+  #   @client = current_client
+  #   @subscribed = @client.stripe_subscription_id? if @client
+  #   @no_email = @client.email.exclude?('@') if @client
+  #   @client_currency = @client.billing_currency if @client
+  # end    
 
 end

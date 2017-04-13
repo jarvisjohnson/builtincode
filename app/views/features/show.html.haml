@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Website:
+  = @feature.website
+%p
+  %b Billing units:
+  = @feature.billing_units
+%p
+  %b Quantity:
+  = @feature.quantity
+%p
+  %b Name:
+  = @feature.name
+
+= link_to 'Edit', edit_feature_path(@feature)
+\|
+= link_to 'Back', features_path

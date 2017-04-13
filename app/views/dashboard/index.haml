@@ -1,6 +1,6 @@
 %section.client-dashboard
   .ui.container
-
+    = link_to 'Invite', new_client_invitation_path
     / If customer has existing invoices, show up here
     -if @subscribed  
       .ui.segment

@@ -18,7 +18,7 @@
 #  stripe_account_id      :string(255)
 #  paid                   :boolean
 #  stripe_subscription_id :string(255)
-#  hosting_units          :string(255)
+#  hosting_units          :integer
 #  billing_currency       :string(255)      default("AUD")
 #  provider               :string(255)
 #  uid                    :string(255)
@@ -31,23 +31,36 @@
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
 #  oauth_avatar           :string(255)
+#  invitation_token       :string(255)
+#  invitation_created_at  :datetime
+#  invitation_sent_at     :datetime
+#  invitation_accepted_at :datetime
+#  invitation_limit       :integer
+#  invited_by_type        :string(255)
+#  invited_by_id          :integer
+#  invitations_count      :integer          default("0")
+#  contact_name           :string(255)
+#  business_name          :string(255)
 #
 # Indexes
 #
 #  index_clients_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_clients_on_email                 (email) UNIQUE
+#  index_clients_on_invitation_token      (invitation_token) UNIQUE
+#  index_clients_on_invitations_count     (invitations_count)
+#  index_clients_on_invited_by_id         (invited_by_id)
 #  index_clients_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
 class Client < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
+  devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :omniauthable,
          :omniauth_providers => [:facebook, :google_oauth2]
 
   #paperclip
-  has_attached_file :avatar, styles: { medium: "300x300#", thumb: "100x100#" }, default_url: "/images/:style/missing.png"
+  has_attached_file :avatar, styles: { medium: "300x300#", thumb: "100x100#" }, default_url: "default_avatar.jpg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/         
   
   # Omniauth login
@@ -60,6 +73,7 @@ class Client < ApplicationRecord
           client.email = "facebook_user: #{auth.info.name}"
         end
         client.password = Devise.friendly_token[0,20]
+        client.contact_name = auth.info.name
         # client.name = auth.info.name   # assuming the client model has a name
         client.oauth_avatar = auth.info.image # assuming the client model has an image
         # If you are using confirmable and the provider(s) you use validate emails, 
@@ -70,6 +84,7 @@ class Client < ApplicationRecord
 
     def self.from_google_omniauth(access_token)
         data = access_token.info
+        # granular = access_token.extra.raw_info
         client = Client.where(:email => data["email"]).first
 
         # Uncomment the section below if you want clients to be created if they don't exist
@@ -78,7 +93,8 @@ class Client < ApplicationRecord
               email: data["email"],
               password: Devise.friendly_token[0,20],
               provider: "google",
-              oauth_avatar: data["image"]
+              oauth_avatar: data["image"],
+              contact_name: data["name"]
             )
         end
         client

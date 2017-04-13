@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Client:
+  = @website.client
+%p
+  %b Features:
+  = @website.features
+%p
+  %b Billing units:
+  = @website.billing_units
+%p
+  %b Name:
+  = @website.name
+%p
+  %b App type:
+  = @website.app_type
+%p
+  %b Ssl:
+  = @website.ssl
+%p
+  %b Cdn:
+  = @website.cdn
+
+= link_to 'Edit', edit_website_path(@website)
+\|
+= link_to 'Back', websites_path

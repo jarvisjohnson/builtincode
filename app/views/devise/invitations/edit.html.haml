@@ -1,0 +1,11 @@
+%h2= t 'devise.invitations.edit.header'
+= simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put } do |f|
+  = devise_error_messages!
+  = f.hidden_field :invitation_token
+  = f.input :password
+  = f.input :password_confirmation
+  = f.input :contact_name
+  = f.input :business_name
+  = f.hidden_field :billing_currency, collection: ['AUD', 'USD']
+  = f.hidden_field :hosting_units, as: :integer  
+  = f.button :submit, t("devise.invitations.edit.submit_button")

@@ -1,0 +1,27 @@
+%h1 Listing features
+
+%table
+  %thead
+    %tr
+      %th Website
+      %th Billing units
+      %th Quantity
+      %th Name
+      %th
+      %th
+      %th
+
+  %tbody
+    - @features.each do |feature|
+      %tr
+        %td= feature.website
+        %td= feature.billing_units
+        %td= feature.quantity
+        %td= feature.name
+        %td= link_to 'Show', feature
+        %td= link_to 'Edit', edit_feature_path(feature)
+        %td= link_to 'Destroy', feature, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Feature', new_feature_path
