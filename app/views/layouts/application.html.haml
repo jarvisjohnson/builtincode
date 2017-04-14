@@ -15,15 +15,12 @@
   %body
 
     .ui.left.vertical.labeled.icon.sidebar.menu.uncover.visible
-      = link_to "LOGO HERE", root_path, class: "ui item"
-      %a.item.active
-        Home
+      = link_to "LOGO HERE", "https://www.builtincode.com", class: "ui item", target: "_blank"
+      = link_to "Dashboard", root_path, class: "ui item #{active_class(root_path)}"
+      = link_to "My Information", client_path(current_client), class: "ui item #{active_class(client_path(current_client))}"
+      = link_to "My Websites", client_websites_path(current_client), class: "ui item #{active_class(client_websites_path(current_client))}"
       %a.item
-        Topics
-      %a.item
-        Friends
-      %a.item
-        Settings
+        Help
 
 
 
@@ -38,19 +35,19 @@
               .right.aligned.column
                 .ui.inline.dropdown
                   .text
-                    - if @client.oauth_avatar?
-                      = image_tag @client.oauth_avatar, class: "ui avatar image"
+                    - if current_client.oauth_avatar?
+                      = image_tag current_client.oauth_avatar, class: "ui avatar image"
                     - else
-                      = image_tag @client.avatar.url(:thumb), class: " ui avatar image"
-                    = @client.business_name ? @client.business_name : @client.contact_name
+                      = image_tag current_client.avatar.url(:thumb), class: " ui avatar image"
+                    = current_client.business_name ? current_client.business_name : current_client.contact_name
                   %i.dropdown.icon
                   .menu
                     .header
-                      - if @client.oauth_avatar?
-                        = image_tag @client.oauth_avatar, class: "ui avatar image"
+                      - if current_client.oauth_avatar?
+                        = image_tag current_client.oauth_avatar, class: "ui avatar image"
                       - else
-                        = image_tag @client.avatar.url(:thumb), class: " ui avatar image"
-                      = @client.business_name ? @client.business_name : @client.contact_name
+                        = image_tag current_client.avatar.url(:thumb), class: " ui avatar image"
+                      = current_client.business_name ? current_client.business_name : current_client.contact_name
                     .divider
                     = link_to(destroy_client_session_path, :method => :delete, class: "item") do
                       Sign Out

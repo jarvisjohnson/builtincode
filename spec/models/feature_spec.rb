@@ -4,8 +4,8 @@
 #
 #  id            :integer          not null, primary key
 #  website_id    :integer
-#  billing_units :integer          default("2")
-#  quantity      :integer          default("1")
+#  billing_units :integer          default(2)
+#  quantity      :integer          default(1)
 #  name          :string(255)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

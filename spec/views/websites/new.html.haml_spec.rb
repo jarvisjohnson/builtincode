@@ -16,7 +16,7 @@ RSpec.describe "websites/new", type: :view do
   it "renders new website form" do
     render
 
-    assert_select "form[action=?][method=?]", websites_path, "post" do
+    assert_select "form[action=?][method=?]", client_websites_path(params[:client_id]), "post" do
 
       assert_select "input#website_client_id[name=?]", "website[client_id]"
 

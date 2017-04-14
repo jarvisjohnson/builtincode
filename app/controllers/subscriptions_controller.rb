@@ -26,25 +26,30 @@ class SubscriptionsController < ApplicationController
       items: [
         {
           plan: "basic-web-hosting",
-          quantity: current_client.hosting_units,
+          quantity: website.hosting_units,
         },
       ]
     )
 
     current_client.assign_attributes(
-      :paid => true, 
       :stripe_account_id => customer.id,
+      )
+
+    current_client.save    
+
+    website.assign_attributes(
+      :paid => true, 
       :stripe_subscription_id => subscription.id
       )
 
-    current_client.save
+    website.save    
 
     flash[:notice] = "Thank you; Your subscription payment has cleared and your membership has been updated"
     redirect_to root_path, notice: "Thank you; Your subscription payment has cleared and your membership has been updated"    
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    redirect_to client_path(current_client.id)
+    redirect_to client_path(current_client.uuid)
   end
 
   def update
@@ -62,11 +67,11 @@ class SubscriptionsController < ApplicationController
     current_client.save
 
     flash[:notice] = "Thank you; Your subscription payment has cleared and your membership has been updated"
-    redirect_to client_path(current_client.id), notice: "Thank you; Your subscription payment has cleared and your membership has been updated"    
+    redirect_to client_path(current_client.uuid), notice: "Thank you; Your subscription payment has cleared and your membership has been updated"    
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    redirect_to client_path(current_client.id)
+    redirect_to client_path(current_client.uuid)
   end
 
   def thanks

@@ -53,7 +53,8 @@ gem 'devise'
 gem 'devise_invitable', '~> 1.7.2'
 gem 'omniauth-facebook', "~> 4.0.0"
 gem "omniauth-google-oauth2"
-# gem 'google-api-client', require: 'google/api_client'
+#Unique IDs
+# gem 'activeuuid'  # https://github.com/jashmenn/activeuuid
 gem 'activerecord-session_store'
 
 #IMages

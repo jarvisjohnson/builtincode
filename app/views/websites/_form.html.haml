@@ -1,14 +1,21 @@
-= simple_form_for(@website) do |f|
-  = f.error_notification
+= simple_form_for [@client, @website] do |w|
+  = simple_fields_for :features do |f|
+    = f.error_notification
 
-  .form-inputs
-    = f.association :client
-    = f.association :features
-    = f.input :billing_units
-    = f.input :name
-    = f.input :app_type
-    = f.input :ssl
-    = f.input :cdn
+    .form-inputs
+      / # = f.association :website
+      = f.input :billing_units
+      = f.input :quantity
+      = f.input :name
+
+    .form-inputs
+      = w.association :client
+      / # = w.association :features
+      = w.input :billing_units
+      = w.input :name
+      = w.input :app_type
+      = w.input :ssl
+      = w.input :cdn
 
   .form-actions
-    = f.button :submit
+    = w.button :submit

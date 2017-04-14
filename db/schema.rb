@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413230456) do
+ActiveRecord::Schema.define(version: 20170414145856) do
 
-  create_table "clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "clients", primary_key: "uuid", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
@@ -25,11 +25,6 @@ ActiveRecord::Schema.define(version: 20170413230456) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
-    t.string   "stripe_account_id"
-    t.boolean  "paid"
-    t.string   "stripe_subscription_id"
-    t.integer  "hosting_units"
-    t.string   "billing_currency",       default: "AUD"
     t.string   "provider"
     t.string   "uid"
     t.string   "confirmation_token"
@@ -51,6 +46,8 @@ ActiveRecord::Schema.define(version: 20170413230456) do
     t.integer  "invitations_count",      default: 0
     t.string   "contact_name"
     t.string   "business_name"
+    t.string   "billing_currency",       default: "AUD"
+    t.string   "stripe_account_id"
     t.index ["confirmation_token"], name: "index_clients_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_clients_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_clients_on_invitation_token", unique: true, using: :btree
@@ -86,17 +83,21 @@ ActiveRecord::Schema.define(version: 20170413230456) do
   create_table "websites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "client_id"
     t.integer  "features_id"
-    t.integer  "billing_units", default: 30
+    t.integer  "billing_units",          default: 30
     t.string   "name"
     t.string   "app_type"
-    t.boolean  "ssl",           default: false
-    t.boolean  "cdn",           default: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.boolean  "ssl",                    default: false
+    t.boolean  "cdn",                    default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "billing_currency",       default: "AUD"
+    t.boolean  "paid"
+    t.string   "stripe_subscription_id"
+    t.string   "hosting_units"
     t.index ["client_id"], name: "index_websites_on_client_id", using: :btree
     t.index ["features_id"], name: "index_websites_on_features_id", using: :btree
   end
 
   add_foreign_key "features", "websites"
-  add_foreign_key "websites", "clients"
+  add_foreign_key "websites", "clients", primary_key: "uuid"
 end

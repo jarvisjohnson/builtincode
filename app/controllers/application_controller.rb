@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   # before_action :set_client
   before_action :configure_permitted_parameters, if: :devise_controller?
-
   # https://github.com/plataformatec/devise/wiki/How-To:-Create-custom-layouts
   layout :layout_by_resource
 
@@ -28,9 +27,9 @@ class ApplicationController < ActionController::Base
 
   # def set_client
   #   @client = current_client
-  #   @subscribed = @client.stripe_subscription_id? if @client
-  #   @no_email = @client.email.exclude?('@') if @client
-  #   @client_currency = @client.billing_currency if @client
+  #   # @subscribed = @client.stripe_subscription_id? if @client
+  #   # @no_email = @client.email.exclude?('@') if @client
+  # #   @client_currency = @client.billing_currency if @client
   # end    
 
 end

@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-
-  resources :features
-  resources :websites
   devise_for :clients, :controllers => {
     :omniauth_callbacks   =>   'clients/omniauth_callbacks',
     :confirmations        =>   'clients/confirmations',
@@ -10,18 +7,15 @@ Rails.application.routes.draw do
     :invitations          =>   'clients/invitations'
   }
 
-  resources :clients
+  resources :websites
+
+  resources :clients do
+    resources :websites do 
+      resources :features
+    end
+  end
+
   resources :subscriptions
-
-
-  # as :client do
-  #   get 'clients', :to => 'dashboard#index', :as => :client_root # Rails 3
-  # end
-
-  # devise_scope :client do
-  #   delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_client_session
-  # end
-
 
   # Consume Stripe Webhooks: https://github.com/integrallis/stripe_event
   mount StripeEvent::Engine, at: '/stripe_webhooks' # provide a custom path

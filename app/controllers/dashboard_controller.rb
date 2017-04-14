@@ -12,20 +12,18 @@ class DashboardController < ApplicationController
       redirect_to edit_client_registration_path(@client)
     end
     
-
-    if @subscribed
-
-      # Talk to Stripe API to retreive their current subscription      
-
-      @subscription = Stripe::Subscription.retrieve(@client.stripe_subscription_id)
-      @status = @subscription.status
-
-      # Talk to Stripe API to retrieve their invoices 
-
-      @invoices = Stripe::Invoice.list(:customer => @client.stripe_account_id)
+    @websites = Website.where(client_id: @client.uuid)  
 
 
-    end
+    # Talk to Stripe API to retreive their current subscription      
+
+    # @subscription = Stripe::Subscription.retrieve(@client.stripe_subscription_id)
+    # @status = @subscription.status
+
+    # Talk to Stripe API to retrieve their invoices 
+
+    @invoices = Stripe::Invoice.list(:customer => @client.stripe_account_id)
+
 
   end
 
@@ -33,7 +31,7 @@ class DashboardController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_client
       @client = current_client
-      @subscribed = @client.stripe_subscription_id?
+      # @subscribed = @client.stripe_subscription_id?
       @no_email = @client.email.exclude?('@')
       @client_currency = @client.billing_currency
     end  

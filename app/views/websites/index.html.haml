@@ -24,10 +24,10 @@
         %td= website.app_type
         %td= website.ssl
         %td= website.cdn
-        %td= link_to 'Show', website
-        %td= link_to 'Edit', edit_website_path(website)
-        %td= link_to 'Destroy', website, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to 'Show', client_website_path(current_client, website)
+        %td= link_to 'Edit', edit_client_website_path(current_client, website)
+        %td= link_to 'Destroy', client_website_path(current_client, website), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Website', new_website_path
+= link_to 'New Website', new_client_website_path(current_client)

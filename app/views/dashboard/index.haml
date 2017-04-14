@@ -2,93 +2,93 @@
   .ui.container
     = link_to 'Invite', new_client_invitation_path
     / If customer has existing invoices, show up here
-    -if @subscribed  
-      .ui.segment
-        %a.ui.ribbon.label{class: "subscription-#{@status}"} #{@status.capitalize}
-        .ui.divided.items
-          .item
-            .image
-              %img{:src => "/images/wireframe/image.png"}/
-            .content
-              %a.header #{@subscription.plan.name}
-              .meta
-                %span.cinema IFC Cinema
-              .description
-                %p
-              .extra
-                = form_tag subscriptions_path do
-                  - if flash[:error].present?
-                    #error_explanation
-                      %p= flash[:error]   
-                  .ui.right.floated     
-                .ui.label Limited 
-      %ul.latest-charges
+    - @websites.each do |website|
+      -if website.stripe_subscription_id
+        .ui.segment
+          %a.ui.ribbon.label{class: "subscription-#{@status}"} #{@status.capitalize}
+          .ui.divided.items
+            .item
+              .image
+              .content
+                %a.header #{@subscription.plan.name}
+                .meta
+                  %span.cinema IFC Cinema
+                .description
+                  %p
+                .extra
+                  = form_tag subscriptions_path do
+                    - if flash[:error].present?
+                      #error_explanation
+                        %p= flash[:error]   
+                    .ui.right.floated     
+                  .ui.label Limited 
+        %ul.latest-charges
 
-        %h6 Upcoming Invoices
-        %li.charge.upcoming
-          %i.ui.icon.calendar.outline
-        = JSON.pretty_generate(@invoices.data.last.lines.data)
-        %h6 Latest
-        - @invoices.data.each do |invoice|
-          %li.charge.active-charge{class: invoice.paid ? "paid" : ""}
-            .ui.right.aligned.grid
-              .center.aligned.one.wide.column
-                %i.ui.icon.checkmark.green
-              .right.aligned.fifteen.wide.column
-                .ui.right.aligned.grid
-                  .left.floated.left.aligned.six.wide.column
-                    .ui.items
-                      .ui.item
-                        .content
-                          .header
-                            Invoice for #{@subscription.plan.name}                      
-                          .meta
-                            %span
-                              = Time.at(invoice.date).to_date 
-                  .right.floated.right.aligned.six.wide.column
-                    .ui.items
-                      .ui.item
-                        .content
-                          .header
-                            = Money.new(invoice.amount_due, @client_currency)                     
-                          .meta
-                            %span
-                              = Time.at(invoice.date).to_date  
-                  .center.aligned.one.column.row
-                    .ui.divider
-                  .sixteen.wide.column
-                    .ui.items
-                      .ui.item
-                        .content
-                          .extra
-                            .ui.right.floated.button
-                              View 
+          %h6 Upcoming Invoices
+          %li.charge.upcoming
+            %i.ui.icon.calendar.outline
+          = JSON.pretty_generate(@invoices.data.last.lines.data)
+          %h6 Latest
+          - @invoices.data.each do |invoice|
+            %li.charge.active-charge{class: invoice.paid ? "paid" : ""}
+              .ui.right.aligned.grid
+                .center.aligned.one.wide.column
+                  %i.ui.icon.checkmark.green
+                .right.aligned.fifteen.wide.column
+                  .ui.right.aligned.grid
+                    .left.floated.left.aligned.six.wide.column
+                      .ui.items
+                        .ui.item
+                          .content
+                            .header
+                              Invoice for #{@subscription.plan.name}                      
+                            .meta
+                              %span
+                                = Time.at(invoice.date).to_date 
+                    .right.floated.right.aligned.six.wide.column
+                      .ui.items
+                        .ui.item
+                          .content
+                            .header
+                              = Money.new(invoice.amount_due, @client_currency)                     
+                            .meta
+                              %span
+                                = Time.at(invoice.date).to_date  
+                    .center.aligned.one.column.row
+                      .ui.divider
+                    .sixteen.wide.column
+                      .ui.items
+                        .ui.item
+                          .content
+                            .extra
+                              .ui.right.floated.button
+                                View 
 
 
-        %h6 Completed
-        %li.charge.paid.inactive
-          %i.ui.icon.checkmark
-    -else
-      .ui.segment
-        %a.ui.ribbon.label Subscription Pending
-        .ui.divided.items
-          .item
-            .image
-              / %img{:src => "/images/wireframe/image.png"}/
-            .content
-              %a.header Your hosting plan
-              .meta
-                %span.cinema IFC Cinema
-              .description
-                %p
-              .extra
-                = form_tag subscriptions_path do
-                  - if flash[:error].present?
-                    #error_explanation
-                      %p= flash[:error]   
-                  .ui.right.floated     
-                    %script.stripe-button{"data-amount" => @amount, "data-description" => "A month's subscription", "data-key" => "#{Rails.configuration.stripe[:publishable_key]}", "data-description" => "#{@description}", "data-email" => "#{current_client.email}",  "data-locale" => "auto", :src => "https://checkout.stripe.com/checkout.js"}  
-                .ui.label Limited 
+          %h6 Completed
+          %li.charge.paid.inactive
+            %i.ui.icon.checkmark
+      -else
+        .ui.segment
+          %a.ui.ribbon.label Subscription Pending
+          .ui.divided.items
+            .item
+              .image
+                / %img{:src => "/images/wireframe/image.png"}/
+              .content
+                %a.header Hosting Plan
+                .meta
+                  %span Your website name
+                .description
+                  %p
+                .extra
+                  = form_tag subscriptions_path do
+                    - if flash[:error].present?
+                      #error_explanation
+                        %p= flash[:error]   
+                    .ui.right.floated     
+                      %script.stripe-button{"data-amount" => @amount, "data-description" => "A month's subscription", "data-key" => "#{Rails.configuration.stripe[:publishable_key]}", "data-description" => "#{@description}", "data-email" => "#{current_client.email}",  "data-locale" => "auto", :src => "https://checkout.stripe.com/checkout.js"}  
+                  .ui.label Limited 
 
 
 

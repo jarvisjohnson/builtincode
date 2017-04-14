@@ -11,5 +11,12 @@ module Builtincode
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    # Use :UUID as primary key instead of :id:integer
+    # http://www.mccartie.com/2015/10/20/default-uuid's-in-rails.html
+    # config.generators do |g|
+    #   g.orm :active_record, primary_key_type: :uuid
+    # end
+
   end
 end

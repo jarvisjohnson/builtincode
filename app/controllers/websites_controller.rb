@@ -1,10 +1,14 @@
 class WebsitesController < ApplicationController
+  
+  before_filter :load_client
+  before_action :authenticate_client!
   before_action :set_website, only: [:show, :edit, :update, :destroy]
+  # before_action :set_client
 
   # GET /websites
   # GET /websites.json
   def index
-    @websites = Website.all
+    @websites = Website.where(client_id: current_client.uuid) 
   end
 
   # GET /websites/1
@@ -14,7 +18,8 @@ class WebsitesController < ApplicationController
 
   # GET /websites/new
   def new
-    @website = Website.new
+    @website = websites.new
+    @website.features.build
   end
 
   # GET /websites/1/edit
@@ -22,12 +27,13 @@ class WebsitesController < ApplicationController
   end
 
   # POST /websites
-  # POST /websites.json
+  # POST /websites.jsonclient_website_path
   def create
-    @website = Website.new(website_params)
+    @website = websites.new(website_params)
 
     respond_to do |format|
       if @website.save
+        flash[:notice] = :success
         format.html { redirect_to @website, notice: 'Website was successfully created.' }
         format.json { render :show, status: :created, location: @website }
       else
@@ -67,8 +73,17 @@ class WebsitesController < ApplicationController
       @website = Website.find(params[:id])
     end
 
+    def load_client
+      params[:client_id] ? @client = Client.find(params[:client_id]) : @client = current_client
+    end
+
+    def websites
+      params[:client_id] ? @client.websites : Website
+    end    
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def website_params
       params.require(:website).permit(:client_id, :features_id, :billing_units, :name, :app_type, :ssl, :cdn)
     end
+    
 end
