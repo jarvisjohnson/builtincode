@@ -2,6 +2,7 @@ class ClientsController < ApplicationController
   before_action :set_client, only: [:index_invoices]
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_client!
+  before_action :authenticate_admin, only: [:index]
 
   # GET /clients
   # GET /clients.json
@@ -23,6 +24,7 @@ class ClientsController < ApplicationController
 
   # GET /clients/1/edit
   def edit
+    @client = Client.find(params[:id])
   end
 
   # POST /clients
@@ -80,4 +82,12 @@ class ClientsController < ApplicationController
     def client_params
       params.require(:client).permit(:avatar, :business_name, websites_attributes: [:id, :name, :ssl, :cdn, :_destroy])
     end
+
+    def authenticate_admin
+      unless current_client.try(:admin)
+        # redirect_to root_url
+        redirect_to root_path
+      end
+    end   
+
 end

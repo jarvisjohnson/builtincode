@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170414145856) do
+ActiveRecord::Schema.define(version: 20170421193159) do
 
   create_table "clients", primary_key: "uuid", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "",    null: false
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20170414145856) do
     t.string   "business_name"
     t.string   "billing_currency",       default: "AUD"
     t.string   "stripe_account_id"
+    t.boolean  "admin"
     t.index ["confirmation_token"], name: "index_clients_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_clients_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_clients_on_invitation_token", unique: true, using: :btree

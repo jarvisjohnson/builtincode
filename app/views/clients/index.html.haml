@@ -1,19 +1,50 @@
-%h1 Listing clients
+- content_for :title, 'Clients' 
 
-%table
+%table.ui.celled.table
   %thead
     %tr
-      %th
-      %th
-      %th
-
+      %th Business
+      %th Contact
+      %th Email
+      %th Confirmation
+      %th Currency
   %tbody
-    - @clients.each do |client|
+    - @clients.each do |client|  
+      %tr
+        -if client.business_name?
+          %td.positive
+            = client.business_name
+        -else
+          %td.negative
+            None
+        -if client.contact_name?
+          %td
+            = client.contact_name
+        -else
+          %td.negative
+            No Contact
+        -if client.email?
+          %td
+            = client.email
+        -else
+          %td.negative
+            No Contact   
+        -if client.confirmed_at?
+          %td.positive
+            %i.icon.checkmark
+            Confirmed 
+        -else
+          %td.negative
+            %i.icon.close
+            Not Confirmed
+        %td.positive
+          = client.billing_currency                   
+
       %tr
         %td= link_to 'Show', client
         %td= link_to 'Edit', edit_client_path(client)
-        %td= link_to 'Destroy', client, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
+        %td= link_to 'Send Invitation', edit_client_path(client)
+        %td= link_to 'Delete', client, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td
 
 = link_to 'New Client', new_client_path

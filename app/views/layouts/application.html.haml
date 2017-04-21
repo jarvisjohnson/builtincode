@@ -15,13 +15,19 @@
   %body
 
     .ui.left.vertical.labeled.icon.sidebar.menu.uncover.visible
-      = link_to "LOGO HERE", "https://www.builtincode.com", class: "ui item", target: "_blank"
-      = link_to "Dashboard", root_path, class: "ui item #{active_class(root_path)}"
-      = link_to "My Information", client_path(current_client), class: "ui item #{active_class(client_path(current_client))}"
-      = link_to "My Sites", client_websites_path(current_client), class: "ui item #{active_class(client_websites_path(current_client))}"
-      = link_to "My Invoices", index_invoices_client_path(current_client), class: "ui item #{active_class(index_invoices_client_path(current_client))}"      
-      %a.item
-        Help
+      .flex-container
+        .user-links
+          = link_to "LOGO HERE", "https://www.builtincode.com", class: "ui item", target: "_blank"
+          = link_to "Dashboard", root_path, class: "ui item #{active_class(root_path)}"
+          = link_to "My Information", client_path(current_client), class: "ui item #{active_class(client_path(current_client))}"
+          = link_to "My Sites", client_websites_path(current_client), class: "ui item #{active_class(client_websites_path(current_client))}"
+          = link_to "My Invoices", index_invoices_client_path(current_client), class: "ui item #{active_class(index_invoices_client_path(current_client))}"      
+          %a.item
+            Help
+        - if current_client.try(:admin?)
+          .admin-links            
+            = link_to "List Clients", clients_path, class: "ui item #{active_class(clients_path)}"        
+
 
 
 

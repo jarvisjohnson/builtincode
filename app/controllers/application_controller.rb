@@ -24,7 +24,9 @@ class ApplicationController < ActionController::Base
     else
       "application"
     end
-  end  
+  end 
+
+
 
   # def set_client
   #   @client = current_client

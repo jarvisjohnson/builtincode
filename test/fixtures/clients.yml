@@ -38,6 +38,7 @@
 #  business_name          :string(255)
 #  billing_currency       :string(255)      default("AUD")
 #  stripe_account_id      :string(255)
+#  admin                  :boolean
 #
 # Indexes
 #

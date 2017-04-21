@@ -1,4 +1,4 @@
-%p#notice= notice
+- content_for :title, @client.business_name ? @client.business_name : @client.contact_name
 
 
 = link_to 'Edit', edit_client_path(@client)
