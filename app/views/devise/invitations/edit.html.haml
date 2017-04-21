@@ -5,7 +5,6 @@
   = f.input :password
   = f.input :password_confirmation
   = f.input :contact_name
+  = f.input :email
   = f.input :business_name
-  = f.hidden_field :billing_currency, collection: ['AUD', 'USD']
-  = f.hidden_field :hosting_units, as: :integer  
   = f.button :submit, t("devise.invitations.edit.submit_button")

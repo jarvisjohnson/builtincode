@@ -1,27 +1,48 @@
-%p#notice= notice
+- content_for :title, @website.name
+%section.client-dashboard
+  .ui.container
 
-%p
-  %b Client:
-  = @website.client
-%p
-  %b Features:
-  = @website.features
-%p
-  %b Billing units:
-  = @website.billing_units
-%p
-  %b Name:
-  = @website.name
-%p
-  %b App type:
-  = @website.app_type
-%p
-  %b Ssl:
-  = @website.ssl
-%p
-  %b Cdn:
-  = @website.cdn
+    -if @website.stripe_subscription_id
+      - subscription = Stripe::Subscription.retrieve(@website.stripe_subscription_id)
+      .ui.segment
+        %a.ui.ribbon.label{class: "subscription-#{subscription.status}"} #{subscription.status.capitalize}
+        .ui.divided.items
+          .item
+            .image
+            .content
+              %a.header #{@website.name ? @website.name : @client.business_name}
+              .meta
+                %span #{subscription.plan.name}
+              .description
+                %p
+              .extra
+                = form_tag websites_path do
+                  - if flash[:error].present?
+                    #error_explanation
+                      %p= flash[:error]   
+                  .ui.right.floated     
 
-= link_to 'Edit', edit_website_path(@website)
-\|
-= link_to 'Back', websites_path
+                = link_to 'Show', client_website_path(current_client, @website), class: "ui button"
+                = link_to 'Edit', edit_client_website_path(current_client, @website), class: "ui button"
+                = link_to 'Destroy', client_website_path(current_client, @website), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "ui button"
+              .extra 
+                - @website.features.each do |feature|
+                  .ui.label
+                    = feature
+                %p
+                  %b Billing units:
+                  = @website.billing_units
+                %p
+                  %b Name:
+                  = @website.name
+                %p
+                  %b App type:
+                  = @website.app_type
+                %p
+                  %b Ssl:
+                  = @website.ssl
+                %p
+                  %b Cdn:
+                  = @website.cdn                    
+
+    %p#notice= notice

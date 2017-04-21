@@ -1,0 +1,118 @@
+%section.client-dashboard
+  .ui.container
+    %ul.latest-charges
+
+      %h6 Upcoming Invoice
+      - invoice = @upcoming
+      %li.charge.invoice
+        .ui.right.aligned.grid
+          .center.aligned.one.wide.column
+            %i.ui.icon.calendar.outline
+          .right.aligned.fifteen.wide.column
+            .ui.right.aligned.grid
+              .left.floated.left.aligned.six.wide.column
+                .ui.items
+                  .ui.item
+                    .content
+                      .header
+                        Invoice : pending
+                      .meta
+                        %span
+                          = @client.business_name ? @client.business_name : @client.contact_name
+              .right.floated.right.aligned.six.wide.column
+                .ui.items
+                  .ui.item
+                    .content
+                      .header
+                        = Money.new(invoice.amount_due, @client_currency)                     
+                      .meta
+                        %span
+                          = Time.at(invoice.date).to_date 
+              .ui.divider                            
+              .ui.accordion.sixteen.wide.column
+                .title.ui.button
+                  %i.dropdown.icon
+                  View        
+                    
+                .content.ui.grid
+                  %br 
+                  - invoice.lines.each do |charge|
+                    .center.aligned.two.column.row
+                      .left.floated.left.aligned.six.wide.column
+                        .ui.items
+                          .ui.item
+                            .content
+                              = charge.description ? charge.description : charge.plan.name
+                      .right.floated.right.aligned.six.wide.column
+                        .ui.items
+                          .ui.item
+                            .content
+                              = Money.new(charge.amount, @client_currency)             
+                  .center.aligned.two.column.row                              
+                    .right.floated.right.aligned.six.wide.column
+                      .ui.items
+                        .ui.item
+                          .content
+                            .header
+                              = Money.new(invoice.amount_due, @client_currency)                  
+
+
+      %h6 Latest
+      - @invoices.data.each do |invoice|
+        %li.charge.active-charge{class: invoice.paid ? "paid" : ""}
+          .ui.right.aligned.grid
+            .center.aligned.one.wide.column
+              %i.ui.icon.checkmark.green
+            .right.aligned.fifteen.wide.column
+              .ui.right.aligned.grid
+                .left.floated.left.aligned.six.wide.column
+                  .ui.items
+                    .ui.item
+                      .content
+                        .header
+                          Invoice #{invoice.paid ? ": paid" : ": unpaid"}                
+                        .meta
+                          %span
+                            = @client.business_name ? @client.business_name : @client.contact_name
+                .right.floated.right.aligned.six.wide.column
+                  .ui.items
+                    .ui.item
+                      .content
+                        .header
+                          = Money.new(invoice.amount_due, @client_currency)                     
+                        .meta
+                          %span
+                            = Time.at(invoice.date).to_date  
+                .center.aligned.one.column.row
+                  .ui.divider
+                  .ui.accordion.sixteen.wide.column
+                    .title.ui.button
+                      %i.dropdown.icon
+                      View        
+                        
+                    .content.ui.grid
+                      %br 
+                      - invoice.lines.each do |charge|
+                        .center.aligned.two.column.row
+                          .left.floated.left.aligned.six.wide.column
+                            .ui.items
+                              .ui.item
+                                .content
+                                  = charge.description ? charge.description : charge.plan.name
+                          .right.floated.right.aligned.six.wide.column
+                            .ui.items
+                              .ui.item
+                                .content
+                                  = Money.new(charge.amount, @client_currency)             
+                      .center.aligned.two.column.row                              
+                        .right.floated.right.aligned.six.wide.column
+                          .ui.items
+                            .ui.item
+                              .content
+                                .header
+                                  = Money.new(invoice.amount_due, @client_currency)
+
+
+      %h6 Completed
+      %li.charge.paid.inactive
+        %i.ui.icon.checkmark  

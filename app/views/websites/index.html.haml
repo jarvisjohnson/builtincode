@@ -1,19 +1,35 @@
-%h1 Listing websites
+- content_for :title, 'Your websites'
+
+- @websites.each do |website|
+  -if website.stripe_subscription_id
+    - subscription = Stripe::Subscription.retrieve(website.stripe_subscription_id)
+    .ui.segment
+      %a.ui.ribbon.label{class: "subscription-#{subscription.status}"} #{subscription.status.capitalize}
+      .ui.divided.items
+        .item
+          .image
+          .content
+            %a.header #{website.name ? website.name : @client.business_name}
+            .meta
+              %span #{subscription.plan.name}
+            .description
+              %p
+            .extra
+              = form_tag websites_path do
+                - if flash[:error].present?
+                  #error_explanation
+                    %p= flash[:error]   
+                .ui.right.floated     
+
+              = link_to 'Show', client_website_path(current_client, website), class: "ui button"
+              = link_to 'Edit', edit_client_website_path(current_client, website), class: "ui button"
+              = link_to 'Destroy', client_website_path(current_client, website), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "ui button"
+            .extra 
+              - website.features.each do |feature|
+                .ui.label
+                  = feature
 
 %table
-  %thead
-    %tr
-      %th Client
-      %th Features
-      %th Billing units
-      %th Name
-      %th App type
-      %th Ssl
-      %th Cdn
-      %th
-      %th
-      %th
-
   %tbody
     - @websites.each do |website|
       %tr
@@ -24,9 +40,7 @@
         %td= website.app_type
         %td= website.ssl
         %td= website.cdn
-        %td= link_to 'Show', client_website_path(current_client, website)
-        %td= link_to 'Edit', edit_client_website_path(current_client, website)
-        %td= link_to 'Destroy', client_website_path(current_client, website), :method => :delete, :data => { :confirm => 'Are you sure?' }
+
 
 %br
 

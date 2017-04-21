@@ -1,10 +1,10 @@
 class SubscriptionsController < ApplicationController
 
+  before_action :set_website, except: :webhook
   skip_before_action :verify_authenticity_token, only: :webhook
 
   before_action :authenticate_client!, except: :webhook
   before_action :set_description, except: :webhook
-  before_action :set_plan, except: :webhook
 
 
   def new
@@ -26,7 +26,7 @@ class SubscriptionsController < ApplicationController
       items: [
         {
           plan: "basic-web-hosting",
-          quantity: website.hosting_units,
+          quantity: @website.hosting_units,
         },
       ]
     )
@@ -37,12 +37,12 @@ class SubscriptionsController < ApplicationController
 
     current_client.save    
 
-    website.assign_attributes(
+    @website.assign_attributes(
       :paid => true, 
       :stripe_subscription_id => subscription.id
       )
 
-    website.save    
+    @website.save    
 
     flash[:notice] = "Thank you; Your subscription payment has cleared and your membership has been updated"
     redirect_to root_path, notice: "Thank you; Your subscription payment has cleared and your membership has been updated"    
@@ -79,9 +79,9 @@ class SubscriptionsController < ApplicationController
 
   private
 
-    def set_plan
-      #TODO: this needs to be dynamic for each client; should be creating plans with the API based on inputs I have as Admin 
-      @plan = 'test_plan'
+    def set_website
+      #TODO: this needs to be dynamic for each website; should be creating plans with the API based on inputs I have as Admin 
+      @website = Website.find(params[:website_id])
     end
 
     def set_description

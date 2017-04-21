@@ -9,10 +9,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    attributes = [:email, :avatar]
+    attributes = [:avatar, :email, :contact_name, :business_name, :billing_currency, websites_attributes: [:id, :name, :ssl, :cdn, :_destroy, :app_type]]
     devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
     devise_parameter_sanitizer.permit(:account_update, keys: attributes)
-    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:email, :contact_name, :business_name, :billing_currency, :hosting_units])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: attributes)
+    devise_parameter_sanitizer.permit(:invite, keys: attributes)
   end  
 
   private

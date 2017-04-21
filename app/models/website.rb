@@ -24,7 +24,7 @@
 #
 
 class Website < ApplicationRecord
-  belongs_to :client
+  belongs_to :client, inverse_of: :websites
   has_many :features, dependent: :destroy, inverse_of: :website
   accepts_nested_attributes_for :features
 end

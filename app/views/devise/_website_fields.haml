@@ -1,0 +1,8 @@
+.nested-fields
+  = f.input :name
+  = f.input :app_type
+  = f.input :billing_units, as: :integer
+  / = website.input :url
+  / = website.input :description
+  / = website.input :done, :as => :boolean
+  = link_to_remove_association "remove website", f

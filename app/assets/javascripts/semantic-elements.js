@@ -12,4 +12,8 @@ document.addEventListener("turbolinks:load", function() {
     .dropdown()
   ;  
 
+  $('.ui.accordion')
+    .accordion()
+  ;  
+
 });

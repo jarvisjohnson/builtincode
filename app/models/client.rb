@@ -63,7 +63,8 @@ class Client < ApplicationRecord
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/         
 
   #relation to websites
-  has_many :websites, dependent: :destroy 
+  has_many :websites
+  accepts_nested_attributes_for :websites, :reject_if => :all_blank, :allow_destroy => true
   
   # Omniauth login
   # https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview

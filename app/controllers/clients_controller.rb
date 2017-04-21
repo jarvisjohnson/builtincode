@@ -1,6 +1,7 @@
 class ClientsController < ApplicationController
-  # before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :set_client, only: [:index_invoices]
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_client!
 
   # GET /clients
   # GET /clients.json
@@ -11,7 +12,8 @@ class ClientsController < ApplicationController
   # GET /clients/1
   # GET /clients/1.json
   def show
-    redirect_to root_url
+    # redirect_to root_url
+    @client = Client.find(params[:id])
   end
 
   # GET /clients/new
@@ -63,6 +65,11 @@ class ClientsController < ApplicationController
     end
   end
 
+  def index_invoices
+    @invoices = Stripe::Invoice.list(:customer => @client.stripe_account_id, limit: 12)
+    @upcoming = Stripe::Invoice.upcoming(:customer => @client.stripe_account_id)
+  end  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client
@@ -71,6 +78,6 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:avatar, :business_name)
+      params.require(:client).permit(:avatar, :business_name, websites_attributes: [:id, :name, :ssl, :cdn, :_destroy])
     end
 end

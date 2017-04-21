@@ -14,15 +14,18 @@ class DashboardController < ApplicationController
     
     @websites = Website.where(client_id: @client.uuid)  
 
+    # @websites.each do |website|
+    #   subscription = Stripe::Subscription.retrieve(website.stripe_subscription_id)  
+    # end
 
     # Talk to Stripe API to retreive their current subscription      
 
-    # @subscription = Stripe::Subscription.retrieve(@client.stripe_subscription_id)
+    
     # @status = @subscription.status
 
     # Talk to Stripe API to retrieve their invoices 
 
-    @invoices = Stripe::Invoice.list(:customer => @client.stripe_account_id)
+    @invoices = Stripe::Invoice.list(:customer => @client.stripe_account_id, limit: 12)
 
 
   end

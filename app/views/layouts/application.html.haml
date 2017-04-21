@@ -7,7 +7,7 @@
     %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
     %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0", :name => "viewport"}/
     / Site Properties
-    %title Builtincode
+    %title Builtincode Client Dashboard
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
@@ -18,7 +18,8 @@
       = link_to "LOGO HERE", "https://www.builtincode.com", class: "ui item", target: "_blank"
       = link_to "Dashboard", root_path, class: "ui item #{active_class(root_path)}"
       = link_to "My Information", client_path(current_client), class: "ui item #{active_class(client_path(current_client))}"
-      = link_to "My Websites", client_websites_path(current_client), class: "ui item #{active_class(client_websites_path(current_client))}"
+      = link_to "My Sites", client_websites_path(current_client), class: "ui item #{active_class(client_websites_path(current_client))}"
+      = link_to "My Invoices", index_invoices_client_path(current_client), class: "ui item #{active_class(index_invoices_client_path(current_client))}"      
       %a.item
         Help
 
@@ -31,7 +32,8 @@
           .ui.container    
             .ui.two.column.grid
               .column
-                %h1.ui Client Dashboard
+                %h1.ui
+                  = yield :title
               .right.aligned.column
                 .ui.inline.dropdown
                   .text
@@ -63,14 +65,15 @@
           .ui.container
             .ui.grid
               .four.column.row
-                .left.floated.column
-                  .ui.blue.button
-                    View Site
-                  .ui.blue.button
-                    Request Help
-                .right.floated.column
+                %button.ui.primary.button
+                  My Sites
+                %button.ui.button
+                  Request Help
 
-      = yield
+      %section.client-dashboard
+        .ui.container
+
+          = yield
 
 
       - if Rails.env == 'development'

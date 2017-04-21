@@ -40,7 +40,10 @@ gem "stripe"
 gem "stripe_event"
 gem "money"
 
+### forms
 gem 'simple_form', "~> 3.4"
+# Nested Model Forms
+gem 'cocoon'
 
 gem 'semantic-ui-sass', '~> 2.2', '>= 2.2.9.0'
 
