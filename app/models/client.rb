@@ -57,7 +57,7 @@ class Client < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :omniauthable,
-         :omniauth_providers => [:facebook, :google_oauth2]
+         :omniauth_providers => [:facebook, :google_oauth2, :linkedin]
 
   #paperclip
   has_attached_file :avatar, styles: { medium: "300x300#", thumb: "100x100#" }, default_url: "default_avatar.jpg"
@@ -69,7 +69,16 @@ class Client < ApplicationRecord
   
   # Omniauth login
   # https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview
-    def self.from_omniauth(auth, client)
+    def self.from_omniauth(auth, current_client)
+
+      if current_client
+        client = current_client
+      elsif Client.where(email: auth.info.email)
+        client = Client.where(email: auth.info.email).first
+      else
+        client = nil
+      end
+      # client = current_client ? current_client : nil
       # client = current_client
       unless client
           client = Client.create(
@@ -92,32 +101,6 @@ class Client < ApplicationRecord
       end
       client
     end         
-
-    def self.from_google_omniauth(auth, client)
-      data = access_token.info
-      # granular = access_token.extra.raw_info
-      # client = current_client
-      # Uncomment the section below if you want clients to be created if they don't exist
-      unless client
-          client = Client.create(
-            email: data["email"],
-            password: Devise.friendly_token[0,20],
-            provider: "google",
-            oauth_avatar: data["image"],
-            contact_name: data["name"]
-          )
-      else
-          client.update_attributes(
-            provider: "google",
-            oauth_avatar: data["image"],
-            contact_name: data["name"]
-          )      
-          client.save
-      end
-      raise
-      client
-    end    
-
 
     def self.new_with_session(params, session)
       super.tap do |client|

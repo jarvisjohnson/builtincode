@@ -1,10 +1,15 @@
 - if devise_mapping.omniauthable?
   .ui.large.form
     .field
+      = link_to(client_google_oauth2_omniauth_authorize_path, class: "button ui basic large red google button fluid") do
+        %i.google.icon
+        Connect with Google   
+    .field        
+      = link_to(client_linkedin_omniauth_authorize_path, class: "button ui basic large teal google button fluid") do
+        %i.linkedin.icon
+        Connect with Linkedin        
+    .field
       = link_to(client_facebook_omniauth_authorize_path, class: "button ui basic large blue facebook button fluid") do
         %i.facebook.icon
         Connect with Facebook
-    .field
-      = link_to(client_google_oauth2_omniauth_authorize_path, class: "button ui basic large red google button fluid") do
-        %i.google.icon
-        Connect with Google 
+

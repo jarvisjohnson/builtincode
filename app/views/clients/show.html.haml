@@ -3,13 +3,16 @@
   / %a.ui.ribbon.label{class: "subscription-#{subscription.status}"} #{subscription.status.capitalize}
   .ui.divided.items
     .ui.grid
-      .ui.two.column.row
+      .ui.three.column.row
         .column
           - fb = check_connection('facebook', 'Facebook')
           = fb.html_safe
         .column
           - google = check_connection('google_oauth2', 'Google')            
           = google.html_safe  
+        .column
+          - google = check_connection('linkedin', 'Linkedin')            
+          = google.html_safe            
 
 = link_to 'Edit', edit_client_path(@client)
 \|
