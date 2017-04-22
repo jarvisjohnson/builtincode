@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     member do 
       get :index_invoices
     end    
+    # member { put :toggle_menu_preference }
     resources :websites do 
       resources :subscriptions
       resources :features

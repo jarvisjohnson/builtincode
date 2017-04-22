@@ -6,7 +6,7 @@ class Clients::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     #   redirect_to "/clients/auth/facebook?auth_type=rerequest&scope=email"
     # end
 
-    @client = Client.from_facebook_omniauth(request.env["omniauth.auth"])
+    @client = Client.from_omniauth(request.env["omniauth.auth"], current_client)
     if @client.persisted?
       sign_in_and_redirect @client, :event => :authentication #this will throw if @client is not activated
       set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
@@ -18,7 +18,7 @@ class Clients::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def google_oauth2
       # You need to implement the method below in your model (e.g. app/models/client.rb)
-      @client = Client.from_google_omniauth(request.env["omniauth.auth"])
+      @client = Client.from_omniauth(request.env["omniauth.auth"], current_client)
 
       if @client.persisted?
         flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Google"
@@ -28,5 +28,9 @@ class Clients::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to new_client_registration_url, alert: @client.errors.full_messages.join("\n")
       end
   end
+
+  def failure
+    redirect_to root_path
+  end  
 
 end

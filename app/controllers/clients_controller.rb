@@ -68,8 +68,12 @@ class ClientsController < ApplicationController
   end
 
   def index_invoices
-    @invoices = Stripe::Invoice.list(:customer => @client.stripe_account_id, limit: 12)
-    @upcoming = Stripe::Invoice.upcoming(:customer => @client.stripe_account_id)
+    if @client.stripe_account_id?
+      # @invoices = Stripe::Invoice.list(:customer => @client.stripe_account_id, limit: 12)
+      # @upcoming = Stripe::Invoice.upcoming(:customer => @client.stripe_account_id)
+    else
+      redirect_to root_path, :notice => "You have not subscribed to a hosting plan yet; please do so below"
+    end
   end  
 
   private

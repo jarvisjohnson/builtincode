@@ -59,9 +59,14 @@ main {}
 .ui.icon.menu .item {
     color: #dbfddd;
 
-    &:hover {
+    &:hover:not(.disabled) {
         color: rgb(135, 226, 147);
     }
+    &.disabled{
+        cursor: default;
+        background-color: transparent !important;
+        color: rgba(135, 226, 147, .5);        
+    }    
 }
 
 .ui.vertical.menu .active.item {
@@ -70,10 +75,11 @@ main {}
     color: rgb(135, 226, 147);
     font-weight: 400;
 
-    &:hover {
+    &:hover:not(.disabled) {
         color: #7ac784;
         background: #27502c;
     }
+
 }
 
 .ui.vertical.segment {

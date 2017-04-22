@@ -69,39 +69,53 @@ class Client < ApplicationRecord
   
   # Omniauth login
   # https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview
-    def self.from_facebook_omniauth(auth)
-      where(provider: auth.provider, uid: auth.uid).first_or_create do |client|
-        if auth.info.email?
-          client.email = auth.info.email
-        else
-          client.email = "facebook_user: #{auth.info.name}"
-        end
-        client.password = Devise.friendly_token[0,20]
-        client.contact_name = auth.info.name
-        # client.name = auth.info.name   # assuming the client model has a name
-        client.oauth_avatar = auth.info.image # assuming the client model has an image
-        # If you are using confirmable and the provider(s) you use validate emails, 
-        # uncomment the line below to skip the confirmation emails.
-        client.skip_confirmation!
+    def self.from_omniauth(auth, client)
+      # client = current_client
+      unless client
+          client = Client.create(
+            email:  auth.info.email ? auth.info.email : "oauth_user: #{auth.info.name}",
+            password: Devise.friendly_token[0,20],
+            contact_name: auth.info.name,
+            oauth_avatar: auth.info.image,
+            provider: auth.provider, 
+            uid: auth.uid
+          )
+          client.skip_confirmation!
+      else
+          client.update_attributes(
+            contact_name: auth.info.name,
+            oauth_avatar: auth.info.image,
+            provider: auth.provider, 
+            uid: auth.uid
+          )      
+          client.save
       end
+      client
     end         
 
-    def self.from_google_omniauth(access_token)
-        data = access_token.info
-        # granular = access_token.extra.raw_info
-        client = Client.where(:email => data["email"]).first
-
-        # Uncomment the section below if you want clients to be created if they don't exist
-        unless client
-            client = Client.create(
-              email: data["email"],
-              password: Devise.friendly_token[0,20],
-              provider: "google",
-              oauth_avatar: data["image"],
-              contact_name: data["name"]
-            )
-        end
-        client
+    def self.from_google_omniauth(auth, client)
+      data = access_token.info
+      # granular = access_token.extra.raw_info
+      # client = current_client
+      # Uncomment the section below if you want clients to be created if they don't exist
+      unless client
+          client = Client.create(
+            email: data["email"],
+            password: Devise.friendly_token[0,20],
+            provider: "google",
+            oauth_avatar: data["image"],
+            contact_name: data["name"]
+          )
+      else
+          client.update_attributes(
+            provider: "google",
+            oauth_avatar: data["image"],
+            contact_name: data["name"]
+          )      
+          client.save
+      end
+      raise
+      client
     end    
 
 
@@ -112,6 +126,17 @@ class Client < ApplicationRecord
         end
       end
     end  
+
+    # http://stackoverflow.com/questions/21370461/connect-twitter-account-to-existing-devise-account    
+
+    def has_connection_with(provider)
+      auth = self.provider
+      if (auth.present? and auth == provider)
+        self.uid.present?
+      else
+        false
+      end
+    end    
 
   protected
 

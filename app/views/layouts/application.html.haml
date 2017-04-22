@@ -14,67 +14,11 @@
 
   %body
 
-    .ui.left.vertical.labeled.icon.sidebar.menu.uncover.visible
-      .flex-container
-        .user-links
-          = link_to "LOGO HERE", "https://www.builtincode.com", class: "ui item", target: "_blank"
-          = link_to "Dashboard", root_path, class: "ui item #{active_class(root_path)}"
-          = link_to "My Information", client_path(current_client), class: "ui item #{active_class(client_path(current_client))}"
-          = link_to "My Sites", client_websites_path(current_client), class: "ui item #{active_class(client_websites_path(current_client))}"
-          = link_to "My Invoices", index_invoices_client_path(current_client), class: "ui item #{active_class(index_invoices_client_path(current_client))}"      
-          %a.item
-            Help
-        - if current_client.try(:admin?)
-          .admin-links            
-            = link_to "List Clients", clients_path, class: "ui item #{active_class(clients_path)}"        
-
-
-
+    = render "layouts/nav"
 
     %main.pusher
 
-      .header
-        .ui.vertical.segment
-          .ui.container    
-            .ui.two.column.grid
-              .column
-                %h1.ui
-                  = yield :title
-              .right.aligned.column
-                .ui.inline.dropdown
-                  .text
-                    - if current_client.oauth_avatar?
-                      = image_tag current_client.oauth_avatar, class: "ui avatar image"
-                    - else
-                      = image_tag current_client.avatar.url(:thumb), class: " ui avatar image"
-                    = current_client.business_name ? current_client.business_name : current_client.contact_name
-                  %i.dropdown.icon
-                  .menu
-                    .header
-                      - if current_client.oauth_avatar?
-                        = image_tag current_client.oauth_avatar, class: "ui avatar image"
-                      - else
-                        = image_tag current_client.avatar.url(:thumb), class: " ui avatar image"
-                      = current_client.business_name ? current_client.business_name : current_client.contact_name
-                    .divider
-                    = link_to(destroy_client_session_path, :method => :delete, class: "item") do
-                      Sign Out
-                      %i.icon.lock.left.floated
-                    = link_to(edit_client_registration_path, class: "item") do
-                      Edit your Account
-                      %i.icon.configure.left.floated
-
-
-            = semantic_flash
-            %p This example shows how to use lazy loaded images, a sticky menu, and a simple text container
-        .ui.vertical.segment
-          .ui.container
-            .ui.grid
-              .four.column.row
-                %button.ui.primary.button
-                  My Sites
-                %button.ui.button
-                  Request Help
+      = render "layouts/header"
 
       %section.client-dashboard
         .ui.container

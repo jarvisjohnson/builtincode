@@ -1,0 +1,43 @@
+.header
+  .ui.vertical.segment
+    .ui.container    
+      .ui.two.column.grid
+        .column
+          %h1.ui
+            = yield :title
+        .right.aligned.column
+          .ui.inline.dropdown
+            .text
+              - if current_client.oauth_avatar?
+                = image_tag current_client.oauth_avatar, class: "ui avatar image"
+              - else
+                = image_tag current_client.avatar.url(:thumb), class: " ui avatar image"
+              = current_client.business_name ? current_client.business_name : current_client.contact_name
+            %i.dropdown.icon
+            .menu
+              .header
+                - if current_client.oauth_avatar?
+                  = image_tag current_client.oauth_avatar, class: "ui avatar image"
+                - else
+                  = image_tag current_client.avatar.url(:thumb), class: " ui avatar image"
+                = current_client.business_name ? current_client.business_name : current_client.contact_name
+              .divider            
+              = link_to(destroy_client_session_path, :method => :delete, class: "item") do
+                Sign Out
+                %i.icon.lock.left.floated
+              = link_to(edit_client_registration_path, class: "item") do
+                Edit your Account
+                %i.icon.configure.left.floated
+
+
+
+      = semantic_flash
+      %p This example shows how to use lazy loaded images, a sticky menu, and a simple text container
+  .ui.vertical.segment
+    .ui.container
+      .ui.grid
+        .four.column.row
+          %button.ui.primary.button
+            My Sites
+          %button.ui.button
+            Request Help
