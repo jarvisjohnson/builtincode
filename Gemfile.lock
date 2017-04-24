@@ -147,6 +147,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.11.0)
+    libv8 (5.3.332.38.5)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -166,6 +167,8 @@ GEM
     mina-whenever (1.0.0)
       mina (~> 1.0.0)
     mini_portile2 (2.1.0)
+    mini_racer (0.1.9)
+      libv8 (~> 5.3)
     minitest (5.10.1)
     momentjs-rails (2.17.1)
       railties (>= 3.1)
@@ -361,6 +364,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   mina-scp
   mina-whenever
+  mini_racer
   money
   mysql2 (>= 0.3.18, < 0.5)
   omniauth-facebook (~> 4.0.0)

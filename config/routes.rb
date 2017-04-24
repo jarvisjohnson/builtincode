@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'hello_world', to: 'hello_world#index'
   get 'react_examples/component', to: 'react_examples#component', as: :component
   
   devise_for :clients, :controllers => {

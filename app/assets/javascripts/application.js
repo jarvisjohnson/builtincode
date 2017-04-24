@@ -1,3 +1,5 @@
+//= require webpack-bundle
+
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -15,6 +17,4 @@
 //= require turbolinks
 //= require semantic-ui
 //= require cocoon
-//= require react_integration
-//= require react_bundle
 //= require_tree .
