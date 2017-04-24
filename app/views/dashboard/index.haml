@@ -1,6 +1,6 @@
 = link_to 'Invite', new_client_invitation_path
 - content_for :title do
-  = react_component('Invoice', {clientName: @client.business_name ? @client.business_name : @client.contact_name }, {server_side: false})
+  = react_component('PageTitle', {clientName: @client.business_name ? @client.business_name : @client.contact_name, client: @client}, {server_side: false})
 
 / If customer has existing invoices, show up here
 - @websites.each do |website|

@@ -47,4 +47,9 @@
         %td= link_to 'Delete', client, :method => :delete, :data => { :confirm => 'Are you sure?' }
         %td
 
+- @clients.each do |client|         
+  = react_component('PageTitle', {clientName: client.business_name ? client.business_name : client.contact_name, client: client})
+
+/ = react_component('HelloModal')
+
 = link_to 'New Client', new_client_path

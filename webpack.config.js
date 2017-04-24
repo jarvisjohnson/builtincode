@@ -5,6 +5,9 @@ module.exports = {
   entry: {
     main: ['./app/react/index.js']
   },
+  // headers: {
+  //   'Access-Control-Allow-Origin': '*',
+  // },  
   output: {
     path: __dirname + '/app/assets/javascripts',
     filename: 'react_bundle.js'
