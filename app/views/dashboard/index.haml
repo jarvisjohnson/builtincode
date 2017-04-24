@@ -1,4 +1,3 @@
-= link_to 'Invite', new_client_invitation_path
 - content_for :title do
   = react_component('PageTitle', {clientName: @client.business_name ? @client.business_name : @client.contact_name, client: @client}, {server_side: false})
 
