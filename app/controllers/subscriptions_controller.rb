@@ -25,8 +25,9 @@ class SubscriptionsController < ApplicationController
       customer: customer,
       items: [
         {
-          plan: "basic-web-hosting",
-          quantity: @website.hosting_units,
+          plan: "web-hosting-#{@website.client.billing_currency.downcase}",
+          # We want this in 'billing units' i.e. 1 unit - $1
+          quantity: (@website.monthly_cost_cents/100)
         },
       ]
     )

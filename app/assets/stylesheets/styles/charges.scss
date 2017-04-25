@@ -11,27 +11,35 @@
     border-radius: 0;
     background: white;
     list-style-type: none;
+    border-top: 1px solid #e2e6e8;
     &.active-charge{
-      border-left: 3px solid#48dc5b;
+      border-left: 3px solid #48dc5b;
     }
-    &.latest{
-
+    &.latest, &.upcoming {
+      border-left: 3px solid #6f8691;
     }
     &.inactive{
-      background-color: transparent;
-      border-top: 1px solid #e2e6e8;
+      // background-color: transparent;
       margin-top: 0;
-      box-shadow: none;      
+      box-shadow: none; 
+      border-left: 2px solid #48dc5b;     
     }
 }
+
 @media (min-width: 576px){
   .charge {
-      padding: 24px !important;
+    padding: 24px !important;
+    &.inactive{
+      padding: 14px !important;
+    }
   }
 }
 @media (min-width: 992px){
   .charge {
-      padding: 32px !important;
+    padding: 32px !important;
+    &.inactive{
+      padding: 20px !important;
+    }    
   }
 }
 

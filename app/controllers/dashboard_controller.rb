@@ -25,8 +25,11 @@ class DashboardController < ApplicationController
 
     # Talk to Stripe API to retrieve their invoices
 
-    @invoices = Stripe::Invoice.list(:customer => @client.stripe_account_id, limit: 12)
+    @invoices = Stripe::Invoice.list(:customer => @client.stripe_account_id, limit: 6)
 
+    @upcoming = @client.stripe_account_id ? 
+      Stripe::Invoice.upcoming(:customer => @client.stripe_account_id) : 
+      nil
 
   end
 

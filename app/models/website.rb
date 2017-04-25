@@ -44,6 +44,7 @@ class Website < ApplicationRecord
 
     # raise
     self.monthly_cost_cents = monthly * 100
+    self.hosting_units = monthly
   end
 
 
