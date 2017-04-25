@@ -16,6 +16,9 @@
 #  paid                   :boolean
 #  stripe_subscription_id :string(255)
 #  hosting_units          :string(255)
+#  monthly_cost_cents     :integer          default(2500)
+#  production_url         :string(255)
+#  staging_url            :string(255)
 #
 # Indexes
 #

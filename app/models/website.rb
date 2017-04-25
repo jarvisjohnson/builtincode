@@ -16,6 +16,9 @@
 #  paid                   :boolean
 #  stripe_subscription_id :string(255)
 #  hosting_units          :string(255)
+#  monthly_cost_cents     :integer          default(2500)
+#  production_url         :string(255)
+#  staging_url            :string(255)
 #
 # Indexes
 #
@@ -27,4 +30,21 @@ class Website < ApplicationRecord
   belongs_to :client, inverse_of: :websites
   has_many :features, dependent: :destroy, inverse_of: :website
   accepts_nested_attributes_for :features
+  before_save :calculate_monthly_cost
+
+
+  def calculate_monthly_cost
+    monthly = 0
+    monthly += self.billing_units
+    
+    # Add value of each feature into monthly cost
+    self.features.each do |feature|
+      monthly += (feature.billing_units * feature.quantity)
+    end
+
+    # raise
+    self.monthly_cost_cents = monthly * 100
+  end
+
+
 end

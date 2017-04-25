@@ -83,7 +83,7 @@ class WebsitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def website_params
-      params.require(:website).permit(:client_id, :features_id, :billing_units, :name, :app_type, :ssl, :cdn)
+      params.require(:website).permit(:client_id, :features_id, :billing_units, :name, :app_type, :ssl, :cdn, :monthly_cost_cents)
     end
     
 end

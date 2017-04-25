@@ -2,6 +2,7 @@
   = react_component('PageTitle', {clientName: @client.business_name ? @client.business_name : @client.contact_name, client: @client}, {server_side: false})
 
 / If customer has existing invoices, show up here
+%h2 Websites
 - @websites.each do |website|
   -if website.stripe_subscription_id
     - subscription = Stripe::Subscription.retrieve(website.stripe_subscription_id)
@@ -11,7 +12,18 @@
         .item
           .image
           .content
-            %a.header #{website.name ? website.name : @client.business_name}
+            .ui.grid
+              .two.column.row
+                %span.left.floated.left.aligned.column
+                  .ui.items
+                    .ui.item
+                      .content
+                        %a.header #{website.name ? website.name : @client.business_name}
+                %span.right.floated.right.aligned.column
+                  .ui.items
+                    .ui.item
+                      .content
+                        %a.header $ #{website.monthly_cost_cents ? Money.new(website.monthly_cost_cents, @client_currency) : "N/A"} / Month            
             .meta
               %span #{subscription.plan.name}
             .description
@@ -22,53 +34,19 @@
                   #error_explanation
                     %p= flash[:error]   
                 .ui.right.floated     
-              .ui.label Limited 
-    %ul.latest-charges.latest-charges-subset
+              .ui.label Limited
+              - if website.features.exists?
+                - website.features.each do |feature|
+                  .ui.label
+                    %span
+                      = feature.quantity                  
+                    %span
+                      x                      
+                    %span
+                      = feature.name
+                    %span
+                      (@ $ #{Money.new(feature.billing_units*100, @client_currency)})
 
-      %h6 Upcoming Invoices
-      %li.charge.upcoming
-        %i.ui.icon.calendar.outline
-      %h6 Latest
-      - @invoices.data.each do |invoice|
-        %li.charge.active-charge{class: invoice.paid ? "paid" : ""}
-          .ui.right.aligned.grid
-            .center.aligned.one.wide.column
-              %i.ui.icon.checkmark.green
-            .right.aligned.fifteen.wide.column
-              .ui.right.aligned.grid
-                .left.floated.left.aligned.six.wide.column
-                  .ui.items
-                    .ui.item
-                      .content
-                        .header
-                          Invoice for
-                          = invoice.lines.data.first.plan.name                      
-                        .meta
-                          %span
-                            = Time.at(invoice.date).to_date 
-                .right.floated.right.aligned.six.wide.column
-                  .ui.items
-                    .ui.item
-                      .content
-                        .header
-                          $ #{Money.new(invoice.amount_due, @client_currency)}
-                        .meta
-                          %span
-                            = Time.at(invoice.date).to_date  
-                .center.aligned.one.column.row
-                  .ui.divider
-                .sixteen.wide.column
-                  .ui.items
-                    .ui.item
-                      .content
-                        .extra
-                          .ui.right.floated.button
-                            View 
-
-
-      %h6 Completed
-      %li.charge.paid.inactive
-        %i.ui.icon.checkmark
   -else
     .ui.segment
       %a.ui.red.ribbon.label Subscription Pending
@@ -88,7 +66,7 @@
                   .ui.items
                     .ui.item
                       .content
-                        %a.header $ #{website.billing_units ? Money.new(website.billing_units*100, @client_currency) : "N/A"} / Month      
+                        %a.header $ #{website.monthly_cost_cents ? Money.new(website.monthly_cost_cents, @client_currency) : "N/A"} / Month      
             .ui.grid
               .two.column.row
                 %span.left.floated.left.aligned.column
@@ -106,6 +84,55 @@
                   %script.stripe-button{"data-amount" => @amount, "data-description" => "A month's subscription", "data-key" => "#{Rails.configuration.stripe[:publishable_key]}", "data-description" => "#{@description}", "data-email" => "#{current_client.email}",  "data-locale" => "auto", :src => "https://checkout.stripe.com/checkout.js"}  
               .ui.label 
                 = website.app_type ?  website.app_type : 'Ruby'
+
+
+%h2 Invoices
+%ul.latest-charges.latest-charges-subset
+
+  %h6 Upcoming Invoices
+  %li.charge.upcoming
+    %i.ui.icon.calendar.outline
+  %h6 Latest
+  - @invoices.data.each do |invoice|
+    %li.charge.active-charge{class: invoice.paid ? "paid" : ""}
+      .ui.right.aligned.grid
+        .center.aligned.one.wide.column
+          %i.ui.icon.checkmark.green
+        .right.aligned.fifteen.wide.column
+          .ui.right.aligned.grid
+            .left.floated.left.aligned.six.wide.column
+              .ui.items
+                .ui.item
+                  .content
+                    .header
+                      Invoice for
+                      = invoice.lines.data.first.plan.name                      
+                    .meta
+                      %span
+                        = Time.at(invoice.date).to_date 
+            .right.floated.right.aligned.six.wide.column
+              .ui.items
+                .ui.item
+                  .content
+                    .header
+                      $ #{Money.new(invoice.amount_due, @client_currency)}
+                    .meta
+                      %span
+                        = Time.at(invoice.date).to_date  
+            .center.aligned.one.column.row
+              .ui.divider
+            .sixteen.wide.column
+              .ui.items
+                .ui.item
+                  .content
+                    .extra
+                      .ui.right.floated.button
+                        View 
+
+
+  %h6 Completed
+  %li.charge.paid.inactive
+    %i.ui.icon.checkmark
 
 
 

@@ -9,6 +9,7 @@
   #websites
   = f.simple_fields_for :websites do |website|
     = render 'website_fields', f: website
-  .links
-    =link_to_add_association 'add website', f, :websites, class: "ui button" 
-  = f.button :submit, t("devise.invitations.new.submit_button")
+  .ui.field
+    =link_to_add_association 'Add A Website for this client', f, :websites, class: "ui positive basic button" 
+  .ui.field
+    = f.button :submit, t("devise.invitations.new.submit_button")

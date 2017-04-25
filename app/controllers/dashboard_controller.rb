@@ -23,7 +23,7 @@ class DashboardController < ApplicationController
     
     # @status = @subscription.status
 
-    # Talk to Stripe API to retrieve their invoices 
+    # Talk to Stripe API to retrieve their invoices
 
     @invoices = Stripe::Invoice.list(:customer => @client.stripe_account_id, limit: 12)
 
