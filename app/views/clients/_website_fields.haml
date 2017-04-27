@@ -1,0 +1,14 @@
+.ui.segment.nested-fields
+  = f.input :name, label: "Website Name"
+  = f.input :app_type, label: "Type of Application"
+  = f.input :billing_units, as: :integer, label: "Base Billing Units"
+  = f.input :production_url
+  = f.input :staging_url
+  / = website.input :description
+  / = website.input :done, :as => :boolean
+  .website-features
+    = f.simple_fields_for :features do |feature|
+      = render 'feature_fields', f: feature
+    .ui.field
+      =link_to_add_association 'Add A Feature for this Site', f, :features, class: "ui basic button"   
+  = link_to_remove_association "remove website", f

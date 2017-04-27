@@ -1,19 +1,51 @@
 - content_for :title, @client.business_name ? @client.business_name : @client.contact_name
 .ui.segment
-  / %a.ui.ribbon.label{class: "subscription-#{subscription.status}"} #{subscription.status.capitalize}
-  .ui.divided.items
-    .ui.grid
-      .ui.three.column.row
-        .column
-          - fb = check_connection('facebook', 'Facebook')
-          = fb.html_safe
-        .column
-          - google = check_connection('google_oauth2', 'Google')            
-          = google.html_safe  
-        .column
-          - google = check_connection('linkedin', 'Linkedin')            
-          = google.html_safe            
+  .ui.grid
+    .ui.one.column.row
+      .column
+        .profile
+          .ui.page.grid.one.column
+            .column
+              / {{&gt; userProfile}}
+        .profile.ui.segments
+          .ui.secondary.segment
+            %h3 
+              =@client.contact_name
+          .ui.segment    
+            .meta
+              %span.date Joined in 2013
 
-= link_to 'Edit', edit_client_path(@client)
-\|
-= link_to 'Back', clients_path
+          .ui.segment
+            %address
+              %strong 
+                =@client.business_name
+              %br/
+              %span 
+                =@client.email
+              %br/
+              %abbr{:title => "Phone"} P:
+          .ui.segment
+            %strong
+              Sites
+            %br/
+            -@client.websites.each do |site|
+              = site.name
+              = link_to "View", Domainatrix.parse(site.production_url).url
+          .ui.segment
+            .left.floated
+              = link_to 'Edit', edit_client_path(@client)
+              \|
+              = link_to 'Back', clients_path   
+            .right.floated
+              = link_to 'Cancel Subscription', clients_path       
+
+    .ui.three.column.row
+      .column
+        - fb = check_connection('facebook', 'Facebook')
+        = fb.html_safe
+      .column
+        - google = check_connection('google_oauth2', 'Google')            
+        = google.html_safe  
+      .column
+        - google = check_connection('linkedin', 'Linkedin')            
+        = google.html_safe            

@@ -1,7 +1,14 @@
 = simple_form_for(@client) do |f|
-  = f.error_notification
-
-  .form-inputs
-
-  .form-actions
-    = f.button :submit
+  / = devise_error_messages!
+  = f.input :email
+  = f.input :contact_name
+  = f.input :business_name
+  = f.input :billing_currency, collection: ['AUD', 'USD']
+  - if current_client.admin?
+    #websites
+    = f.simple_fields_for :websites do |website|
+      = render 'devise/website_fields', f: website
+    .ui.field
+      =link_to_add_association 'Add A Website for this client', f, :websites, class: "ui positive basic button" 
+  .ui.field
+    = f.button :submit, "Update"

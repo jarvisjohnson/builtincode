@@ -6,6 +6,19 @@ class ApplicationController < ActionController::Base
   # https://github.com/plataformatec/devise/wiki/How-To:-Create-custom-layouts
   layout :layout_by_resource
 
+  # def after_sign_in_path_for(resource)
+  #   # request.env['omniauth.origin'] || stored_location_for(resource) || root_path
+  #   dashboard_index_path
+  # end  
+
+  def after_sign_out_path_for(resource)
+    new_client_session_path
+  end  
+
+  def after_sign_in_path_for(resource)
+    dashboard_index_path
+  end    
+
   protected
 
   def configure_permitted_parameters

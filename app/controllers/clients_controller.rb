@@ -46,6 +46,7 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1
   # PATCH/PUT /clients/1.json
   def update
+    @client = Client.find(params[:id])
     respond_to do |format|
       if @client.update(client_params)
         format.html { redirect_to @client, notice: 'Client was successfully updated.' }
@@ -72,7 +73,7 @@ class ClientsController < ApplicationController
       @invoices = Stripe::Invoice.list(:customer => @client.stripe_account_id, limit: 12)
       @upcoming = Stripe::Invoice.upcoming(:customer => @client.stripe_account_id)
     else
-      redirect_to root_path, :notice => "You have not subscribed to a hosting plan yet; please do so below"
+      redirect_to dashboard_index_path, :notice => "You have not subscribed to a hosting plan yet; please do so below"
     end
   end  
 
@@ -90,7 +91,7 @@ class ClientsController < ApplicationController
     def authenticate_admin
       unless current_client.try(:admin)
         # redirect_to root_url
-        redirect_to root_path
+        redirect_to dashboard_index_path
       end
     end   
 

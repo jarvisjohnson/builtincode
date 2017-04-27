@@ -1,0 +1,5 @@
+.ui.segment.nested-fields.second-level-nested-fields
+  = f.input :name
+  = f.input :quantity, as: :integer
+  = f.input :billing_units, as: :integer
+  = link_to_remove_association "remove feature", f

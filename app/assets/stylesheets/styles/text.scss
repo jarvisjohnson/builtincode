@@ -1,12 +1,12 @@
 body{
   color: rgba(45, 61, 59, 0.8);
   background: white;
-  font-weight: 300;
+  // font-weight: bold;
   // letter-spacing: .5px;
 }
 h1,h2,h3,h4,h4,h6,b{
   font-family: $secondary-font-family;
-  font-weight: 500;
+  font-weight: 700;
 }
 h6, .h6 {
     color: #829ca9;
@@ -16,7 +16,7 @@ h6, .h6 {
 a{
   cursor: pointer;
 }
-a.item, a, .ui.menu a.item, a.ui.item, .item a {
-  font-weight: 300;
-  letter-spacing: .5px;
+a.item, .ui.menu a.item, a.ui.item, .item a, .ui.button {
+  font-weight: 400;
+  letter-spacing: 1px;
 }

@@ -1,6 +1,7 @@
-%h1 Editing client
+- content_for :title, @client.business_name ? "Editing: #{@client.business_name}" : "Editing: #{@client.contact_name}"
 
-= render 'form'
+.ui.segment.center.aligned
+  = render 'form'
 
 = link_to 'Show', @client
 \|
