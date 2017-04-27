@@ -39,5 +39,9 @@
         .four.column.row
           %button.ui.basic.button
             My Sites
-          %button.ui.basic.button
-            Request Help
+          %button.ui.basic.button{id: "modal__trigger__contact-options" }
+            Get Help
+  
+  = render :partial => "layouts/modals/header_modals.haml"
+          
+            

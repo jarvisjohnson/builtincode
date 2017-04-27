@@ -16,11 +16,21 @@ document.addEventListener("turbolinks:load", function() {
     .accordion()
   ;  
 
+  // Modals, except those that need to be dynamic
   $('.ui.modal')
   .modal({
-    inverted: true
+    inverted: true,
+    allowMultiple: true
   })
-  // .modal('show')
   ;
+  $('#modal__contact-options')
+    .modal('attach events', '#modal__trigger__contact-options', 'show')
+  ; 
+  $('#modal__contact__form-support')
+    .modal('attach events', '#modal__contact-options .support.button')
+  ;
+  $('#modal__contact__form-enquiry')
+    .modal('attach events', '#modal__contact-options .enquiry.button')
+  ;    
 
 });
