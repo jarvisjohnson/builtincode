@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'pages/welcome'
+
+  get "dashboard/index"  
+
   get 'react_examples/component', to: 'react_examples#component', as: :component
   
   devise_for :clients, :controllers => {
@@ -27,7 +31,6 @@ Rails.application.routes.draw do
   # Consume Stripe Webhooks: https://github.com/integrallis/stripe_event
   mount StripeEvent::Engine, at: '/stripe_webhooks' # provide a custom path
 
-
-  root to: "dashboard#index"
+  root to: "pages#welcome"
 
 end

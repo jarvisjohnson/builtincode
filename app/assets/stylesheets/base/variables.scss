@@ -1,8 +1,9 @@
 // Semantic UI
 $columnCount: 12;
-$font-url: 'https://fonts.googleapis.com/css?family=Fira+Sans:300,400' !default;
-$font-name: 'Fira Sans' !default;
+$font-url: "https://fonts.googleapis.com/css?family=Josefin+Sans:700|Open Sans" !default;
+$font-name: 'Open Sans' !default;
 $font-family: $font-name, sans-serif !default;
+$secondary-font-family: 'Josefin Sans', sans-serif !default;
 
 //Bourbon
 $output-bourbon-deprecation-warnings: false;

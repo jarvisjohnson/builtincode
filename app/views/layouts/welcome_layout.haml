@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    / Standard Meta
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0", :name => "viewport"}/
+    / Site Properties
+    %title Builtincode Client Dashboard
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  %body.welcome
+  
+    = render 'layouts/react_hot_assets'
+
+    = yield
+    / = render "layouts/nav"
+
+    / %main.pusher
+
+    /   = render "layouts/header"
+
+    /   %section.client-dashboard
+    /     .ui.container
+
+
+    /   - if Rails.env == 'development'
+    /     = console
+
+    /   = render "layouts/footer"

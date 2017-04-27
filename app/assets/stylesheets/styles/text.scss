@@ -1,13 +1,19 @@
 body{
   color: #6f8691;
-  background: #f2f5f7;
+  background: white;
   font-weight: 300;
+}
+h1,h2,h3,h4,h4,h6,b{
+  font-family: $secondary-font-family;
 }
 h6, .h6 {
     color: #829ca9;
 }
 
 //Links
+a{
+  cursor: pointer;
+}
 a.item, a, .ui.menu .item {
   font-weight: 300;
 }
