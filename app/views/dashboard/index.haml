@@ -31,87 +31,16 @@
     
       %h5.pad-left Upcoming Invoices
       - invoice = @upcoming
-      %li.charge.upcoming
-        .ui.right.aligned.grid
-          .center.aligned.one.wide.column  
-            %i.ui.icon.calendar.outline
-          .right.aligned.fifteen.wide.column
-            .ui.right.aligned.grid
-              .left.floated.left.aligned.six.wide.column
-                .ui.items
-                  .ui.item
-                    .content
-                      .header
-                        Invoice for
-                        = invoice.lines.data.first.plan.name                      
-                      .meta
-                        %span
-                          = Time.at(invoice.date).to_date 
-              .right.floated.right.aligned.six.wide.column
-                .ui.items
-                  .ui.item
-                    .content
-                      .header
-                        $ #{Money.new(invoice.amount_due, @client_currency)}
-                      .meta
-                        %span
-                          = Time.at(invoice.date).to_date          
+      = render :partial => "layouts/invoice_simple", locals: { invoice: @upcoming, icon: "calendar outline", inactive: false }
+
       %h5.pad-left Latest
       - invoice = @invoices.data.shift
-      %li.charge.active-charge{class: invoice.paid ? "paid" : ""}
-        .ui.right.aligned.grid
-          .center.aligned.one.wide.column
-            %i.ui.icon.checkmark.green
-          .right.aligned.fifteen.wide.column
-            .ui.right.aligned.grid
-              .left.floated.left.aligned.six.wide.column
-                .ui.items
-                  .ui.item
-                    .content
-                      .header
-                        Invoice for
-                        = invoice.lines.data.first.plan.name                      
-                      .meta
-                        %span
-                          = Time.at(invoice.date).to_date 
-              .right.floated.right.aligned.six.wide.column
-                .ui.items
-                  .ui.item
-                    .content
-                      .header
-                        $ #{Money.new(invoice.amount_due, @client_currency)}
-                      .meta
-                        %span
-                          = Time.at(invoice.date).to_date  
+      = render :partial => "layouts/invoice_simple", locals: { invoice: invoice, icon: "checkmark green", inactive: false }      
 
+      %h5.pad-left{class: @invoices.data.empty? ? "faded" : "" } Completed
+      - @invoices.data.each do |invoice|  
+        = render :partial => "layouts/invoice_simple", locals: { invoice: invoice, icon: "checkmark", inactive: true }     
 
-      %h5.pad-left Completed
-      / - @invoices.data.each do |invoice|
-      %li.charge.paid.inactive
-        .ui.right.aligned.grid
-          .center.aligned.one.wide.column
-            %i.ui.icon.checkmark.green
-          .right.aligned.fifteen.wide.column
-            .ui.right.aligned.grid
-              .left.floated.left.aligned.six.wide.column
-                .ui.items
-                  .ui.item
-                    .content
-                      .header
-                        Invoice for
-                        = invoice.lines.data.first.plan.name                      
-                      .meta
-                        %span
-                          = Time.at(invoice.date).to_date 
-              .right.floated.right.aligned.six.wide.column
-                .ui.items
-                  .ui.item
-                    .content
-                      .header
-                        $ #{Money.new(invoice.amount_due, @client_currency)}
-                      .meta
-                        %span
-                          = Time.at(invoice.date).to_date  
   - if @upcoming
     .site-or-invoice-group
       .ui.grid

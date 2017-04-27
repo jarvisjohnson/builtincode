@@ -10,27 +10,25 @@
         .profile.ui.segments
           .ui.secondary.segment
             %h3 
-              =@client.contact_name
+              =@client.business_name
           .ui.segment    
             .meta
-              %span.date Joined in 2013
+              %span.date Member since #{@client.created_at.year}
 
           .ui.segment
             %address
               %strong 
-                =@client.business_name
+                =@client.contact_name
               %br/
               %span 
                 =@client.email
-              %br/
-              %abbr{:title => "Phone"} P:
           .ui.segment
             %strong
               Sites
             %br/
             -@client.websites.each do |site|
               = site.name
-              = link_to "View", Domainatrix.parse(site.production_url).url
+              = link_to "View", Domainatrix.parse(site.production_url).url, target: '_blank'
           .ui.segment
             .left.floated
               = link_to 'Edit', edit_client_path(@client)

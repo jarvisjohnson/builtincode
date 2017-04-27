@@ -46,7 +46,7 @@ class SubscriptionsController < ApplicationController
     @website.save    
 
     flash[:notice] = "Thank you; Your subscription payment has cleared and your membership has been updated"
-    redirect_to root_path, notice: "Thank you; Your subscription payment has cleared and your membership has been updated"    
+    redirect_to dashboard_index_path, notice: "Thank you; Your subscription payment has cleared and your membership has been updated"    
 
   rescue Stripe::CardError => e
     flash[:error] = e.message

@@ -13,11 +13,11 @@
     list-style-type: none;
     border-top: 1px solid #e2e6e8;
 
-    &.active-charge {
+    &.charge-paid {
         border-left: 3px solid #48dc5b;
     }
 
-    &.latest, &.upcoming {
+    &.charge-latest, &.carge-upcoming {
         border-left: 3px solid #6f8691;
     }
 

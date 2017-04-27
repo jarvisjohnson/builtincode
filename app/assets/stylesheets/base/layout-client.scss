@@ -42,4 +42,7 @@
 
 .pad-left{
   padding-left: 1em;
+  &.faded{
+    opacity: .5;
+  }
 }
