@@ -15,7 +15,7 @@ main {}
 
 //Header
 .header {
-    background: #fff;
+    // background: #fff;
     margin-bottom: 3rem;
 }
 
@@ -52,34 +52,53 @@ main {}
     background-repeat: no-repeat;
     background-size: 264px auto;
     height: 100vh;
-    background-color: #006b0c !important;
+    background-color: #383A35;
     background-position-y: 100%;
 }
 
 .ui.icon.menu .item {
-    color: #dbfddd;
+    color: #E3E8DC;
 
     &:hover:not(.disabled) {
-        color: rgb(135, 226, 147);
+        color: rgba(255, 255, 255, 0.7);
     }
-    &.disabled{
+
+    &.disabled {
         cursor: default;
         background-color: transparent !important;
-        color: rgba(135, 226, 147, .5);        
-    }    
+        color: rgba(90, 90, 90, 0.9);
+    }
+
+    &.main-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #E3E8DC;
+
+        span {
+            color: rgba(0, 255, 222, 0.6);
+        }
+
+        &:hover {
+            color: rgba(255, 255, 255, 0.7);
+
+            span {
+                color: #fff;
+            }
+        }
+    }
 }
 
 .ui.vertical.menu .active.item {
-    background: #27502c;
-    border-left: 3px solid rgb(135, 226, 147);
-    color: rgb(135, 226, 147);
+    background: rgba(0, 0, 0, 0.1);
+    border-left: 3px solid rgba(0, 255, 222, 0.6);;
+    color: rgba(0, 255, 222, 0.8);
     font-weight: 400;
 
     &:hover:not(.disabled) {
-        color: #7ac784;
-        background: #27502c;
+        color: rgba(0, 255, 222, 0.6);
+        background: rgba(0, 0, 0, 0.08);
     }
-
 }
 
 .ui.vertical.segment {

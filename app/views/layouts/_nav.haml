@@ -1,10 +1,17 @@
 .ui.left.vertical.labeled.icon.sidebar.menu.uncover.visible
   .flex-container
     .user-links
-      = link_to "LOGO HERE", "https://www.builtincode.com", class: "ui item", target: "_blank"
-      = link_to "Dashboard", root_path, class: "ui item #{active_class(root_path)}"
+      = link_to "https://www.builtincode.com", class: "ui item main-logo", target: "_blank" do
+        %h3
+          BUILT
+          %span> IN
+          CODE
+      = link_to "Dashboard", dashboard_index_path, class: "ui item #{active_class(dashboard_index_path)}"
       = link_to "My Information", client_path(current_client), class: "ui item #{active_class(client_path(current_client))}"
-      = link_to "My Sites", client_websites_path(current_client), class: "ui item #{active_class(client_websites_path(current_client))}"
+      - if current_client.websites.empty?
+        %span.ui.item.disabled My Sites
+      -else
+        = link_to "My Sites", client_websites_path(current_client), class: "ui item #{active_class(client_websites_path(current_client))}"
       - if current_client.stripe_account_id.nil?
         %span.ui.item.disabled My Invoices
       -else

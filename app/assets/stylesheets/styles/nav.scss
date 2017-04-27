@@ -1,56 +1,56 @@
-// nav {
-//     z-index: 100;
+// .main-logo {
+//     -webkit-transition: color 0.3s;
+//     transition: color 0.3s;
 
-//     ul, ol {
-//         list-style: none;
-//         list-style-image: none;
+//     &:before, &:after {
+//         content: '';
+//         position: absolute;
+//         width: 30%;
+//         height: 5px;
+//         background: #E3E8DC;
+//         bottom: 0;
+//         left: 35%;
+//         -webkit-transition: -webkit-transform 0.5s;
+//         transition: transform 0.5s;
+//         -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+//         transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 //     }
-// }
 
-// @media only screen and (min-width: 569px) {
-//     nav {
-//         position: fixed;
-//         top: 0;
-//         left: 0;
-//         right: 0;
-//         background-color: rgba(29, 30, 34, 0.15);
-//         padding-right: 60px;
-//         -moz-transition: background-color 0.12s ease-in-out;
-//         -o-transition: background-color 0.12s ease-in-out;
-//         -webkit-transition: background-color 0.12s ease-in-out;
-//         transition: background-color 0.12s ease-in-out;
+//     &:after {
+//         background: rgba(0, 255, 222, 0.6);
+//         -webkit-transform: translate3d(-300%, 0, 0) scale3d(0, 1, 1);
+//         transform: translate3d(-300%, 0, 0) scale3d(0, 1, 1);
+//     }
 
-//         ul {
-//             float: right;
-//             padding: 0;
-//             margin: 0;
+//     span {
+//         color: #E3E8DC;
+//         display: inline-block;
+//         position: relative;
+//         -webkit-transform: perspective(1000px) rotate3d(0, 1, 0, 0deg);
+//         transform: perspective(500px) rotate3d(8, 0, 0, 0deg);
+//         -webkit-transition: -webkit-transform 0.8s, color 0.5s;
+//         transition: transform 0.8s, color 0.5s;
+//         -webkit-transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+//         transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+//     }
 
-//             li {
-//                 float: left;
+//     &:hover {
+//         color: rgba(300, 300, 300, 0.3);
 
-//                 a {
-//                     display: block;
-//                     padding-top: 20px;
-//                     font-family: 'gt_walsheim_medium', "Helvetica Neue", Helvetica, Arial, sans-serif;
-//                     text-transform: uppercase;
-//                     font-size: 11px;
-//                     letter-spacing: 2px;
-//                     color: #fff;
-//                     padding-right: 15px;
-//                     padding-left: 15px;
-//                 }
-//             }
+//         span {
+//             color: #fff;
+//             -webkit-transform: perspective(1000px) rotate3d(0, 1, 0, 180deg);
+//             transform: perspective(1000px) rotate3d(1, 1, 0, 360deg);
 //         }
 
-//         &:hover {
-//             background-color: rgba(29, 30, 34, 0.6);
+//         &:before {
+//             -webkit-transform: translate3d(300%, 0, 0) scale3d(0, 1, 1);
+//             transform: translate3d(300%, 0, 0) scale3d(0, 1, 1);
+//         }
+
+//         &:after {
+//             -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+//             transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
 //         }
 //     }
-// }
-
-// .flex-container{
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: space-between;
-//     height: 100%;    
 // }

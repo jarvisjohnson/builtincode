@@ -62,7 +62,12 @@ footer{
 .ui.segment {
     background: #FFFFFF;
     box-shadow: $box-shadow;
-    border: none;
+    border: 1px solid rgba(100,100,100,.2);
+    border-radius: 0;
+}
+
+main.pusher {
+    background: #f2f5f7;
 }
 
 /* Small Monitor */

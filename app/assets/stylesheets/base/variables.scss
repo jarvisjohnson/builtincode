@@ -1,9 +1,11 @@
 // Semantic UI
 $columnCount: 12;
-$font-url: "https://fonts.googleapis.com/css?family=Josefin+Sans:700|Open Sans" !default;
-$font-name: 'Open Sans' !default;
+$font-url: "https://fonts.googleapis.com/css?family=Josefin+Sans:700,500|Poppins:300" !default;
+$font-name: 'Poppins' !default;
 $font-family: $font-name, sans-serif !default;
 $secondary-font-family: 'Josefin Sans', sans-serif !default;
+$primaryColor   : rgba(0, 255, 222, 0.6);
+@blue: $primaryColor;
 
 //Bourbon
 $output-bourbon-deprecation-warnings: false;

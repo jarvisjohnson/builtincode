@@ -8,7 +8,9 @@
       .left.floated.column
         %h2 Websites Summary
       .right.floated.right.aligned.column
-        = link_to "My Sites", client_websites_path(current_client), class: "ui button"
+        = link_to "My Sites", client_websites_path(current_client), class: "ui basic button #{"disabled" if current_client.websites.empty?}"
+  - if @websites.nil? || @websites.empty?
+    = render "layouts/none_yet", locals: {type: "websites"}       
   - @websites.each do |website|
     -if website.stripe_subscription_id
       - subscription = Stripe::Subscription.retrieve(website.stripe_subscription_id)
@@ -55,7 +57,7 @@
 
     -else
       .ui.segment
-        %a.ui.red.ribbon.label Subscription Pending
+        %a.ui.orange.ribbon.label Subscription Pending
         .ui.divided.items
           .item
             .image
@@ -98,7 +100,8 @@
       .left.floated.column
         %h2 Invoice Summary
       .right.floated.right.aligned.column
-        = link_to "My Invoices", index_invoices_client_path(current_client), class: "ui button" 
+        = link_to "My Invoices", index_invoices_client_path(current_client), class: "ui basic button #{"disabled" if current_client.stripe_account_id.nil?}"
+
 
   - if @upcoming
 
@@ -196,4 +199,8 @@
           .left.floated.column
             / %h2 Invoice Summary
           .right.floated.right.aligned.column
-            = link_to "View More Invoices", index_invoices_client_path(current_client), class: "ui button"                         
+            = link_to "View More Invoices", index_invoices_client_path(current_client), class: "ui basic button #{"disabled" if current_client.stripe_account_id.nil?}"                         
+
+
+  - else
+    = render "layouts/none_yet", locals: {type: "invoices"}       

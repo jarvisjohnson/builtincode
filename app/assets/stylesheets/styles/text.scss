@@ -1,10 +1,12 @@
 body{
-  color: #6f8691;
+  color: rgba(45, 61, 59, 0.8);
   background: white;
   font-weight: 300;
+  // letter-spacing: .5px;
 }
 h1,h2,h3,h4,h4,h6,b{
   font-family: $secondary-font-family;
+  font-weight: 500;
 }
 h6, .h6 {
     color: #829ca9;
@@ -14,6 +16,7 @@ h6, .h6 {
 a{
   cursor: pointer;
 }
-a.item, a, .ui.menu .item {
+a.item, a, .ui.menu .item, .ui.item {
   font-weight: 300;
+  letter-spacing: .5px;
 }
