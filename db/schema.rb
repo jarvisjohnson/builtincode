@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425175829) do
+ActiveRecord::Schema.define(version: 20170427162622) do
 
   create_table "clients", primary_key: "uuid", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "",    null: false
@@ -89,8 +89,8 @@ ActiveRecord::Schema.define(version: 20170425175829) do
     t.string   "app_type"
     t.boolean  "ssl",                    default: false
     t.boolean  "cdn",                    default: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "billing_currency",       default: "AUD"
     t.boolean  "paid"
     t.string   "stripe_subscription_id"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20170425175829) do
     t.integer  "monthly_cost_cents",     default: 2500
     t.string   "production_url"
     t.string   "staging_url"
+    t.string   "live_status",            default: "live"
     t.index ["client_id"], name: "index_websites_on_client_id", using: :btree
     t.index ["features_id"], name: "index_websites_on_features_id", using: :btree
   end

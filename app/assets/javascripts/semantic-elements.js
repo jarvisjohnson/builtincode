@@ -16,4 +16,11 @@ document.addEventListener("turbolinks:load", function() {
     .accordion()
   ;  
 
+  $('.ui.modal')
+  .modal({
+    inverted: true
+  })
+  // .modal('show')
+  ;
+
 });

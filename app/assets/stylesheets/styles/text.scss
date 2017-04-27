@@ -16,7 +16,7 @@ h6, .h6 {
 a{
   cursor: pointer;
 }
-a.item, a, .ui.menu .item, .ui.item {
+a.item, a, .ui.menu a.item, a.ui.item, .item a {
   font-weight: 300;
   letter-spacing: .5px;
 }

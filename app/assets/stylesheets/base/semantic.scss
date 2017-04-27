@@ -144,3 +144,23 @@ abbr[title] {
     right: 0px;
     left: auto;
 }
+
+.ui.items > .item > .image {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 120px;
+    flex-direction: column;
+
+
+    & > img {
+      width: 30%;
+      width: 40%;
+      margin-bottom: .5em; 
+            
+    }
+}
+.ui.items > .item > .image:not(.ui) {
+    width: 120px;
+}
+

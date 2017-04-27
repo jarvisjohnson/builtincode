@@ -39,6 +39,7 @@ gem "figaro"
 gem "stripe"
 gem "stripe_event"
 gem "money"
+gem "domainatrix"
 
 ### forms
 gem 'simple_form', "~> 3.4"

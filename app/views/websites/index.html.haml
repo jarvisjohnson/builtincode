@@ -1,47 +1,6 @@
 - content_for :title, 'Your websites'
 
 - @websites.each do |website|
-  -if website.stripe_subscription_id
-    - subscription = Stripe::Subscription.retrieve(website.stripe_subscription_id)
-    .ui.segment
-      %a.ui.ribbon.label{class: "subscription-#{subscription.status}"} #{subscription.status.capitalize}
-      .ui.divided.items
-        .item
-          .image
-          .content
-            %a.header #{website.name ? website.name : @client.business_name}
-            .meta
-              %span #{subscription.plan.name}
-            .description
-              %p
-            .extra
-              = form_tag websites_path do
-                - if flash[:error].present?
-                  #error_explanation
-                    %p= flash[:error]   
-                .ui.right.floated     
-
-              = link_to 'Show', client_website_path(current_client, website), class: "ui basic button"
-              = link_to 'Edit', edit_client_website_path(current_client, website), class: "ui basic button"
-              = link_to 'Destroy', client_website_path(current_client, website), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "ui basic button"
-            .extra 
-              - website.features.each do |feature|
-                .ui.label
-                  = feature
-
-%table
-  %tbody
-    - @websites.each do |website|
-      %tr
-        %td= website.client
-        %td= website.features
-        %td= website.monthly_cost_cents
-        %td= website.name
-        %td= website.app_type
-        %td= website.ssl
-        %td= website.cdn
-
-
-%br
+  = render :partial => 'layouts/website_full', locals: {subscription: website.stripe_subscription_id ? Stripe::Subscription.retrieve(website.stripe_subscription_id) : nil, website: website}
 
 = link_to 'New Website', new_client_website_path(current_client)

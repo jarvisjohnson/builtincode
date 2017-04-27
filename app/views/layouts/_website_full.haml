@@ -1,0 +1,72 @@
+.ui.segment.site-segment
+  .ui.divided.items
+    .item
+      .image
+        =image_tag "#{website.live_status == "development" ? "icons/linear-cli.svg" : "icons/linear-laptop-phone.svg"}"
+        .status #{website.live_status ? website.live_status : "n/a status"}
+      .content
+        .ui.grid
+          .two.column.row
+            %span.left.floated.left.aligned.column
+              .ui.items
+                .ui.item
+                  .content
+                    %span.header #{website.name ? website.name : @client.business_name}
+            %span.right.floated.right.aligned.column
+              .ui.items
+                .ui.item
+                  .content
+                    %span.header $ #{website.monthly_cost_cents ? Money.new(website.monthly_cost_cents, @client_currency) : "N/A"} / Month 
+          .two.column.row
+            %span.left.aligned.column
+              #{ subscription.nil? ? "Awaiting subscription signup" : subscription.plan.name }
+            %span.right.aligned.column
+              %span{class: "ui right basic label subscription-#{ subscription.nil? ? "pending orange" : "#{subscription.status} green" }"} #{subscription.nil? ? "Subscription: pending" : "Subscription: #{subscription.status}" }                            
+        .one.column.row
+          .description
+            %p
+        .one.column.row
+          .extra
+            -if subscription.nil?
+              = form_tag client_website_subscriptions_path(@client, website) do
+                - initial_charge = website.monthly_cost_cents
+                - if flash[:error].present?
+                  #error_explanation
+                    %p= flash[:error]   
+                .ui.right.floated     
+                  %script.stripe-button{"data-amount" => initial_charge, "data-description" => "A month's subscription", "data-key" => "#{Rails.configuration.stripe[:publishable_key]}", "data-description" => "#{@description}", "data-email" => "#{current_client.email}",  "data-locale" => "auto", :src => "https://checkout.stripe.com/checkout.js"}     
+            .ui.label 
+              = website.app_type ?  website.app_type : 'Ruby'   
+            - if website.features.exists?
+              - website.features.each do |feature|
+                .ui.label
+                  %span
+                    = feature.quantity                  
+                  %span
+                    x                      
+                  %span
+                    = feature.name
+                  %span
+                    (@ $ #{Money.new(feature.billing_units*100, @client_currency)})         
+                  
+      
+        .one.column.row
+          .extra
+            = link_to 'View Live Site', Domainatrix.parse(website.production_url).url, class: "ui basic button"
+            = link_to 'View Staging Site', Domainatrix.parse(website.staging_url).url, class: "ui basic button"
+            %a.ui.basic.button{id: "modal__trigger__#{website.id}" }
+              Request Help for this site
+            .ui.modal{id: "modal__#{website.id}" }
+              .header Request Help for #{website.name}
+              .content
+                %p
+                %p
+                %p
+            :javascript
+              $("#modal__trigger__#{website.id}").click(function(){
+                $('#modal__#{website.id}').modal('show');
+              });
+
+            - if current_client.admin?
+              = link_to 'Edit', edit_client_website_path(current_client, website), class: "ui basic button"
+              = link_to 'Destroy', client_website_path(current_client, website), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "ui basic button"                                        

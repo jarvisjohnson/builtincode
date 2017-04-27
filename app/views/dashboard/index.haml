@@ -10,89 +10,9 @@
       .right.floated.right.aligned.column
         = link_to "My Sites", client_websites_path(current_client), class: "ui basic button #{"disabled" if current_client.websites.empty?}"
   - if @websites.nil? || @websites.empty?
-    = render "layouts/none_yet", locals: {type: "websites"}       
+    = render :partial => 'layouts/none_yet', locals: {type: "websites"}       
   - @websites.each do |website|
-    -if website.stripe_subscription_id
-      - subscription = Stripe::Subscription.retrieve(website.stripe_subscription_id)
-      .ui.segment
-        %a.ui.green.ribbon.label{class: "subscription-#{subscription.status}"} #{subscription.status.capitalize}
-        .ui.divided.items
-          .item
-            .image
-            .content
-              .ui.grid
-                .two.column.row
-                  %span.left.floated.left.aligned.column
-                    .ui.items
-                      .ui.item
-                        .content
-                          %a.header #{website.name ? website.name : @client.business_name}
-                  %span.right.floated.right.aligned.column
-                    .ui.items
-                      .ui.item
-                        .content
-                          %a.header $ #{website.monthly_cost_cents ? Money.new(website.monthly_cost_cents, @client_currency) : "N/A"} / Month            
-              .meta
-                %span #{subscription.plan.name}
-              .description
-                %p
-              .extra
-                = form_tag websites_path do
-                  - if flash[:error].present?
-                    #error_explanation
-                      %p= flash[:error]   
-                  .ui.right.floated     
-                .ui.label Limited
-                - if website.features.exists?
-                  - website.features.each do |feature|
-                    .ui.label
-                      %span
-                        = feature.quantity                  
-                      %span
-                        x                      
-                      %span
-                        = feature.name
-                      %span
-                        (@ $ #{Money.new(feature.billing_units*100, @client_currency)})
-
-    -else
-      .ui.segment
-        %a.ui.orange.ribbon.label Subscription Pending
-        .ui.divided.items
-          .item
-            .image
-              / %img{:src => "/images/wireframe/image.png"}/
-            .content
-              .ui.grid
-                .two.column.row
-                  %span.left.floated.left.aligned.column
-                    .ui.items
-                      .ui.item
-                        .content
-                          %a.header #{website.name ? website.name : @client.business_name}
-                  %span.right.floated.right.aligned.column
-                    .ui.items
-                      .ui.item
-                        .content
-                          %a.header $ #{website.monthly_cost_cents ? Money.new(website.monthly_cost_cents, @client_currency) : "N/A"} / Month      
-              .ui.grid
-                .two.column.row
-                  %span.left.floated.left.aligned.column
-                    Awaiting subscription signup
-                  %span.right.floated.right.aligned.column
-                    Awaiting subscription signup
-              .description
-                %p
-              .extra
-                = form_tag client_website_subscriptions_path(@client, website) do
-                  - initial_charge = website.monthly_cost_cents
-                  - if flash[:error].present?
-                    #error_explanation
-                      %p= flash[:error]   
-                  .ui.right.floated     
-                    %script.stripe-button{"data-amount" => initial_charge, "data-description" => "A month's subscription", "data-key" => "#{Rails.configuration.stripe[:publishable_key]}", "data-description" => "#{@description}", "data-email" => "#{current_client.email}",  "data-locale" => "auto", :src => "https://checkout.stripe.com/checkout.js"}  
-                .ui.label 
-                  = website.app_type ?  website.app_type : 'Ruby'
+    = render :partial => 'layouts/website_simple', locals: {subscription: website.stripe_subscription_id ? Stripe::Subscription.retrieve(website.stripe_subscription_id) : nil, website: website}
 
 .site-or-invoice-group
   .ui.grid
@@ -109,7 +29,7 @@
     %ul.latest-charges
 
     
-      %h6 Upcoming Invoices
+      %h5.pad-left Upcoming Invoices
       - invoice = @upcoming
       %li.charge.upcoming
         .ui.right.aligned.grid
@@ -136,7 +56,7 @@
                       .meta
                         %span
                           = Time.at(invoice.date).to_date          
-      %h6 Latest
+      %h5.pad-left Latest
       - invoice = @invoices.data.shift
       %li.charge.active-charge{class: invoice.paid ? "paid" : ""}
         .ui.right.aligned.grid
@@ -165,7 +85,7 @@
                           = Time.at(invoice.date).to_date  
 
 
-      %h6 Completed
+      %h5.pad-left Completed
       / - @invoices.data.each do |invoice|
       %li.charge.paid.inactive
         .ui.right.aligned.grid
@@ -203,4 +123,4 @@
 
 
   - else
-    = render "layouts/none_yet", locals: {type: "invoices"}       
+    = render :partial => 'layouts/none_yet', locals: {type: "invoices"}       

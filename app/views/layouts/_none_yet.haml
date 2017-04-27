@@ -3,10 +3,10 @@
     .one.column.row
       .column
         .ui.icon.message
-          %i{class: locals[:type] == "websites" ? "laptop icon" : "inbox icon"}
+          %i{class: type == "websites" ? "laptop icon" : "inbox icon"}
           .content
             .header
-              = locals[:type] == "websites" ? "No hosted sites to display yet" : "No invoices to display yet"
+              = type == "websites" ? "No hosted sites to display yet" : "No invoices to display yet"
 
             %p
-              = locals[:type] == "websites" ? "You'll can view your sites here when they are set up." : "Your upcoming, paid, and past invoices will show up here." 
+              = type == "websites" ? "You'll can view your sites here when they are set up." : "Your upcoming, paid, and past invoices will show up here." 

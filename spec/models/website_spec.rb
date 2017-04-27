@@ -19,6 +19,7 @@
 #  monthly_cost_cents     :integer          default(2500)
 #  production_url         :string(255)
 #  staging_url            :string(255)
+#  live_status            :string(255)      default("live")
 #
 # Indexes
 #
