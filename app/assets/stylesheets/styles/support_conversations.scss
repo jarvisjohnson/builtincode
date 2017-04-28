@@ -1,0 +1,15 @@
+#conversation-body {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 2em;
+}
+
+.ui.comments {
+    margin: 1.5em auto;
+
+    .comment img.avatar, .ui.comments .comment .avatar img {
+        border-radius: 50%;
+        width: auto;
+        max-height: 2em;
+    }
+}

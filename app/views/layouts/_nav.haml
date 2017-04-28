@@ -19,8 +19,7 @@
         %span.ui.item.disabled My Invoices
       -else
         = link_to "My Invoices", index_invoices_client_path(current_client), class: "ui item #{active_class(index_invoices_client_path(current_client))}"      
-      %a.item
-        Help
+      = link_to "Support", support_conversations_path, class: "ui item #{active_class(support_conversations_path)}"     
     - if current_client.try(:admin?)
       .admin-links            
         = link_to "List Clients", clients_path, class: "ui item #{active_class(clients_path)}"     

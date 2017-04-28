@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :support_conversations
+
   get 'pages/welcome'
 
   get "dashboard/index"  
@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   }
 
   resources :websites
+
+  resources :messages, only: [:new, :create]
+  resources :support_conversations, only: [:index, :show]
 
   resources :clients do
     member do 

@@ -11,6 +11,7 @@ LINKEDIN_SECRET: 'mixofnumber3sandstrings'
 LINKEDIN_KEY: 'mixofnumber3sandstrings'
 GOOGLE_CLIENT_SECRET: 'mixofnumber3sandstrings'
 GOOGLE_CLIENT_ID: 'mixofnumber3sandstrings.apps.googleusercontent.com'
+time_zone: 'Melbourne'
 
 production:
   STRIPE_SECRET_KEY: 'sk_live_mixofnumber3sandstrings'

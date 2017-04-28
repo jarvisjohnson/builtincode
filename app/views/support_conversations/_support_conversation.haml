@@ -1,0 +1,38 @@
+- icon = "email"
+- last = support_conversation.messages.last
+- message_time = last.created_at.in_time_zone(ENV["time_zone"])
+%li.charge
+  .ui.right.aligned.grid
+    .right.aligned.sixteen.wide.column
+      .ui.right.aligned.grid
+        .left.floated.left.aligned.twelve.wide.column
+          .ui.items
+            .ui.item
+              .content
+                .header
+                  Chatting with #{support_conversation.with(current_client).contact_name}
+                .description
+                  %em= last.body.truncate(50)
+                .meta
+                  %span
+                    = link_to 'View conversation', support_conversation_path(support_conversation)
+        .right.floated.right.aligned.four.wide.column
+          .ui.items
+            .ui.item
+              .content
+                .meta
+                  - if last.client.oauth_avatar?
+                    = image_tag last.client.oauth_avatar, class: "ui avatar image"
+                  - else
+                    = image_tag last.client.avatar.url(:thumb), class: "ui avatar image"
+                .meta
+                  %span
+                    %strong= time_ago_in_words(message_time)
+                    ago
+                    %br/
+                    by
+                    %strong= last.client.contact_name  
+                    
+  %hr/
+
+

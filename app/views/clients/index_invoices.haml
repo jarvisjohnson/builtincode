@@ -1,15 +1,13 @@
-%section.client-dashboard
-  .ui.container
-    %ul.latest-charges
+%ul.latest-charges
 
-      %h5.pad-left Upcoming Invoice
-      - invoice = @upcoming
-      = render :partial => "layouts/invoice_full", locals: { invoice: @upcoming, icon: "calendar outline", inactive: false }
+  %h5.pad-left Upcoming Invoice
+  - invoice = @upcoming
+  = render :partial => "layouts/invoice_full", locals: { invoice: @upcoming, icon: "calendar outline", inactive: false }
 
-      %h5.pad-left Latest
-      - invoice = @invoices.data.shift
-      = render :partial => "layouts/invoice_full", locals: { invoice: invoice, icon: "checkmark green", inactive: false }
+  %h5.pad-left Latest
+  - invoice = @invoices.data.shift
+  = render :partial => "layouts/invoice_full", locals: { invoice: invoice, icon: "checkmark green", inactive: false }
 
-      %h5.pad-left{class: @invoices.data.empty? ? "faded" : "" } Completed        
-      - @invoices.data.each do |invoice|  
-        = render :partial => "layouts/invoice_full", locals: { invoice: invoice, icon: "checkmark", inactive: true }      
+  %h5.pad-left{class: @invoices.data.empty? ? "faded" : "" } Completed        
+  - @invoices.data.each do |invoice|  
+    = render :partial => "layouts/invoice_full", locals: { invoice: invoice, icon: "checkmark", inactive: true }      

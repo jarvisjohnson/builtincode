@@ -37,7 +37,7 @@
             .right.floated
               = link_to 'Cancel Subscription', clients_path       
 
-    .ui.three.column.row
+    .ui.three.column.stackable.row
       .column
         - fb = check_connection('facebook', 'Facebook')
         = fb.html_safe

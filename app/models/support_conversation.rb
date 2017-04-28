@@ -23,4 +23,20 @@ class SupportConversation < ApplicationRecord
   has_many :messages, -> { order(created_at: :asc) }, dependent: :destroy
   validates :author, uniqueness: {scope: :receiver}
 
+  scope :participating, -> (client) do
+    where("(support_conversations.author_id = ? OR support_conversations.receiver_id = ?)", client.uuid, client.uuid)
+  end  
+
+  scope :between, -> (sender_id, receiver_id) do
+    where(author_id: sender_id, receiver_id: receiver_id).or(where(author_id: receiver_id, receiver_id: sender_id)).limit(1)
+  end
+
+  def with(current_client)
+    author == current_client ? receiver : author
+  end 
+
+   def participates?(client)
+    author == client || receiver == client
+  end
+
 end

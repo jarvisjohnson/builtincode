@@ -1,0 +1,28 @@
+- message_time = message.created_at.in_time_zone(ENV["time_zone"])
+.comment
+  - if message.client.oauth_avatar?
+    = image_tag message.client.oauth_avatar, class: "ui avatar image"
+  - else
+    = image_tag message.client.avatar.url(:thumb), class: "ui avatar image"
+  .content
+    %span.author= "#{message.client.contact_name} @ #{message.client.business_name}"
+    .metadata
+      %span.date= "#{time_ago_in_words(message_time)} ago - #{message_time.to_s(:time)} on #{message_time.to_date}"
+    .text
+      =message.body
+      -if message.attached_image.exists?
+        %p
+          * message has attachment
+        = link_to "Download Attachment", message.attached_image.url(:original, false), class: "ui basic button"
+/ %p
+/   %strong= time_ago_in_words(message_time)
+/   ago  ( 
+/   %strong= message_time.to_s(:time)
+/   %strong= message_time.to_date
+/   )
+/   %br/
+/   from
+/   %strong= message.client.contact_name
+/   @
+/   %strong= message.client.business_name
+/ %hr/

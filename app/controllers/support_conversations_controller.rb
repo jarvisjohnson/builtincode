@@ -1,15 +1,17 @@
 class SupportConversationsController < ApplicationController
-  before_action :set_support_conversation, only: [:show, :edit, :update, :destroy]
+  before_action :set_support_conversation, except: [:index]
+  before_action :check_participating!, except: [:index]
 
   # GET /support_conversations
   # GET /support_conversations.json
   def index
-    @support_conversations = SupportConversation.all
+    @support_conversations = SupportConversation.participating(current_client).order('updated_at DESC')
   end
 
   # GET /support_conversations/1
   # GET /support_conversations/1.json
   def show
+    @message = Message.new
   end
 
   # GET /support_conversations/new
@@ -71,4 +73,8 @@ class SupportConversationsController < ApplicationController
     def support_conversation_params
       params.require(:support_conversation).permit(:author_id, :receiver_id)
     end
+
+    def check_participating!
+      redirect_to dashboard_index_path unless @support_conversation && @support_conversation.participates?(current_client)
+    end    
 end
