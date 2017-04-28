@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Author:
+  = @support_conversation.author_id
+%p
+  %b Receiver:
+  = @support_conversation.receiver_id
+
+= link_to 'Edit', edit_support_conversation_path(@support_conversation)
+\|
+= link_to 'Back', support_conversations_path

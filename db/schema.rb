@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170427162622) do
+ActiveRecord::Schema.define(version: 20170428205128) do
 
   create_table "clients", primary_key: "uuid", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "",    null: false
@@ -81,6 +81,35 @@ ActiveRecord::Schema.define(version: 20170427162622) do
     t.index ["website_id"], name: "index_features_websites_on_website_id", using: :btree
   end
 
+  create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text     "body",                        limit: 65535
+    t.integer  "support_conversation_id"
+    t.integer  "client_id"
+    t.integer  "stores_id"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.string   "attached_image_file_name"
+    t.string   "attached_image_content_type"
+    t.integer  "attached_image_file_size"
+    t.datetime "attached_image_updated_at"
+    t.index ["client_id"], name: "index_messages_on_client_id", using: :btree
+    t.index ["stores_id"], name: "index_messages_on_stores_id", using: :btree
+    t.index ["support_conversation_id"], name: "index_messages_on_support_conversation_id", using: :btree
+  end
+
+  create_table "support_conversations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "author_id"
+    t.integer  "receiver_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["author_id", "receiver_id"], name: "index_support_conversations_on_author_id_and_receiver_id", unique: true, using: :btree
+    t.index ["author_id"], name: "index_support_conversations_on_author_id", using: :btree
+    t.index ["receiver_id"], name: "index_support_conversations_on_receiver_id", using: :btree
+  end
+
+  create_table "support_requests", unsigned: true, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  end
+
   create_table "websites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "client_id"
     t.integer  "features_id"
@@ -104,5 +133,6 @@ ActiveRecord::Schema.define(version: 20170427162622) do
   end
 
   add_foreign_key "features", "websites"
+  add_foreign_key "messages", "support_conversations"
   add_foreign_key "websites", "clients", primary_key: "uuid"
 end

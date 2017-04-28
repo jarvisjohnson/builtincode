@@ -1,0 +1,23 @@
+%h1 Listing support_conversations
+
+%table
+  %thead
+    %tr
+      %th Author
+      %th Receiver
+      %th
+      %th
+      %th
+
+  %tbody
+    - @support_conversations.each do |support_conversation|
+      %tr
+        %td= support_conversation.author_id
+        %td= support_conversation.receiver_id
+        %td= link_to 'Show', support_conversation
+        %td= link_to 'Edit', edit_support_conversation_path(support_conversation)
+        %td= link_to 'Destroy', support_conversation, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Support conversation', new_support_conversation_path

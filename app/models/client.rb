@@ -67,6 +67,11 @@ class Client < ApplicationRecord
   has_many :websites
   accepts_nested_attributes_for :websites, :reject_if => :all_blank, :allow_destroy => true
   
+  # Relation to Support Conversations
+  has_many :authored_support_conversations, class_name: 'SupportConversation', foreign_key: 'author_id'
+  has_many :received_support_conversations, class_name: 'SupportConversation', foreign_key: 'receiver_id'   
+  has_many :messages, dependent: :destroy
+
   # Omniauth login
   # https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview
     def self.from_omniauth(auth, current_client)

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :support_conversations
   get 'pages/welcome'
 
   get "dashboard/index"  

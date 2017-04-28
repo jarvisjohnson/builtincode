@@ -1,0 +1,9 @@
+= simple_form_for(@support_conversation) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :author_id
+    = f.input :receiver_id
+
+  .form-actions
+    = f.button :submit
