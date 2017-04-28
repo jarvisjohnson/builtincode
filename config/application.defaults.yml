@@ -1,0 +1,17 @@
+# Add configuration values here, as shown below.
+
+secret_key_base: [rake secret]
+STRIPE_SECRET_KEY: 'sk_test_mixofnumber3sandstrings'
+BUILT_STRIPE_PUBLISHABLE_KEY: 'pk_test_mixofnumber3sandstrings'
+gmail_username: 'blah@gmail.com'
+gmail_password: 'gmail_password'
+FACEBOOK_APP_ID: '12345678910'
+FACEBOOK_APP_SECRET: 'mixofnumber3sandstrings'
+LINKEDIN_SECRET: 'mixofnumber3sandstrings'
+LINKEDIN_KEY: 'mixofnumber3sandstrings'
+GOOGLE_CLIENT_SECRET: 'mixofnumber3sandstrings'
+GOOGLE_CLIENT_ID: 'mixofnumber3sandstrings.apps.googleusercontent.com'
+
+production:
+  STRIPE_SECRET_KEY: 'sk_live_mixofnumber3sandstrings'
+  BUILT_STRIPE_PUBLISHABLE_KEY: 'pk_live_mixofnumber3sandstrings'
