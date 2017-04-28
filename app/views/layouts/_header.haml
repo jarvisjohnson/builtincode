@@ -2,9 +2,14 @@
   .ui.vertical.segment
     .ui.container    
       .ui.two.column.grid
-        .column
-          %h1.ui
-            = yield :title
+        .left.aligned.column
+          .ui.inline.dropdown
+            .flex
+              %a.toc.item.open
+                %i.sidebar.icon
+              %h1
+                = yield :title      
+
         .right.aligned.column
           .ui.inline.dropdown
             .text
@@ -35,12 +40,11 @@
       %p This example shows how to use lazy loaded images, a sticky menu, and a simple text container
   .ui.vertical.segment
     .ui.container
-      .ui.grid
-        .four.column.row
-          %button.ui.basic.button
-            My Sites
-          %button.ui.basic.button{id: "modal__trigger__contact-options" }
-            Get Help
+      .four.column.row
+        %button.ui.basic.button
+          My Sites
+        %button.ui.basic.button{id: "modal__trigger__contact-options" }
+          Get Help
   
   = render :partial => "layouts/modals/header_modals.haml"
           

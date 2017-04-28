@@ -1,73 +1,79 @@
-html{
-  font-size: 16px;
+html {
+    font-size: 16px;
 }
+
 @import "semantic-ui";
-html{
-  font-size: 16px;
+
+html {
+    font-size: 16px;
 }
+
 body {
-  background-color: #FFFFFF;
+    background-color: #FFFFFF;
 }
+
 .main.container {
-  margin-top: 2em;
+    margin-top: 2em;
 }
 
 .main.menu {
-  margin-top: 4em;
-  border-radius: 0;
-  border: none;
-  box-shadow: none;
-  transition:
-    box-shadow 0.5s ease,
-    padding 0.5s ease
-  ;
+    margin-top: 4em;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    transition: box-shadow 0.5s ease, padding 0.5s ease;
 }
+
 .main.menu .item img.logo {
-  margin-right: 1.5em;
+    margin-right: 1.5em;
 }
 
 .overlay {
-  float: left;
-  margin: 0em 3em 1em 0em;
+    float: left;
+    margin: 0em 3em 1em 0em;
 }
+
 .overlay .menu {
-  position: relative;
-  left: 0;
-  transition: left 0.5s ease;
+    position: relative;
+    left: 0;
+    transition: left 0.5s ease;
 }
 
 .main.menu.fixed {
-  background-color: #FFFFFF;
-  border: 1px solid #DDD;
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    background-color: #FFFFFF;
+    border: 1px solid #DDD;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
 }
+
 .overlay.fixed .menu {
-  left: 800px;
+    left: 800px;
 }
 
 .text.container .left.floated.image {
-  margin: 2em 2em 2em -4em;
-}
-.text.container .right.floated.image {
-  margin: 2em -4em 2em 2em;
+    margin: 2em 2em 2em -4em;
 }
 
-footer{
-  margin-top: 3rem;
-  // position: absolute;
-  // width: 100%;
-  // bottom: 2rem;
+.text.container .right.floated.image {
+    margin: 2em -4em 2em 2em;
+}
+
+footer {
+    margin-top: 3rem;
+
+    // position: absolute;
+    // width: 100%;
+    // bottom: 2rem;
 }
 
 .ui.footer.segment {
-  margin: 5em 0em 0em;
-  padding: 5em 0em;
+    margin: 5em 0em 0em;
+    padding: 5em 0em;
 }
 
 .ui.segment {
     background: #FFFFFF;
     box-shadow: $box-shadow;
-    border: 1px solid rgba(100,100,100,.2);
+    border: 1px solid rgba(100, 100, 100, 0.2);
     border-radius: 0;
 }
 
@@ -75,72 +81,85 @@ main.pusher {
     background: #f2f5f7;
 }
 
+.toc.item {
+    display: none;
+    opacity: 0;
+}
+
+body.pushable > .pusher {
+  background: #f2f5f7;
+}
+
 /* Small Monitor */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .ui.container {
-    width: 733px;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  .ui.grid.container {
-    width: calc( 933px  +  2rem ) !important;
-  }
-
-  .ui.relaxed.grid.container {
-    width: calc( 933px  +  3rem ) !important;
-  }
-
-  .ui.very.relaxed.grid.container {
-    width: calc( 933px  +  5rem ) !important;
-  }
-  .ui.visible.uncover.sidebar {
-    width: 180px;  
-  }
-  .ui.visible.left.sidebar ~ .fixed,
-  .ui.visible.left.sidebar ~ .pusher {
-    margin-left: 180px;  
-  }
+    .ui.container {
+        width: 630px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
 }
 
 .ui.visible.left.sidebar ~ .fixed,
 .ui.visible.left.sidebar ~ .pusher {
-  -webkit-transform: translate3d(0px, 0, 0);
-  transform: translate3d(0px, 0, 0);
-  // margin-left: 260px;
+    -webkit-transform: translate3d(0px, 0, 0);
+    transform: translate3d(0px, 0, 0);
+
 }
 
 /* Large Monitor */
 @media only screen and (min-width: 1200px) {
-  .ui.container {
-    width: 927px;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
+    .ui.container {
+        width: 830px;
+    }
+}
 
-  .ui.grid.container {
-    width: calc( 1127px  +  2rem ) !important;
-  }
+@media only screen and (min-width: 1500px) {
+    .ui.container {
+        width: 1100px;
+    }
+}
 
-  .ui.relaxed.grid.container {
-    width: calc( 1127px  +  3rem ) !important;
-  }
+@media (min-width: 992px) {
+    .ui.wide.left.sidebar ~ .fixed, .ui.wide.left.sidebar ~ .pusher {
+        -webkit-transform: translate3d(350px, 0, 0);
+        transform: translate3d(350px, 0, 0);
+        width: calc(100% - 350px);
+    }
 
-  .ui.very.relaxed.grid.container {
-    width: calc( 1127px  +  5rem ) !important;
-  }
-  .ui.visible.uncover.sidebar {
-    width: 260px;  
-  }  
-  .ui.visible.left.sidebar ~ .fixed,
-  .ui.visible.left.sidebar ~ .pusher {
-    margin-left: 260px;  
-  }  
+    .ui.uncover.sidebar {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        visibility: visible;
+    }
+}
+
+//Small -to mobile
+@media only screen and (max-width: 992px) {
+    .ui.form .field {
+        margin: 0em 0em .3em;
+    }
+
+    .toc.item {
+        display: initial;
+        opacity: 1;
+    }
+
+    .pusher.dimmed {
+        .toc.item.open {
+            visibility: hidden;
+        }
+    }
+}
+
+.ui.dimmer {
+    //Match Stripe's dimmer
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .ui.divider {
     width: 100%;
 }
+
 abbr[title] {
     border-bottom: none;
 }
@@ -157,15 +176,13 @@ abbr[title] {
     width: 120px;
     flex-direction: column;
 
-
     & > img {
-      width: 30%;
-      width: 40%;
-      margin-bottom: .5em; 
-            
+        width: 30%;
+        width: 40%;
+        margin-bottom: .5em;
     }
 }
+
 .ui.items > .item > .image:not(.ui) {
     width: 120px;
 }
-

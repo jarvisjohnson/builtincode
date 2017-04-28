@@ -1,5 +1,5 @@
 %h2 Sign up
-.ui.two.column.grid
+.ui.two.column.stackable.grid
   .column
     = render "devise/shared/omniauth_links"
   .column
@@ -11,7 +11,7 @@
         = f.input :password_confirmation, required: true, label: false, placeholder: "Confirm Password"
         .field
           = f.button :submit, "Sign up"
-.ui.one.column.grid          
+.ui.one.column.stackable.grid          
   .column
     = render "devise/shared/links"
 

@@ -1,5 +1,5 @@
-%h2 Log in
-.ui.two.column.grid
+%h2 LOGIN
+.ui.two.column.stackable.grid
   .column
     = render "devise/shared/omniauth_links"
   .column
@@ -16,6 +16,6 @@
 
         .field     
           = f.button :submit, "Log in"
-.ui.one.column.grid          
+.ui.one.column.stackable.grid          
   .column
     = render "devise/shared/links"

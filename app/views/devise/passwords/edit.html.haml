@@ -1,5 +1,5 @@
 %h2 Change your password
-.ui.one.column.grid
+.ui.one.column.stackable.grid
   .column
     = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
       = f.error_notification
@@ -10,6 +10,6 @@
         = f.input :password_confirmation, required: true, label: false, placeholder: "Confirm New Password"
         .field
           = f.button :submit, "Change my password"
-.ui.one.column.grid          
+.ui.one.column.stackable.grid          
   .column
     = render "devise/shared/links"

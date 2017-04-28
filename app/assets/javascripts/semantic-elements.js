@@ -23,6 +23,7 @@ document.addEventListener("turbolinks:load", function() {
     allowMultiple: true
   })
   ;
+
   $('#modal__contact-options')
     .modal('attach events', '#modal__trigger__contact-options', 'show')
   ; 
@@ -31,6 +32,12 @@ document.addEventListener("turbolinks:load", function() {
   ;
   $('#modal__contact__form-enquiry')
     .modal('attach events', '#modal__contact-options .enquiry.button')
-  ;    
+  ;
+
+  // create sidebar and attach to menu open
+  $('.ui.sidebar')
+    .sidebar('attach events', '.toc.item.open', 'show')
+    .sidebar('attach events', '.toc.item.close', 'hide')
+  ;      
 
 });

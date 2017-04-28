@@ -42,18 +42,28 @@ main {}
     color: #dbfddd;
 }
 
-.ui.visible.left.overlay.sidebar {
+.ui.vertical.menu {
+    background-color: initial;
+}
+
+.ui.vertical.menu.sidebar {
     background: rgb(248, 247, 243);
 }
 
-.ui.visible.uncover.sidebar {
+
+
+.ui.vertical.menu.sidebar {
     // width: 260px;
     background-image: url("/assets/client-menu-bg.svg");
     background-repeat: no-repeat;
-    background-size: 264px auto;
+    background-size: 500px auto;
     height: 100vh;
     background-color: #383A35;
     background-position-y: 100%;
+    background-position-x: 100%;    
+
+    // -webkit-transform: translate3d(-100%, 0, 0);
+    // transform: translate3d(-100%, 0, 0);
 }
 
 .ui.icon.menu .item {
@@ -75,6 +85,10 @@ main {}
         justify-content: center;
         color: #E3E8DC;
 
+        @media only screen and (max-width: 992px) {
+            // display: block;
+        }
+
         span {
             color: rgba(0, 255, 222, 0.6);
         }
@@ -91,7 +105,7 @@ main {}
 
 .ui.vertical.menu .active.item {
     background: rgba(0, 0, 0, 0.1);
-    border-left: 3px solid rgba(0, 255, 222, 0.6);;
+    border-left: 3px solid rgba(0, 255, 222, 0.6);
     color: rgba(0, 255, 222, 0.8);
     font-weight: 400;
 
