@@ -11,6 +11,7 @@
               .content
                 .header
                   Chatting with #{support_conversation.with(current_client).contact_name}
+                %hr/
                 .description
                   %em= last.body.truncate(50)
                 .meta
@@ -32,7 +33,6 @@
                     %br/
                     by
                     %strong= last.client.contact_name  
-                    
-  %hr/
+                  
 
 

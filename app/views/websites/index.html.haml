@@ -3,5 +3,5 @@
 - @websites.each do |website|
   = render :partial => 'layouts/website_full', locals: {subscription: website.stripe_subscription_id ? Stripe::Subscription.retrieve(website.stripe_subscription_id) : nil, website: website}
 
-- if current_client.admin?
+- if current_client.try(:admin?)
   = link_to 'New Website', new_client_website_path(current_client)

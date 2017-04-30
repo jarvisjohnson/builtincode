@@ -69,108 +69,108 @@ RSpec.describe SupportConversationsController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "assigns a new support_conversation as @support_conversation" do
-      get :new, params: {}, session: valid_session
-      expect(assigns(:support_conversation)).to be_a_new(SupportConversation)
-    end
-  end
+  # describe "GET #new" do
+  #   it "assigns a new support_conversation as @support_conversation" do
+  #     get :new, params: {}, session: valid_session
+  #     expect(assigns(:support_conversation)).to be_a_new(SupportConversation)
+  #   end
+  # end
 
-  describe "GET #edit" do
-    it "assigns the requested support_conversation as @support_conversation" do
-      support_conversation = SupportConversation.create! valid_attributes
-      get :edit, params: {id: support_conversation.to_param}, session: valid_session
-      expect(assigns(:support_conversation)).to eq(support_conversation)
-    end
-  end
+  # describe "GET #edit" do
+  #   it "assigns the requested support_conversation as @support_conversation" do
+  #     support_conversation = SupportConversation.create! valid_attributes
+  #     get :edit, params: {id: support_conversation.to_param}, session: valid_session
+  #     expect(assigns(:support_conversation)).to eq(support_conversation)
+  #   end
+  # end
 
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new SupportConversation" do
-        expect {
-          post :create, params: {support_conversation: valid_attributes}, session: valid_session
-        }.to change(SupportConversation, :count).by(1)
-      end
+  # describe "POST #create" do
+  #   context "with valid params" do
+  #     it "creates a new SupportConversation" do
+  #       expect {
+  #         post :create, params: {support_conversation: valid_attributes}, session: valid_session
+  #       }.to change(SupportConversation, :count).by(1)
+  #     end
 
-      it "assigns a newly created support_conversation as @support_conversation" do
-        post :create, params: {support_conversation: valid_attributes}, session: valid_session
-        expect(assigns(:support_conversation)).to be_a(SupportConversation)
-        expect(assigns(:support_conversation)).to be_persisted
-      end
+  #     it "assigns a newly created support_conversation as @support_conversation" do
+  #       post :create, params: {support_conversation: valid_attributes}, session: valid_session
+  #       expect(assigns(:support_conversation)).to be_a(SupportConversation)
+  #       expect(assigns(:support_conversation)).to be_persisted
+  #     end
 
-      it "redirects to the created support_conversation" do
-        post :create, params: {support_conversation: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(SupportConversation.last)
-      end
-    end
+  #     it "redirects to the created support_conversation" do
+  #       post :create, params: {support_conversation: valid_attributes}, session: valid_session
+  #       expect(response).to redirect_to(SupportConversation.last)
+  #     end
+  #   end
 
-    context "with invalid params" do
-      it "assigns a newly created but unsaved support_conversation as @support_conversation" do
-        post :create, params: {support_conversation: invalid_attributes}, session: valid_session
-        expect(assigns(:support_conversation)).to be_a_new(SupportConversation)
-      end
+  #   context "with invalid params" do
+  #     it "assigns a newly created but unsaved support_conversation as @support_conversation" do
+  #       post :create, params: {support_conversation: invalid_attributes}, session: valid_session
+  #       expect(assigns(:support_conversation)).to be_a_new(SupportConversation)
+  #     end
 
-      it "re-renders the 'new' template" do
-        post :create, params: {support_conversation: invalid_attributes}, session: valid_session
-        expect(response).to render_template("new")
-      end
-    end
-  end
+  #     it "re-renders the 'new' template" do
+  #       post :create, params: {support_conversation: invalid_attributes}, session: valid_session
+  #       expect(response).to render_template("new")
+  #     end
+  #   end
+  # end
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+  # describe "PUT #update" do
+  #   context "with valid params" do
+  #     let(:new_attributes) {
+  #       skip("Add a hash of attributes valid for your model")
+  #     }
 
-      it "updates the requested support_conversation" do
-        support_conversation = SupportConversation.create! valid_attributes
-        put :update, params: {id: support_conversation.to_param, support_conversation: new_attributes}, session: valid_session
-        support_conversation.reload
-        skip("Add assertions for updated state")
-      end
+  #     it "updates the requested support_conversation" do
+  #       support_conversation = SupportConversation.create! valid_attributes
+  #       put :update, params: {id: support_conversation.to_param, support_conversation: new_attributes}, session: valid_session
+  #       support_conversation.reload
+  #       skip("Add assertions for updated state")
+  #     end
 
-      it "assigns the requested support_conversation as @support_conversation" do
-        support_conversation = SupportConversation.create! valid_attributes
-        put :update, params: {id: support_conversation.to_param, support_conversation: valid_attributes}, session: valid_session
-        expect(assigns(:support_conversation)).to eq(support_conversation)
-      end
+  #     it "assigns the requested support_conversation as @support_conversation" do
+  #       support_conversation = SupportConversation.create! valid_attributes
+  #       put :update, params: {id: support_conversation.to_param, support_conversation: valid_attributes}, session: valid_session
+  #       expect(assigns(:support_conversation)).to eq(support_conversation)
+  #     end
 
-      it "redirects to the support_conversation" do
-        support_conversation = SupportConversation.create! valid_attributes
-        put :update, params: {id: support_conversation.to_param, support_conversation: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(support_conversation)
-      end
-    end
+  #     it "redirects to the support_conversation" do
+  #       support_conversation = SupportConversation.create! valid_attributes
+  #       put :update, params: {id: support_conversation.to_param, support_conversation: valid_attributes}, session: valid_session
+  #       expect(response).to redirect_to(support_conversation)
+  #     end
+  #   end
 
-    context "with invalid params" do
-      it "assigns the support_conversation as @support_conversation" do
-        support_conversation = SupportConversation.create! valid_attributes
-        put :update, params: {id: support_conversation.to_param, support_conversation: invalid_attributes}, session: valid_session
-        expect(assigns(:support_conversation)).to eq(support_conversation)
-      end
+  #   context "with invalid params" do
+  #     it "assigns the support_conversation as @support_conversation" do
+  #       support_conversation = SupportConversation.create! valid_attributes
+  #       put :update, params: {id: support_conversation.to_param, support_conversation: invalid_attributes}, session: valid_session
+  #       expect(assigns(:support_conversation)).to eq(support_conversation)
+  #     end
 
-      it "re-renders the 'edit' template" do
-        support_conversation = SupportConversation.create! valid_attributes
-        put :update, params: {id: support_conversation.to_param, support_conversation: invalid_attributes}, session: valid_session
-        expect(response).to render_template("edit")
-      end
-    end
-  end
+  #     it "re-renders the 'edit' template" do
+  #       support_conversation = SupportConversation.create! valid_attributes
+  #       put :update, params: {id: support_conversation.to_param, support_conversation: invalid_attributes}, session: valid_session
+  #       expect(response).to render_template("edit")
+  #     end
+  #   end
+  # end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested support_conversation" do
-      support_conversation = SupportConversation.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: support_conversation.to_param}, session: valid_session
-      }.to change(SupportConversation, :count).by(-1)
-    end
+  # describe "DELETE #destroy" do
+  #   it "destroys the requested support_conversation" do
+  #     support_conversation = SupportConversation.create! valid_attributes
+  #     expect {
+  #       delete :destroy, params: {id: support_conversation.to_param}, session: valid_session
+  #     }.to change(SupportConversation, :count).by(-1)
+  #   end
 
-    it "redirects to the support_conversations list" do
-      support_conversation = SupportConversation.create! valid_attributes
-      delete :destroy, params: {id: support_conversation.to_param}, session: valid_session
-      expect(response).to redirect_to(support_conversations_url)
-    end
-  end
+  #   it "redirects to the support_conversations list" do
+  #     support_conversation = SupportConversation.create! valid_attributes
+  #     delete :destroy, params: {id: support_conversation.to_param}, session: valid_session
+  #     expect(response).to redirect_to(support_conversations_url)
+  #   end
+  # end
 
 end

@@ -34,6 +34,16 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  # http://stackoverflow.com/questions/20331248/test-fails-when-sending-email-an-smtp-to-address-is-required-to-send-a-message
+  config.action_mailer.raise_delivery_errors = false
+
+  # Devise mailer for tests
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # https://mailcatcher.me/
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 

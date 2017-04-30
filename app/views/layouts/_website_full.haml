@@ -66,6 +66,6 @@
                 $('#modal__#{website.id}').modal('show');
               });
 
-            - if current_client.admin?
+            - if current_client.try(:admin?)
               = link_to 'Edit', edit_client_website_path(current_client, website), class: "ui basic button"
               = link_to 'Destroy', client_website_path(current_client, website), :method => :delete, :data => { :confirm => 'Are you sure?' }, class: "ui basic button"                                        
