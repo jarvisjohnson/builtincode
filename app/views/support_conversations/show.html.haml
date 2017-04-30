@@ -1,11 +1,12 @@
 - content_for :title do 
   Your support conversations
 .ui.comments.segment
-  %h3.ui.dividing.header Chatting with #{@support_conversation.with(current_client).contact_name}
-  = render @support_conversation.messages
-  = simple_form_for @message do |f|
-    = hidden_field_tag 'support_conversation_id', @support_conversation.id
-    .ui.field
-      = f.text_area :body
-    .ui.field
-      = f.button :submit, "Send"
+  -if @support_conversation
+    %h3.ui.dividing.header Chatting with #{@support_conversation.with(current_client).contact_name}
+    = render @support_conversation.messages
+    = simple_form_for @message do |f|
+      = hidden_field_tag 'support_conversation_id', @support_conversation.id
+      .ui.field
+        = f.text_area :body
+      .ui.field
+        = f.button :submit, "Send"

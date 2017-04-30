@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "clients/show", type: :view do
   before(:each) do
-    @client = assign(:client, Client.create!(email: 'test@tester.me'))
-    login_as(@client, :scope => :client)
+    signed_in_as_a_valid_client
   end
 
   it "renders attributes in <p>" do

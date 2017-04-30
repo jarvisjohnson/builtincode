@@ -21,7 +21,7 @@ require 'devise'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -59,8 +59,8 @@ RSpec.configure do |config|
   # http://stackoverflow.com/questions/12512108/can-i-access-application-helper-methods-in-a-rspec-request
   config.include ApplicationHelper  
 
-  config.include ValidClientHelper, :type => :controller
-  config.include ValidClientRequestHelper, :type => :request
+  config.include ValidClientHelper
+  config.include ValidClientRequestHelper
 
 
   # Filter lines from Rails gems in backtraces.

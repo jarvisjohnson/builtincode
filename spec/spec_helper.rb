@@ -50,10 +50,6 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
 
-  # Load Devise for tests
-  # http://stackoverflow.com/questions/38421853/why-is-my-rspec-not-loading-devisetestcontrollerhelpers
-  # Devise::Test::ControllerHelpers
-
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
