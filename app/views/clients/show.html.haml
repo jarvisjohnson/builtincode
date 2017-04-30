@@ -1,4 +1,6 @@
 - content_for :title, @client.business_name ? @client.business_name : @client.contact_name
+- content_for :sub_title do 
+  = "Viewing your account details"
 .ui.segment
   .ui.grid
     .ui.one.column.row

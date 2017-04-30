@@ -1,5 +1,6 @@
 - content_for :title, @website.name
-
+- content_for :sub_title do 
+  = "Information regarding your website"
 -if @website.stripe_subscription_id
   - subscription = Stripe::Subscription.retrieve(@website.stripe_subscription_id)
   .ui.segment

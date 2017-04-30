@@ -1,5 +1,7 @@
 - content_for :title do 
-  Your support conversations
+  = "Your conversation with #{@support_conversation.with(current_client).contact_name}"
+- content_for :sub_title do 
+  = "Lodge support requests and view your support history here"
 .ui.comments.segment
   -if @support_conversation
     %h3.ui.dividing.header Chatting with #{@support_conversation.with(current_client).contact_name}

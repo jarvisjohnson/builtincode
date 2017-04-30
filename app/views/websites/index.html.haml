@@ -1,5 +1,6 @@
 - content_for :title, 'Your websites'
-
+- content_for :sub_title do 
+  = "Lists all websites we have on file for you as a client"
 - @websites.each do |website|
   = render :partial => 'layouts/website_full', locals: {subscription: website.stripe_subscription_id ? Stripe::Subscription.retrieve(website.stripe_subscription_id) : nil, website: website}
 

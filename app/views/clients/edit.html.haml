@@ -1,4 +1,6 @@
 - content_for :title, @client.business_name ? "Editing: #{@client.business_name}" : "Editing: #{@client.contact_name}"
+- content_for :sub_title do 
+  = "Edit your account details below"
 
 .ui.segment.center.aligned
   = render 'form'

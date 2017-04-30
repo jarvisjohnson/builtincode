@@ -2,7 +2,7 @@
   .ui.vertical.segment
     .ui.container    
       .ui.two.column.grid
-        .left.aligned.column
+        .twelve.wide.left.aligned.column
           .ui.inline.dropdown
             .flex
               %a.toc.item.open
@@ -10,7 +10,7 @@
               %h1
                 = yield :title      
 
-        .right.aligned.column
+        .four.wide.right.aligned.column
           .ui.inline.dropdown
             .text
               - if current_client.oauth_avatar?
@@ -37,7 +37,8 @@
 
 
       = semantic_flash
-      %p This example shows how to use lazy loaded images, a sticky menu, and a simple text container
+      %p.sub-title
+        = yield :sub_title
   .ui.vertical.segment
     .ui.container
       .four.column.row

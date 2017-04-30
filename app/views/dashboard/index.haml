@@ -1,5 +1,7 @@
 - content_for :title do
   = react_component('PageTitle', {clientName: @client.business_name ? @client.business_name : @client.contact_name, client: @client}, {server_side: false})
+- content_for :sub_title do 
+  = "Your homepage shows a general overview of your account"
 
 / If customer has existing invoices, show up here
 .site-or-invoice-group

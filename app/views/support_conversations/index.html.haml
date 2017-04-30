@@ -1,5 +1,7 @@
 - content_for :title do 
-  Your support conversations
+  = "Your support conversations"
+- content_for :sub_title do 
+  = "View and respond to the conversation below"
 %ul.latest-charges
   .ui.comments
     = render @support_conversations
