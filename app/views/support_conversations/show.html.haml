@@ -4,7 +4,11 @@
   = "Lodge support requests and view your support history here"
 .ui.comments.segment
   -if @support_conversation
-    %h3.ui.dividing.header Chatting with #{@support_conversation.with(current_client).contact_name}
+    - if @support_conversation.website_id?
+      %h3.ui.dividing.header= "Support request for #{@support_conversation.website.name}"
+    - else
+      %h3.ui.dividing.header= "Chatting with #{@support_conversation.with(current_client).contact_name}"  
+    / Chatting with #{@support_conversation.with(current_client).contact_name}
     = render @support_conversation.messages
     = simple_form_for @message do |f|
       = hidden_field_tag 'support_conversation_id', @support_conversation.id

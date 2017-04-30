@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170428205128) do
+ActiveRecord::Schema.define(version: 20170430182223) do
 
   create_table "clients", primary_key: "uuid", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "",    null: false
@@ -102,9 +102,10 @@ ActiveRecord::Schema.define(version: 20170428205128) do
     t.integer  "receiver_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["author_id", "receiver_id"], name: "index_support_conversations_on_author_id_and_receiver_id", unique: true, using: :btree
+    t.integer  "website_id"
     t.index ["author_id"], name: "index_support_conversations_on_author_id", using: :btree
     t.index ["receiver_id"], name: "index_support_conversations_on_receiver_id", using: :btree
+    t.index ["website_id"], name: "index_support_conversations_on_website_id", using: :btree
   end
 
   create_table "support_requests", unsigned: true, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -134,5 +135,6 @@ ActiveRecord::Schema.define(version: 20170428205128) do
 
   add_foreign_key "features", "websites"
   add_foreign_key "messages", "support_conversations"
+  add_foreign_key "support_conversations", "websites"
   add_foreign_key "websites", "clients", primary_key: "uuid"
 end

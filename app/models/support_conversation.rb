@@ -7,21 +7,24 @@
 #  receiver_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  website_id  :integer
 #
 # Indexes
 #
-#  index_support_conversations_on_author_id                  (author_id)
-#  index_support_conversations_on_author_id_and_receiver_id  (author_id,receiver_id) UNIQUE
-#  index_support_conversations_on_receiver_id                (receiver_id)
+#  index_support_conversations_on_author_id    (author_id)
+#  index_support_conversations_on_receiver_id  (receiver_id)
+#  index_support_conversations_on_website_id   (website_id)
 #
 
 class SupportConversation < ApplicationRecord
   
   # https://www.sitepoint.com/build-a-messaging-system-with-rails-and-actioncable/  
   belongs_to :author, class_name: 'Client'
-  belongs_to :receiver, class_name: 'Client'  
-  has_many :messages, -> { order(created_at: :asc) }, dependent: :destroy
-  validates :author, uniqueness: {scope: :receiver}
+  belongs_to :receiver, class_name: 'Client'
+  belongs_to :website, optional: true  
+  has_many :messages, -> { order(created_at: :asc) }, dependent: :destroy, inverse_of: :support_conversation
+  # validates :author, uniqueness: {scope: :receiver}
+  accepts_nested_attributes_for :messages
 
   scope :participating, -> (client) do
     where("(support_conversations.author_id = ? OR support_conversations.receiver_id = ?)", client.uuid, client.uuid)

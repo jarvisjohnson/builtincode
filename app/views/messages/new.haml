@@ -1,8 +1,13 @@
-%h1
+- content_for :title do
   New message to #{@receiver.contact_name}
-= simple_form_for @message do |f|
-  = hidden_field_tag 'receiver_id', @receiver.uuid
-  .ui.field
-    = f.text_area :body
-  .ui.field
-    = f.button :submit, "Send"
+- content_for :sub_title do
+  Let us know any general enquiries you have.  We'll be notified by email and get back to you shortly
+%ul.latest-charges
+  .ui.comments  
+    %li.charge
+      .ui.center.aligned.grid
+        .center.aligned.sixteen.wide.column
+          .ui.items
+            .ui.item
+              .content 
+                = render 'form'

@@ -2,8 +2,16 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :author_id
-    = f.input :receiver_id
+    = f.hidden_field :receiver_id, value: @receiver.uuid
+    = f.hidden_field :author_id, value: current_client.uuid  
+    = f.association :website, collection: @websites, :selected => @websites.last
+    / https://github.com/plataformatec/simple_form/wiki/Nested-Models
+    = f.simple_fields_for :messages do |m|
+      .ui.field
+        = m.label "Message"
+        = m.text_area :body
+        = m.hidden_field :client_id, value: current_client.uuid
 
-  .form-actions
-    = f.button :submit
+  
+    .ui.field
+      = f.button :submit

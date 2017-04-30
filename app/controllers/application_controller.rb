@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   # before_action :set_client
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_support_receiver
   # https://github.com/plataformatec/devise/wiki/How-To:-Create-custom-layouts
   layout :layout_by_resource
 
@@ -44,7 +45,10 @@ class ApplicationController < ActionController::Base
     end
   end 
 
-
+  def set_support_receiver
+    @support_receiver = Client.find_by(admin: true)
+    # @support_conversation = current_client.authored_support_conversations.build
+  end
 
   # def set_client
   #   @client = current_client

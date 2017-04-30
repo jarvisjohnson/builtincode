@@ -42,8 +42,10 @@
   .ui.vertical.segment
     .ui.container
       .four.column.row
-        %button.ui.basic.button
-          My Sites
+        - if current_client.websites.empty?
+          %button.ui.basic.button.disabled My Sites
+        -else
+          = link_to "My Sites", client_websites_path(current_client), class: "ui basic button"      
         %button.ui.basic.button{id: "modal__trigger__contact-options" }
           Get Help
   

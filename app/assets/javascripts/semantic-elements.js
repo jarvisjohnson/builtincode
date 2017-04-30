@@ -26,13 +26,14 @@ document.addEventListener("turbolinks:load", function() {
 
   $('#modal__contact-options')
     .modal('attach events', '#modal__trigger__contact-options', 'show')
-  ; 
-  $('#modal__contact__form-support')
-    .modal('attach events', '#modal__contact-options .support.button')
-  ;
-  $('#modal__contact__form-enquiry')
-    .modal('attach events', '#modal__contact-options .enquiry.button')
-  ;
+    // .modal('attach events', '#modal__trigger__contact-options__lower', 'show')
+  ;   
+  // $('#modal__contact__form-support')
+  //   .modal('attach events', '#modal__contact-options .support.button')
+  // ;
+  // $('#modal__contact__form-enquiry')
+  //   .modal('attach events', '#modal__contact-options .enquiry.button')
+  // ;
 
   // create sidebar and attach to menu open
   $('.ui.sidebar')

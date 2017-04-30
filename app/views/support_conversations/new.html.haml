@@ -1,5 +1,15 @@
-%h1 New support_conversation
+- content_for :title do
+  New Support Conversation with #{@receiver.contact_name}
+- content_for :sub_title do
+  Please detail the issues you are having and upload any helpful screenshots in the form below
+%ul.latest-charges
+  .ui.comments  
+    %li.charge
+      .ui.center.aligned.grid
+        .center.aligned.sixteen.wide.column
+          .ui.items
+            .ui.item
+              .content  
+                = render 'form'
 
-= render 'form'
-
-= link_to 'Back', support_conversations_path
+/ = link_to 'Back', support_conversations_path

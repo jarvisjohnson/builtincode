@@ -10,7 +10,10 @@
             .ui.item
               .content
                 .header
-                  Chatting with #{support_conversation.with(current_client).contact_name}
+                  - if support_conversation.website_id?
+                    = "Support request for #{support_conversation.website.name}"
+                  - else
+                    = "Chatting with #{support_conversation.with(current_client).contact_name}"
                 %hr/
                 .description
                   %em= last.body.truncate(50)

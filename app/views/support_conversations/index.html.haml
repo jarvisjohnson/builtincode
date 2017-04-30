@@ -4,6 +4,25 @@
   = "View and respond to the conversation below"
 %ul.latest-charges
   .ui.comments
+    -if @support_conversations.empty?
+      %li.charge
+        .ui.center.aligned.grid
+          .center.aligned.sixteen.wide.column
+            .ui.items
+              .ui.item
+                .content
+                  .header
+                    No Support Conversations to show at this point  
+    %li.charge
+      .ui.center.aligned.grid
+        .center.aligned.sixteen.wide.column
+          .ui.items
+            .ui.item
+              .content
+                -unless current_client.websites.empty?
+                  = link_to 'Create a New Support Request', new_support_conversation_path(receiver_id: @support_receiver), class: "ui button basic"
+                = link_to 'New General Enquiry', new_message_path(receiver_id: @support_receiver, generic_contact: true), class: "ui button basic"
+                      
     = render @support_conversations
 
 %br

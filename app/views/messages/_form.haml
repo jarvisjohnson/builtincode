@@ -1,0 +1,7 @@
+= simple_form_for @message do |f|
+  = hidden_field_tag 'receiver_id', @receiver.uuid
+  .ui.field
+    = f.label "Message"
+    = f.text_area :body
+  .ui.field
+    = f.button :submit, "Send"

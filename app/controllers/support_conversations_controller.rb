@@ -1,6 +1,7 @@
 class SupportConversationsController < ApplicationController
-  before_action :set_support_conversation, except: [:index]
-  before_action :check_participating!, except: [:index]
+  before_action :set_support_conversation, except: [:index, :new, :create]
+  before_action :check_participating!, except: [:index, :new, :create]
+  before_action :set_admin_receiver
 
   # GET /support_conversations
   # GET /support_conversations.json
@@ -16,11 +17,10 @@ class SupportConversationsController < ApplicationController
 
   # GET /support_conversations/new
   def new
+    @receiver = Client.find(params[:receiver_id])
+    @websites = current_client.websites
     @support_conversation = SupportConversation.new
-  end
-
-  # GET /support_conversations/1/edit
-  def edit
+    @support_conversation.messages.build
   end
 
   # POST /support_conversations
@@ -39,29 +39,6 @@ class SupportConversationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /support_conversations/1
-  # PATCH/PUT /support_conversations/1.json
-  def update
-    respond_to do |format|
-      if @support_conversation.update(support_conversation_params)
-        format.html { redirect_to @support_conversation, notice: 'Support conversation was successfully updated.' }
-        format.json { render :show, status: :ok, location: @support_conversation }
-      else
-        format.html { render :edit }
-        format.json { render json: @support_conversation.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /support_conversations/1
-  # DELETE /support_conversations/1.json
-  def destroy
-    @support_conversation.destroy
-    respond_to do |format|
-      format.html { redirect_to support_conversations_url, notice: 'Support conversation was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -71,10 +48,16 @@ class SupportConversationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def support_conversation_params
-      params.require(:support_conversation).permit(:author_id, :receiver_id)
+      params.require(:support_conversation).permit(:author_id, :receiver_id, :website_id, :messages_attributes => [:body, :attached_image, :client_id])
     end
 
     def check_participating!
       redirect_to dashboard_index_path unless @support_conversation && @support_conversation.participates?(current_client)
+    end 
+
+    def set_admin_receiver
+      @support_receiver = Client.find_by(admin: true)
+      # @support_conversation = current_client.authored_support_conversations.build
     end    
+
 end

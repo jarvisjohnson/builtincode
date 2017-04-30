@@ -44,5 +44,5 @@
       $("#modal__trigger__#{client.uuid}").click(function(){
         $('#modal__#{client.uuid}').modal('show');
       });
-  %td= link_to 'Message', new_message_path(receiver_id: client)
+  %td= link_to 'Message', new_message_path(receiver_id: client, generic_contact: true)
   %td= link_to 'Delete', client, :method => :delete, :data => { :confirm => 'Are you sure?' }
