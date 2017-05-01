@@ -15,6 +15,6 @@
 //= require turbolinks
 //= require semantic-ui
 //= require cocoon
-//= require react_integration
-//= require react_bundle
+// require react_integration
+// require react_bundle
 //= require_tree .
