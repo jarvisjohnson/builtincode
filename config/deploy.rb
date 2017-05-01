@@ -1,7 +1,7 @@
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
-# require 'mina/rbenv'
+require 'mina/npm'
 require 'mina/whenever'
 # require 'mina/scp'
 
@@ -99,6 +99,8 @@ task :deploy do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
+    # invoke :'npm run build'
+    # invoke :'npm run rwr-node-server'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
     # invoke :'secrets:upload'    
