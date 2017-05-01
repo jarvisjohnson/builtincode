@@ -85,7 +85,7 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:avatar, :business_name, websites_attributes: [:id, :name, :ssl, :cdn, :_destroy])
+      params.require(:client).permit(:avatar, :business_name, :contact_name, websites_attributes: [:id, :name, :ssl, :cdn, :_destroy])
     end
 
     def authenticate_admin

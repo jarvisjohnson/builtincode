@@ -64,6 +64,9 @@ Rails.application.configure do
   # Devise Mailer
   config.action_mailer.default_url_options = { :host => "builtincode.com" }
 
+  # Images in emails
+  config.action_mailer.asset_host = ENV["site_url"]
+
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
      :address => "smtp.gmail.com",
