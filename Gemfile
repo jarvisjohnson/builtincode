@@ -77,8 +77,10 @@ gem "administrate", "~> 0.3.0"
 #Apparently administrate needs Bourbon: https://rails.devcamp.com/professional-rails-development-course/advanced-user-features/installing-admin-dashboard-rails-using-administrate-gem
 gem 'bourbon'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# Use Mina for deployment
+gem 'mina-whenever', require: false
+gem 'mina-scp', require: false
+gem 'whenever', :require => false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

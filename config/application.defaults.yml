@@ -12,8 +12,9 @@ LINKEDIN_KEY: 'mixofnumber3sandstrings'
 GOOGLE_CLIENT_SECRET: 'mixofnumber3sandstrings'
 GOOGLE_CLIENT_ID: 'mixofnumber3sandstrings.apps.googleusercontent.com'
 time_zone: 'Melbourne'
-from_email: 'hello@builtincode.com'
+from_email: 'email@address.xyz'
 
 production:
   STRIPE_SECRET_KEY: 'sk_live_mixofnumber3sandstrings'
   BUILT_STRIPE_PUBLISHABLE_KEY: 'pk_live_mixofnumber3sandstrings'
+  BUILTINCODE_DATABASE_PASSWORD: 'mixofnumber3sandstrings'
