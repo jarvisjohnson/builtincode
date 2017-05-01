@@ -1,4 +1,4 @@
-class Users::SessionsController < Devise::SessionsController
+class Clients::SessionsController < Devise::SessionsController
 
   before_filter :remove_authentication_flash_message_if_root_url_requested
 
