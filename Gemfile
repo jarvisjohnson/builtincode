@@ -51,7 +51,7 @@ gem 'semantic-ui-sass', '~> 2.2', '>= 2.2.9.0'
 # Use Mina for deployment
 gem 'mina-whenever', require: false
 gem 'mina-scp', require: false
-gem 'mina-npm', require: false
+# gem 'mina-npm', require: false
 gem 'whenever', :require => false
 
 #User login

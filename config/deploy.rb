@@ -1,7 +1,7 @@
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
-require 'mina/npm'
+# require 'mina/npm'
 require 'mina/whenever'
 # require 'mina/scp'
 
