@@ -1,0 +1,9 @@
+%h5
+  ="Hey #{@receiver.contact_name ? @receiver.contact_name : @receiver.business_name},"
+%p
+  ="You've received a new message on Built in Code from #{@sender.contact_name ? @sender.contact_name : @sender.business_name}:"
+%blockquote
+  = @message.body
+%p
+  ="To reply to this message, please click "
+  = link_to 'here', support_conversation_url(@convo.id)

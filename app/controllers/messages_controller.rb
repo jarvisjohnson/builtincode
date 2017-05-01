@@ -11,9 +11,15 @@ class MessagesController < ApplicationController
 
     @message = current_client.messages.build(message_params)
     @message.support_conversation_id = @support_conversation.id
-    @support_conversation.updated_at = Time.now
     @message.save!
+
+    # Update the 'modified' time of the convo so it gets to the top of the pile
+    @support_conversation.updated_at = Time.now
     @support_conversation.save!
+
+    #send notification to the receiver of the message
+    ClientMailer.new_message_received(@message, @support_conversation).deliver_now!
+
 
     flash[:success] = "Your message was sent!"
     redirect_to support_conversation_path(@support_conversation)
