@@ -9,7 +9,7 @@
             .ui.item
               .content
                 .header
-                  Invoice : pending
+                  Invoice : #{invoice.paid ? "paid" : "upcoming"}
                 .meta
                   %span
                     = @client.business_name ? @client.business_name : @client.contact_name
