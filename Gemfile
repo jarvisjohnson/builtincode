@@ -100,7 +100,8 @@ group :development do
   gem 'binding_of_caller'
   gem "better_errors"
   # http://stackoverflow.com/questions/21397648/getting-an-error-trying-to-route-a-page-rails-server
-  gem 'progress_bar'  
+  gem 'progress_bar' 
+  gem 'rails_real_favicon' 
 end
 
 group :production do 
