@@ -1,7 +1,8 @@
+- @cancel = params[:cancel] ? "Please cancel my subscription" : nil
 = simple_form_for @message do |f|
   = hidden_field_tag 'receiver_id', @receiver.uuid
   .ui.field
     = f.label "Message"
-    = f.text_area :body
+    = f.text_area :body, value: @cancel
   .ui.field
     = f.button :submit, "Send"

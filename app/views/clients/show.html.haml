@@ -30,14 +30,15 @@
             %br/
             -@client.websites.each do |site|
               = site.name
-              = link_to "View", Domainatrix.parse(site.production_url).url, target: '_blank'
+              = link_to "View", Domainatrix.parse(site.production_url).url, target: '_blank', style: "font-size: .8em"
+              %br/
           .ui.segment
             .left.floated
               = link_to 'Edit', edit_client_path(@client)
               \|
               = link_to 'Back', clients_path   
-            .right.floated
-              = link_to 'Cancel Subscription', clients_path       
+            .right.floated{style: "font-size: .8em"}
+              = link_to "Request to Cancel Subscription", new_message_path(receiver_id: @support_receiver, generic_contact: true, cancel: true)  
 
     .ui.three.column.stackable.row
       .column

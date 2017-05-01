@@ -52,8 +52,8 @@
       
         .one.column.row
           .extra
-            = link_to 'View Live Site', Domainatrix.parse(website.production_url).url, class: "ui basic button"
-            = link_to 'View Staging Site', Domainatrix.parse(website.staging_url).url, class: "ui basic button"
+            = link_to 'View Live Site', Domainatrix.parse(website.production_url).url, class: "ui basic button", target: "_blank"
+            = link_to 'View Staging Site', Domainatrix.parse(website.staging_url).url, class: "ui basic button", target: "_blank"
             = link_to 'Request Help for this site', new_support_conversation_path(receiver_id: @support_receiver, website_id: website.id), class: "ui button basic"
               
 
