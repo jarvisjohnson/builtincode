@@ -2,28 +2,41 @@
   .ui.center.aligned.container
     .ui.stackable.divided.grid
       .eight.wide.column
-        %h4.ui.header Group 1
+        %h4.ui.header Site Links
         .ui.link.list
-          %a.item{:href => "#"} Link One
-          %a.item{:href => "#"} Link Two
-          %a.item{:href => "#"} Link Three
-          %a.item{:href => "#"} Link Four
+          = link_to "Contact Us", new_message_path(receiver_id: @support_receiver, generic_contact: true), class: "item"
+          = link_to "Terms and Conditions", pages_terms_path, class: "item"
+          = link_to "Privacy Policy", pages_privacy_path, class: "item"
+          = link_to "Support", support_conversations_path, class: "ui item"
       .eight.wide.column
-        %h4.ui.header Group 1
+        %h4.ui.header User Links
         .ui.link.list
-          %a.item{:href => "#"} Link One
-          %a.item{:href => "#"} Link Two
-          %a.item{:href => "#"} Link Three
-          %a.item{:href => "#"} Link Four
+          = link_to "Dashboard", dashboard_index_path, class: "ui item"
+          = link_to "My Information", client_path(current_client), class: "ui item"
+          - if current_client.websites.empty?
+            %span.ui.item.disabled My Sites
+          -else
+            = link_to "My Sites", client_websites_path(current_client), class: "ui item"
+          - if current_client.stripe_account_id.nil?
+            %span.ui.item.disabled My Invoices
+          -else
+            = link_to "My Invoices", index_invoices_client_path(current_client), class: "ui item"       
+    %br/
+    %br/
+    %br/
+    %br/
     .ui.grid
-      %p The TransferWise program in the United States is sponsored by Community Federal Savings Bank, to which TransferWise is a service provider, except in certain states in which TransferWise Inc. is a licensed money transmitter.
+      %p Built in Code is a custom website and web application service. We are based in New York, NY.  We have previously traded as Swish Web Developers.  All payments are taken through Stripe payment gateway.
+    %br/
+    %br/
+    %br/
     .ui.center.aligned.grid
       .ui.horizontal.small.divided.link.list
         .item © Built in Code #{Time.current.year}
-        %a.item{:href => "#"} Contact Us
-        %a.item{:href => "#"} Terms and Conditions
-        %a.item{:href => "#"} Privacy Policy
+        = link_to "Contact Us", new_message_path(receiver_id: @support_receiver, generic_contact: true), class: "item"
+        = link_to "Terms and Conditions", pages_terms_path, class: "item"
+        = link_to "Privacy Policy", pages_privacy_path, class: "item"
     .ui.center.aligned.grid
       .ui.horizontal.small.divided.link.list
         .item © Swish Web Developers #{Time.current.year}
-        %a.item{:href => "#"} Privacy Policy  
+        = link_to "Privacy Policy", pages_privacy_path, class: "item"

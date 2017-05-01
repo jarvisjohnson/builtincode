@@ -1,15 +1,16 @@
+- selected = params[:website_id] ? @websites.where(id: params[:website_id])[0] : @websites.last
 = simple_form_for(@support_conversation) do |f|
   = f.error_notification
 
   .form-inputs
     = f.hidden_field :receiver_id, value: @receiver.uuid
     = f.hidden_field :author_id, value: current_client.uuid  
-    = f.association :website, collection: @websites, :selected => @websites.last
+    = f.association :website, collection: @websites, selected: selected, required: true
     / https://github.com/plataformatec/simple_form/wiki/Nested-Models
     = f.simple_fields_for :messages do |m|
       .ui.field
         = m.label "Message"
-        = m.text_area :body
+        = m.text_area :body, required: true
         = m.hidden_field :client_id, value: current_client.uuid
 
   

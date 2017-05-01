@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
 
   get 'pages/welcome'
+  get 'pages/terms'
+  get 'pages/privacy'
+  # get 'pages/swish_privacy'
 
   get "dashboard/index"  
 

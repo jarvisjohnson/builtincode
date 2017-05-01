@@ -54,17 +54,8 @@
           .extra
             = link_to 'View Live Site', Domainatrix.parse(website.production_url).url, class: "ui basic button"
             = link_to 'View Staging Site', Domainatrix.parse(website.staging_url).url, class: "ui basic button"
-            %a.ui.basic.button{id: "modal__trigger__#{website.id}" }
-              Request Help for this site
-            .ui.modal.basic{id: "modal__#{website.id}" }
-              .header Request Help for #{website.name}
-              .content
-                / TODO: Contact Section
-                %p Contact form not built yet
-            :javascript
-              $("#modal__trigger__#{website.id}").click(function(){
-                $('#modal__#{website.id}').modal('show');
-              });
+            = link_to 'Request Help for this site', new_support_conversation_path(receiver_id: @support_receiver, website_id: website.id), class: "ui button basic"
+              
 
             - if current_client.try(:admin?)
               = link_to 'Edit', edit_client_website_path(current_client, website), class: "ui basic button"

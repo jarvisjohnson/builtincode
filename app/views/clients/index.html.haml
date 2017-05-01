@@ -13,8 +13,8 @@
   %tbody
     = render @clients
 
-- @clients.each do |client|         
-  = react_component('PageTitle', {clientName: client.business_name ? client.business_name : client.contact_name, client: client})
+/ # - @clients.each do |client|         
+/ #   = react_component('PageTitle', {clientName: client.business_name ? client.business_name : client.contact_name, client: client})
 
 / = react_component('HelloModal')
 

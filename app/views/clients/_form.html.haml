@@ -3,8 +3,8 @@
   = f.input :email
   = f.input :contact_name
   = f.input :business_name
-  = f.input :billing_currency, collection: ['AUD', 'USD']
   - if current_client.try(:admin?)
+    = f.input :billing_currency, collection: ['AUD', 'USD']
     #websites
     = f.simple_fields_for :websites do |website|
       = render 'devise/website_fields', f: website
