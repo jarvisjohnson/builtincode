@@ -18,7 +18,7 @@ module Builtincode
     #   g.orm :active_record, primary_key_type: :uuid
     # end
 
-    Rails.application.config.react.server_side = false
+    # Rails.application.config.react.server_side = false
 
   end
 end
