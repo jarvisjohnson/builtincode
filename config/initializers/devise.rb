@@ -14,6 +14,8 @@ Devise.setup do |config|
   # with default "from" parameter.
   config.mailer_sender = ENV['from_email']
 
+  Devise::Mailer.layout "mailer" # email.haml or email.erb
+
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 

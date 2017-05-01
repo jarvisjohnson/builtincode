@@ -1,9 +1,31 @@
-%h5
+/ - content_for :header do
+/   ="Hey Header Here. Lots of Text to throw in."
+/ - content_for :footer do
+/   ="Hey Footer Here. Lots of Text to throw in."
+
+/ Main Content
+
+%h4
   ="Hey #{@receiver.contact_name ? @receiver.contact_name : @receiver.business_name},"
+%hr/
 %p
   ="You've received a new message on Built in Code from #{@sender.contact_name ? @sender.contact_name : @sender.business_name}:"
-%blockquote
-  = @message.body
+%blockquote{:style => "background: #f9f9f9;border-left: 10px solid #ccc;margin: 1.5em 10px;padding: 0.5em 10px;quotes: \"\\201C\"\"\\201D\"\"\\2018\"\"\\2019\";"}
+  %br/
+  %p{:style => "display: inline;margin-left: 2em;"}
+    = @message.body
+  %br/  
+  %br/    
 %p
   ="To reply to this message, please click "
   = link_to 'here', support_conversation_url(@convo.id)
+%hr/
+%h4
+  = "Cheers,"
+  %br/
+  %br/
+  = "the Built in Code team"  
+  %br/
+%p{:style => "font-size: .9em"}
+  = "Feel free to reply to this email with any questions"
+%br/

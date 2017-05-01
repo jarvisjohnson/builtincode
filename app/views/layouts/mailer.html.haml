@@ -4,5 +4,71 @@
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
     :css
       /* Email styles need to be inline */
-  %body
-    = yield
+      @import url('http://fonts.googleapis.com/css?family=Josefin+Sans');
+      .emailContent{
+        font-family:'Josefin Sans', 'Helvetica Neue', Helvetica, sans-serif;
+      }      
+      a{
+        color: #383A35;
+      }
+      #emailFooter a{
+        color: white;
+      }
+      #emailBody{
+        font-size: 1.2em;
+        background: #f0f0f0;
+      }
+      blockquote {
+        background: #f9f9f9;
+        border-left: 10px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0.5em 10px;
+        quotes: "\201C""\201D""\2018""\2019";
+      }
+      blockquote:before {
+        color: #ccc;
+        content: open-quote;
+        font-size: 4em;
+        line-height: 0.1em;
+        margin-right: 0.25em;
+        vertical-align: -0.4em;
+      }
+      blockquote p {
+        display: inline;
+        margin-left: 2em;
+      }
+  %body.emailContent
+    %table#bodyTable{:border => "0", :cellpadding => "0", :cellspacing => "0", :height => "100%", :width => "100%"}
+      %tr
+        %td{:align => "center", :valign => "top"}
+          %table#emailContainer{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "600"}
+            %tr
+              %td{:align => "center", :valign => "top"}
+                %table#emailHeader{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%", style: "background-color: #383A35; color: #E3E8DC"}
+                  %tr
+                    %td{:align => "center", :valign => "top"}
+                      -if content_for :header
+                        = content_for :header
+                        %br/
+                      = image_tag("logos/Wide@2x.png", height: '60', width: 'auto')
+            %tr
+              %td{:align => "center", :valign => "top"}
+                %table#emailBody{:border => "0", :cellpadding => "20", :cellspacing => "0", :style => "font-size: 1.2em;background: #f0f0f0;", :width => "100%"}
+                  %tr
+                    %td{:style => "font-size: 1px;", :width => "75", :valign => "top"}  
+                    %td{:align => "left", :valign => "top"}
+                      = yield
+                    %td{:style => "font-size: 1px;", :width => "75", :valign => "top"}    
+            %tr
+              %td{:align => "center", :valign => "top"}
+                %table#emailFooter{:border => "0", :cellpadding => "40", :cellspacing => "0", :width => "100%", style: "background-color: #383A35; color: #E3E8DC"}
+                  %tr
+                    %td{:align => "center", :valign => "top"}
+                      -if content_for :footer
+                        = content_for :footer
+                        %br/
+                      = "© Built in Code #{Time.current.year}"
+                      = "|"
+                      = link_to 'Visit the Homepage', root_url
+                      %br/
+                      %p= "Built in Code is a custom website and app development service"

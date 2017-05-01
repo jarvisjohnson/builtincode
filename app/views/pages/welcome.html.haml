@@ -5,8 +5,7 @@
         =link_to "Clients", new_client_session_path, {"class": "left-link", "data-hover": "Clients"}
         / # %a.{"data-hover": "Clients"}
         / #   Clients
-        %a.left-link{"data-hover": "Home"}
-          Home
+        =link_to "Home", Domainatrix.parse("home.builtincode.com").url, {"class": "left-link", "data-hover": "Home"}
       .grid__bulk
         %a.link.main-logo.link__built{:href => "#"}
           Built
