@@ -65,7 +65,7 @@ gem 'omniauth-oauth2', '~> 1.3.1'
 # gem 'activeuuid'  # https://github.com/jashmenn/activeuuid
 gem 'activerecord-session_store'
 
-gem 'react_webpack_rails'
+# gem 'react_webpack_rails'
 
 #IMages
 gem "paperclip", "~> 5.0.0"

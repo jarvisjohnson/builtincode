@@ -99,7 +99,7 @@ task :deploy do
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
     invoke :'rails:db_migrate'
-    # invoke :'npm run build'
+    # invoke :'npm:run_build'
     # invoke :'npm run rwr-node-server'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
