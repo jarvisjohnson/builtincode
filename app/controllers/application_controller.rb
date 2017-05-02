@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   # before_action :authenticate_client!
-  protect_from_forgery prepend: true
+  protect_from_forgery with: :exception
   # before_action :set_client
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_support_receiver
