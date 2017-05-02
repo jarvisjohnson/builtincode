@@ -1,44 +1,38 @@
 .header
   .ui.vertical.segment
-    .ui.container    
-      .ui.two.column.grid
-        .twelve.wide.left.aligned.column
-          .ui.inline.dropdown
-            .flex
-              %a.toc.item.open
-                %i.sidebar.icon
-              %h1
-                = yield :title      
+    .ui.container#header-wrap    
+      %a.toc.item.open
+        %i.sidebar.icon
+      .header-text
+        %h1
+          = yield :title 
+        %p.sub-title
+          = yield :sub_title
+        = semantic_flash     
 
-        .four.wide.right.aligned.column
-          .ui.inline.dropdown
-            .text
-              - if current_client.oauth_avatar?
-                = image_tag current_client.oauth_avatar, class: "ui avatar image"
-              - else
-                = image_tag current_client.avatar.url(:thumb), class: " ui avatar image"
-              = current_client.business_name ? current_client.business_name : current_client.contact_name
-            %i.dropdown.icon
-            .menu
-              .header
-                - if current_client.oauth_avatar?
-                  = image_tag current_client.oauth_avatar, class: "ui avatar image"
-                - else
-                  = image_tag current_client.avatar.url(:thumb), class: " ui avatar image"
-                = current_client.business_name ? current_client.business_name : current_client.contact_name
-              .divider            
-              = link_to(destroy_client_session_path, :method => :delete, class: "item") do
-                Sign Out
-                %i.icon.lock.left.floated
-              = link_to(edit_client_registration_path, class: "item") do
-                Edit your Account
-                %i.icon.configure.left.floated
+      .ui.inline.dropdown.flexed-drop
+        .text
+          - if current_client.oauth_avatar?
+            = image_tag current_client.oauth_avatar, class: "ui avatar image"
+          - else
+            = image_tag current_client.avatar.url(:thumb), class: " ui avatar image"
+          = current_client.business_name ? current_client.business_name : current_client.contact_name
+        %i.dropdown.icon
+        .menu
+          .header
+            - if current_client.oauth_avatar?
+              = image_tag current_client.oauth_avatar, class: "ui avatar image"
+            - else
+              = image_tag current_client.avatar.url(:thumb), class: " ui avatar image"
+            = current_client.business_name ? current_client.business_name : current_client.contact_name
+          .divider            
+          = link_to(destroy_client_session_path, :method => :delete, class: "item") do
+            Sign Out
+            %i.icon.lock.left.floated
+          = link_to(edit_client_registration_path, class: "item") do
+            Edit your Account
+            %i.icon.configure.left.floated
 
-
-
-      = semantic_flash
-      %p.sub-title
-        = yield :sub_title
   .ui.vertical.segment
     .ui.container
       .four.column.row
