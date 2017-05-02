@@ -62,7 +62,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Devise Mailer
-  config.action_mailer.default_url_options = { :host => "builtincode.com" }
+  config.action_mailer.default_url_options = { :host => ENV["site_url"] }
 
   # Images in emails
   config.action_mailer.asset_host = ENV["site_url"]
