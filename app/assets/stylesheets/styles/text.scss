@@ -15,9 +15,9 @@ h6, .h6 {
 //Links
 a{
   cursor: pointer;
-  color: darken($primaryColor, 25%);
+  color: $linkColor;
   &:hover{
-    color: darken($primaryColor, 35%);
+    color: darken($linkColor, 10%);
   }
 }
 a.item, .ui.menu a.item, a.ui.item, .item a, .ui.button {

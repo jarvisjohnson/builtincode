@@ -29,7 +29,7 @@
           = link_to(destroy_client_session_path, :method => :delete, class: "item") do
             Sign Out
             %i.icon.lock.left.floated
-          = link_to(edit_client_registration_path, class: "item") do
+          = link_to(edit_client_path(current_client), class: "item") do
             Edit your Account
             %i.icon.configure.left.floated
 

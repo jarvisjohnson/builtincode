@@ -144,7 +144,6 @@ body.welcome {
         @media only screen and (min-width: 1760px) {
             font-size: 12em;
         }
-
     }
 }
 
@@ -218,5 +217,32 @@ body.welcome {
             -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
             transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
         }
+    }
+}
+
+//On Devise layout pages
+.login-screen-logo {
+    display: block;
+    position: relative;
+    font-size: 4em;
+    margin-bottom: 1em;
+
+    a {
+        color: #383A35;
+
+        &:hover {
+            color: #797d72;
+
+            span {
+                color: rgba(0, 255, 222, 0.8);
+            }
+        }
+
+        &:before, &:after {
+            display: none;
+        }
+    }
+    @media only screen and (max-width: 992px) {
+        display: none;
     }
 }
