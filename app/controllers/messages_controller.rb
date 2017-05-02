@@ -18,7 +18,7 @@ class MessagesController < ApplicationController
     @support_conversation.save!
 
     #send notification to the receiver of the message
-    ClientMailer.new_message_received(@message, @support_conversation).deliver_now!
+    ClientMailer.new_message_received(@message, @support_conversation).deliver_later
 
 
     flash[:success] = "Your message was sent!"

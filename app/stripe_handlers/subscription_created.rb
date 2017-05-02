@@ -9,6 +9,6 @@ class SubscriptionCreated
       :last_payment_method => 'stripe'
       )   
     client.listing.update_attribute(:approved, true)
-    Notification.subscription_renewed(client).deliver_now!
+    Notification.subscription_renewed(client).deliver_later
   end  
 end

@@ -32,7 +32,7 @@ class SupportConversationsController < ApplicationController
       if @support_conversation.save
         format.html { 
           redirect_to @support_conversation, notice: 'Support conversation was successfully created.'
-          ClientMailer.new_message_received(@support_conversation.messages.last, @support_conversation).deliver_now!
+          ClientMailer.new_message_received(@support_conversation.messages.last, @support_conversation).deliver_later
         }
         format.json { render :show, status: :created, location: @support_conversation }
       else

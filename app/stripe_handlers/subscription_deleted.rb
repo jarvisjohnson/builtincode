@@ -4,6 +4,6 @@ class SubscriptionDeleted
     client.update_attribute(:role, "lapsed")
     client.update_attribute(:subscription_status, "unpaid")
     client.listing.update_attribute(:approved, false)
-    Notification.subscription_canceled(client).deliver_now!
+    Notification.subscription_canceled(client).deliver_later
   end  
 end
