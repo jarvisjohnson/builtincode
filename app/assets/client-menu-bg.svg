@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="414px" height="579px" viewBox="0 0 414 579" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>client-menu-bg</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.5" opacity="0.2">
+        <g id="client-menu-bg" transform="translate(-1.000000, 0.000000)" fill-rule="nonzero" fill="#007062">
+            <g id="Phase-1">
+                <g id="Activity-Copy-22">
+                    <g id="Left">
+                        <g id="Group-10" transform="translate(0.572262, 0.000000)">
+                            <polygon id="Fill-2" points="295.856678 304.71042 272.471575 358.64792 413.539036 358.64792 413.539036 304.71042"></polygon>
+                            <polygon id="Fill-5" points="249.086297 414.754923 225.701195 468.692423 413.538861 468.692423 413.538861 414.754923"></polygon>
+                            <polygon id="Fill-7" points="202.326253 524.775105 178.941151 578.712605 413.540262 578.712605 413.540262 524.775105"></polygon>
+                            <circle id="Oval" cx="120.427738" cy="120" r="120"></circle>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -38,7 +38,7 @@ document.addEventListener("turbolinks:load", function() {
   // create sidebar and attach to menu open
   $('.ui.sidebar')
     .sidebar('attach events', '.toc.item.open', 'show')
-    .sidebar('attach events', '.toc.item.close', 'hide')
+    .sidebar('attach events', '.ui.sidebar', 'hide')
   ;      
 
 });

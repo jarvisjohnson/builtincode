@@ -15,10 +15,10 @@
         %span.ui.item.disabled My Sites
       -else
         = link_to "My Sites", client_websites_path(current_client), class: "ui item #{active_class(client_websites_path(current_client))}"
-      - if (current_client.stripe_account_id.nil? and !current_client.subscribed?)
-        %span.ui.item.disabled My Invoices
+      - if (current_client.stripe_account_id? and current_client.subscribed)
+        = link_to "My Invoices", index_invoices_client_path(current_client), class: "ui item #{active_class(index_invoices_client_path(current_client))}"       
       -else
-        = link_to "My Invoices", index_invoices_client_path(current_client), class: "ui item #{active_class(index_invoices_client_path(current_client))}"      
+        %span.ui.item.disabled My Invoices     
       = link_to "Support", support_conversations_path, class: "ui item #{active_class(support_conversations_path)}"     
     - if current_client.try(:admin?)
       .admin-links            

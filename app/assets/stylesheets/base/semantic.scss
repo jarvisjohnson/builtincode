@@ -164,6 +164,11 @@ main.pusher {
             text-align: center;
         }
     }
+
+    #stripe-pay {
+        float: none;
+        text-align: center;
+    }
 }
 
 .ui.dimmer {
@@ -212,7 +217,7 @@ abbr[title] {
     }
 }
 
-.status{
+.status {
     text-align: center;
 }
 
@@ -227,8 +232,8 @@ abbr[title] {
     font-size: 1.2em;
 }
 
-.site-segment{
-    .ui.label{
-        display: inline;
-    }
-}
+// .site-segment{
+//     .ui.label{
+//         display: inline;
+//     }
+// }

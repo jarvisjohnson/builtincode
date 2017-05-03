@@ -18,24 +18,13 @@
                 .ui.item
                   .content
                     %span.header $ #{website.monthly_cost_cents ? Money.new(website.monthly_cost_cents, @client_currency) : "N/A"} / Month 
-          .two.column.row
+          .two.column.stackable.row
             %span.left.aligned.column
               #{ subscription.nil? ? "Awaiting subscription signup" : subscription.plan.name }
             %span.right.aligned.column
               %span{class: "ui right basic label subscription-#{ (@unsubscribed == true) ? "pending orange" : "#{subscription.status} green" }"} #{subscription.nil? ? "Subscription: pending" : "Subscription: #{subscription.status}" }                            
         .one.column.row
-          .description
-            %p
-        .one.column.row
-          .extra
-            -if @unsubscribed
-              = form_tag client_website_subscriptions_path(@client, website) do
-                - initial_charge = website.monthly_cost_cents
-                - if flash[:error].present?
-                  #error_explanation
-                    %p= flash[:error]   
-                .ui.right.floated     
-                  %script.stripe-button{"data-amount" => initial_charge, "data-description" => "A month's subscription", "data-key" => "#{Rails.configuration.stripe[:publishable_key]}", "data-description" => "#{@description}", "data-email" => "#{current_client.email}",  "data-locale" => "auto", :src => "https://checkout.stripe.com/checkout.js"}     
+          .extra   
             .ui.label 
               = website.app_type ?  website.app_type : 'Ruby'   
             - if website.features.exists?
@@ -49,6 +38,14 @@
                     = feature.name
                   %span
                     (@ $ #{Money.new(feature.billing_units*100, @client_currency)})         
+            -if @unsubscribed
+              = form_tag client_website_subscriptions_path(@client, website) do
+                - initial_charge = website.monthly_cost_cents
+                - if flash[:error].present?
+                  #error_explanation
+                    %p= flash[:error]   
+                .ui.right.floated#stripe-pay   
+                  %script.stripe-button{"data-amount" => initial_charge, "data-description" => "A month's subscription", "data-key" => "#{Rails.configuration.stripe[:publishable_key]}", "data-description" => "#{@description}", "data-email" => "#{current_client.email}",  "data-locale" => "auto", :src => "https://checkout.stripe.com/checkout.js"}                      
                   
       
         .one.column.row

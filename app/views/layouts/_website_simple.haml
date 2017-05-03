@@ -18,14 +18,11 @@
                 .ui.item
                   .content
                     %span.header $ #{website.monthly_cost_cents ? Money.new(website.monthly_cost_cents, @client_currency) : "N/A"} / Month 
-          .two.column.row
+          .two.column.stackable.row
             %span.left.aligned.column
               #{ subscription.nil? ? "Awaiting subscription signup" : subscription.plan.name }
             %span.right.aligned.column
               %span{class: "ui right basic label subscription-#{ (@unsubscribed == true) ? "pending orange" : "#{subscription.status} green" }"} #{subscription.nil? ? "Subscription: pending" : "Subscription: #{subscription.status}" }                            
-        .one.column.row
-          .description
-            %p
         .one.column.row
           .extra
             -if @unsubscribed
