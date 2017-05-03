@@ -14,7 +14,7 @@ class ClientsController < ApplicationController
   # GET /clients/1.json
   def show
     # redirect_to root_url
-    @client = Client.find(params[:id])
+    @client = Client.friendly.find(params[:id])
   end
 
   # GET /clients/new
@@ -24,7 +24,7 @@ class ClientsController < ApplicationController
 
   # GET /clients/1/edit
   def edit
-    @client = Client.find(params[:id])
+    @client = Client.friendly.find(params[:id])
   end
 
   # POST /clients
@@ -46,7 +46,7 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1
   # PATCH/PUT /clients/1.json
   def update
-    @client = Client.find(params[:id])
+    @client = Client.friendly.find(params[:id])
     respond_to do |format|
       if @client.update(client_params)
         format.html { redirect_to @client, notice: 'Client was successfully updated.' }
@@ -80,7 +80,7 @@ class ClientsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client
-      @client = Client.find(params[:id])
+      @client = Client.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

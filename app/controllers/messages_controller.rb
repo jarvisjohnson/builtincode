@@ -33,12 +33,12 @@ class MessagesController < ApplicationController
 
   def find_conversation!
     if (params[:generic_contact] && params[:receiver_id])
-      @receiver = Client.find(params[:receiver_id])
+      @receiver = Client.friendly.find(params[:receiver_id])
       @support_conversation = SupportConversation.between(current_client.uuid, @receiver.uuid).where(website_id: nil)[0]
       # @support_conversation = SupportConversation.create(author_id: current_client.uuid, 
       #                                                     receiver_id: @receiver.uuid)      
     elsif params[:receiver_id]
-      @receiver = Client.find(params[:receiver_id])
+      @receiver = Client.friendly.find(params[:receiver_id])
       redirect_to(dashboard_index_path) and return unless @receiver
       @support_conversation = SupportConversation.between(current_client.uuid, @receiver.uuid)[0]
     else

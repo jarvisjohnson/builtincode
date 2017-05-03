@@ -41,6 +41,7 @@
 #  admin                  :boolean
 #  subscribed             :boolean          default(FALSE)
 #  receipt_number         :string(255)
+#  slug                   :string(255)
 #
 # Indexes
 #
@@ -50,6 +51,7 @@
 #  index_clients_on_invitations_count     (invitations_count)
 #  index_clients_on_invited_by_id         (invited_by_id)
 #  index_clients_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_clients_on_slug                  (slug) UNIQUE
 #
 
 require 'rails_helper'

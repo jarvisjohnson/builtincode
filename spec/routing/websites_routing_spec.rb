@@ -20,11 +20,13 @@
 #  production_url         :string(255)
 #  staging_url            :string(255)
 #  live_status            :string(255)      default("live")
+#  slug                   :string(255)
 #
 # Indexes
 #
 #  index_websites_on_client_id    (client_id)
 #  index_websites_on_features_id  (features_id)
+#  index_websites_on_slug         (slug) UNIQUE
 #
 
 require "rails_helper"

@@ -19,7 +19,6 @@ module Builtincode
     # end
 
     # Rails.application.config.react.server_side = false
-
     config.exceptions_app = self.routes
 
   end

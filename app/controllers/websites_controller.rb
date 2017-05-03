@@ -70,11 +70,11 @@ class WebsitesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_website
-      @website = Website.find(params[:id])
+      @website = Website.friendly.find(params[:id])
     end
 
     def load_client
-      params[:client_id] ? @client = Client.find(params[:client_id]) : @client = current_client
+      params[:client_id] ? @client = Client.friendly.find(params[:client_id]) : @client = current_client
     end
 
     def websites

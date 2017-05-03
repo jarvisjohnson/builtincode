@@ -41,6 +41,7 @@
 #  admin                  :boolean
 #  subscribed             :boolean          default(FALSE)
 #  receipt_number         :string(255)
+#  slug                   :string(255)
 #
 # Indexes
 #
@@ -50,6 +51,7 @@
 #  index_clients_on_invitations_count     (invitations_count)
 #  index_clients_on_invited_by_id         (invited_by_id)
 #  index_clients_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_clients_on_slug                  (slug) UNIQUE
 #
 
 class Client < ApplicationRecord
@@ -63,7 +65,7 @@ class Client < ApplicationRecord
 
   #paperclip
   has_attached_file :avatar, styles: { medium: "300x300#", thumb: "100x100#" }, default_url: "default_avatar.jpg"
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/         
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   #relation to websites
   has_many :websites
@@ -73,6 +75,12 @@ class Client < ApplicationRecord
   has_many :authored_support_conversations, class_name: 'SupportConversation', foreign_key: 'author_id'
   has_many :received_support_conversations, class_name: 'SupportConversation', foreign_key: 'receiver_id'   
   has_many :messages, dependent: :destroy
+
+
+  # Better URL Slugs
+  extend FriendlyId
+  friendly_id :business_name, use: :slugged
+  validates :business_name, uniqueness: true, presence: true
 
   # Omniauth login
   # https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview

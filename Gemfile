@@ -40,6 +40,7 @@ gem "stripe"
 gem "stripe_event"
 gem "money"
 gem "domainatrix"
+gem 'friendly_id', '~> 5.1.0'
 
 ### forms
 gem 'simple_form', "~> 3.4"

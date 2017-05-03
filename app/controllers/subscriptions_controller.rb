@@ -89,7 +89,7 @@ class SubscriptionsController < ApplicationController
 
     def set_website
       #TODO: this needs to be dynamic for each website; should be creating plans with the API based on inputs I have as Admin 
-      @website = Website.find(params[:website_id])
+      @website = Website.friendly.find(params[:website_id])
     end
 
     def set_description

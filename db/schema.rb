@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503163240) do
+ActiveRecord::Schema.define(version: 20170503220905) do
 
   create_table "clients", primary_key: "uuid", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "",    null: false
@@ -51,12 +51,14 @@ ActiveRecord::Schema.define(version: 20170503163240) do
     t.boolean  "admin"
     t.boolean  "subscribed",             default: false
     t.string   "receipt_number"
+    t.string   "slug"
     t.index ["confirmation_token"], name: "index_clients_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_clients_on_email", unique: true, using: :btree
     t.index ["invitation_token"], name: "index_clients_on_invitation_token", unique: true, using: :btree
     t.index ["invitations_count"], name: "index_clients_on_invitations_count", using: :btree
     t.index ["invited_by_id"], name: "index_clients_on_invited_by_id", using: :btree
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true, using: :btree
+    t.index ["slug"], name: "index_clients_on_slug", unique: true, using: :btree
   end
 
   create_table "clients_websites", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -81,6 +83,18 @@ ActiveRecord::Schema.define(version: 20170503163240) do
     t.integer "feature_id", null: false
     t.index ["feature_id"], name: "index_features_websites_on_feature_id", using: :btree
     t.index ["website_id"], name: "index_features_websites_on_website_id", using: :btree
+  end
+
+  create_table "friendly_id_slugs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
 
   create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -131,8 +145,10 @@ ActiveRecord::Schema.define(version: 20170503163240) do
     t.string   "production_url"
     t.string   "staging_url"
     t.string   "live_status",            default: "live"
+    t.string   "slug"
     t.index ["client_id"], name: "index_websites_on_client_id", using: :btree
     t.index ["features_id"], name: "index_websites_on_features_id", using: :btree
+    t.index ["slug"], name: "index_websites_on_slug", unique: true, using: :btree
   end
 
   add_foreign_key "features", "websites"

@@ -17,7 +17,7 @@ class SupportConversationsController < ApplicationController
 
   # GET /support_conversations/new
   def new
-    @receiver = Client.find(params[:receiver_id])
+    @receiver = Client.friendly.find(params[:receiver_id])
     @websites = current_client.websites
     @support_conversation = SupportConversation.new
     @message = @support_conversation.messages.build
