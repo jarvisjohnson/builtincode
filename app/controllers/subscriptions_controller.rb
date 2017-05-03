@@ -5,6 +5,7 @@ class SubscriptionsController < ApplicationController
 
   before_action :authenticate_client!, except: :webhook
   before_action :set_description, except: :webhook
+  before_action :check_if_current_stripe_account
 
 
   def new
@@ -12,10 +13,12 @@ class SubscriptionsController < ApplicationController
 
   def create
 
-    customer = Stripe::Customer.create(
-      :email => params[:stripeEmail],
-      :source  => params[:stripeToken]
-    )
+    customer = @current_account ? 
+      current_client.stripe_account_id :
+      Stripe::Customer.create(
+        :email => params[:stripeEmail],
+        :source  => params[:stripeToken]
+      )
 
     # https://stripe.com/docs/subscriptions/quantities
     # Use base plan of $1 
@@ -34,6 +37,10 @@ class SubscriptionsController < ApplicationController
 
     current_client.assign_attributes(
       :stripe_account_id => customer.id,
+      ) if !@current_account
+
+    current_client.assign_attributes(
+      :subscribed => true
       )
 
     current_client.save    
@@ -87,6 +94,10 @@ class SubscriptionsController < ApplicationController
 
     def set_description
       @description = "Some amazing product"
-    end    
+    end   
+
+    def check_if_current_stripe_account
+      @current_account = current_client.stripe_account_id?
+    end 
 
 end

@@ -7,12 +7,12 @@ Stripe.api_key = Rails.configuration.stripe[:secret_key]
 
 StripeEvent.configure do |events|
 
-  events.subscribe 'customer.subscription.deleted' , SubscriptionDeleted.new
+  events.subscribe 'customer.subscription.deleted', ::SubscriptionDeleted.new
 
-  events.subscribe 'invoice.payment_succeeded', SubscriptionRenewed.new
+  events.subscribe 'customer.subscription.created', ::SubscriptionCreated.new
 
-  events.all do |event|
-    events.all BillingEventLogger.new(Rails.logger)
-    # events.subscribe 'customer.created', CustomerCreated.new
-  end
+  # events.subscribe 'invoice.payment_succeeded', ::SubscriptionInvoicePaid.new
+
+  events.all ::BillingEventLogger.new(Rails.logger)
+
 end

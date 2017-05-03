@@ -27,7 +27,7 @@ class DashboardController < ApplicationController
 
     @invoices = Stripe::Invoice.list(:customer => @client.stripe_account_id, limit: 6)
 
-    @upcoming = @client.stripe_account_id ? 
+    @upcoming = (@client.stripe_account_id? and @client.subscribed?) ? 
       Stripe::Invoice.upcoming(:customer => @client.stripe_account_id) : 
       nil
 

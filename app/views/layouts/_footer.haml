@@ -17,7 +17,7 @@
             %span.ui.item.disabled My Sites
           -else
             = link_to "My Sites", client_websites_path(current_client), class: "ui item"
-          - if current_client.stripe_account_id.nil?
+          - if (current_client.stripe_account_id.nil? and !current_client.subscribed?)
             %span.ui.item.disabled My Invoices
           -else
             = link_to "My Invoices", index_invoices_client_path(current_client), class: "ui item"       

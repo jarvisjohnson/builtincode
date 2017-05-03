@@ -1,3 +1,4 @@
+- @unsubscribed = (subscription.nil? or subscription.status == 'canceled')
 .ui.segment.site-segment
   .ui.divided.items
     .item
@@ -21,20 +22,20 @@
             %span.left.aligned.column
               #{ subscription.nil? ? "Awaiting subscription signup" : subscription.plan.name }
             %span.right.aligned.column
-              %span{class: "ui right basic label subscription-#{ subscription.nil? ? "pending orange" : "#{subscription.status} green" }"} #{subscription.nil? ? "Subscription: pending" : "Subscription: #{subscription.status}" }                            
+              %span{class: "ui right basic label subscription-#{ (@unsubscribed == true) ? "pending orange" : "#{subscription.status} green" }"} #{subscription.nil? ? "Subscription: pending" : "Subscription: #{subscription.status}" }                            
         .one.column.row
           .description
             %p
         .one.column.row
           .extra
-            -if subscription.nil?
+            -if @unsubscribed
               = form_tag client_website_subscriptions_path(@client, website) do
                 - initial_charge = website.monthly_cost_cents
                 - if flash[:error].present?
                   #error_explanation
                     %p= flash[:error]   
                 .ui.right.floated     
-                  %script.stripe-button{"data-amount" => initial_charge, "data-description" => "A month's subscription", "data-key" => "#{Rails.configuration.stripe[:publishable_key]}", "data-description" => "#{@description}", "data-email" => "#{current_client.email}",  "data-locale" => "auto", :src => "https://checkout.stripe.com/checkout.js"}     
+                  %script.stripe-button{"data-amount" => initial_charge, "data-description" => "A month's subscription", "data-key" => "#{Rails.configuration.stripe[:publishable_key]}", "data-description" => "#{@description}", "data-email" => "#{current_client.email}",  "data-image" => "#{image_url("logos/Square.png")}","data-locale" => "auto", :src => "https://checkout.stripe.com/checkout.js"}     
             .ui.label 
               = website.app_type ?  website.app_type : 'Ruby'   
             - if website.features.exists?

@@ -23,7 +23,7 @@
       .left.floated.column
         %h2 Invoice Summary
       .right.floated.right.aligned.column
-        = link_to "My Invoices", index_invoices_client_path(current_client), class: "ui basic button #{"disabled" if current_client.stripe_account_id.nil?}"
+        = link_to "My Invoices", index_invoices_client_path(current_client), class: "ui basic button #{"disabled" if (current_client.stripe_account_id.nil? and !current_client.subscribed?)}"
 
 
   - if @upcoming
@@ -51,7 +51,7 @@
           .left.floated.column
             / %h2 Invoice Summary
           .right.floated.right.aligned.column
-            = link_to "View More Invoices", index_invoices_client_path(current_client), class: "ui basic button #{"disabled" if current_client.stripe_account_id.nil?}"                         
+            = link_to "View More Invoices", index_invoices_client_path(current_client), class: "ui basic button #{"disabled" if (current_client.stripe_account_id.nil? and !current_client.subscribed?)}"                         
 
 
   - else

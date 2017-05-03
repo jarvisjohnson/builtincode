@@ -1,0 +1,7 @@
+- content_for :header do
+  %span Built in Code Membership Activated
+%h4
+  ="Hey #{@client.contact_name ? @client.contact_name : @client.business_name},"
+%hr/
+%p
+  = @message

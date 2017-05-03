@@ -1,3 +1,4 @@
+- @unsubscribed = (subscription.nil? or subscription.status == 'canceled')
 .ui.segment.site-segment
   .ui.divided.items
     .item
@@ -21,13 +22,13 @@
             %span.left.aligned.column
               #{ subscription.nil? ? "Awaiting subscription signup" : subscription.plan.name }
             %span.right.aligned.column
-              %span{class: "ui right basic label subscription-#{ subscription.nil? ? "pending orange" : "#{subscription.status} green" }"} #{subscription.nil? ? "Subscription: pending" : "Subscription: #{subscription.status}" }                            
+              %span{class: "ui right basic label subscription-#{ (@unsubscribed == true) ? "pending orange" : "#{subscription.status} green" }"} #{subscription.nil? ? "Subscription: pending" : "Subscription: #{subscription.status}" }                            
         .one.column.row
           .description
             %p
         .one.column.row
           .extra
-            -if subscription.nil?
+            -if @unsubscribed
               = form_tag client_website_subscriptions_path(@client, website) do
                 - initial_charge = website.monthly_cost_cents
                 - if flash[:error].present?

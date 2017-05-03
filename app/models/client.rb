@@ -39,6 +39,8 @@
 #  billing_currency       :string(255)      default("AUD")
 #  stripe_account_id      :string(255)
 #  admin                  :boolean
+#  subscribed             :boolean          default(FALSE)
+#  receipt_number         :string(255)
 #
 # Indexes
 #

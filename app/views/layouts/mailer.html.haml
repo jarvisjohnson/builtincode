@@ -47,10 +47,11 @@
                 %table#emailHeader{:border => "0", :cellpadding => "20", :cellspacing => "0", :width => "100%", style: "background-color: #383A35; color: #E3E8DC"}
                   %tr
                     %td{:align => "center", :valign => "top"}
+                      = image_tag("logos/Wide@2x.png", height: '60', width: 'auto')
                       -if content_for :header
+                        %br/
                         = content_for :header
                         %br/
-                      = image_tag("logos/Wide@2x.png", height: '60', width: 'auto')
             %tr
               %td{:align => "center", :valign => "top"}
                 %table#emailBody{:border => "0", :cellpadding => "20", :cellspacing => "0", :style => "font-size: 1.2em;background: #f0f0f0;", :width => "100%"}
@@ -58,6 +59,17 @@
                     %td{:style => "font-size: 1px;", :width => "75", :valign => "top"}  
                     %td{:align => "left", :valign => "top"}
                       = yield
+                      %h4
+                        = "Cheers,"
+                        %br/
+                        %br/
+                        = "the Built in Code team"  
+                        %br/                      
+                      %p{:style => "font-size: .9em"}
+                      %hr
+                      %br/
+                      = "Feel free to reply to this email with any questions"
+                      %br/
                     %td{:style => "font-size: 1px;", :width => "75", :valign => "top"}    
             %tr
               %td{:align => "center", :valign => "top"}

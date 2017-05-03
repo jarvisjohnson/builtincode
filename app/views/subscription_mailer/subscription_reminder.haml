@@ -1,0 +1,9 @@
+- content_for :header do
+  %span Your Built in Code Membership is due for renewal
+/ - content_for :footer do
+/   ="Hey Footer Here. Lots of Text to throw in."
+%h4
+  ="Hey #{@client.contact_name ? @client.contact_name : @client.business_name},"
+%hr/
+%p
+  = @message

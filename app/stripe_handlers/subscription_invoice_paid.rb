@@ -1,5 +1,5 @@
-class SubscriptionCreated
-
+class SubscriptionInvoicePaid
+  
   def call(event)
     # Get admins
     admin = ::Client.where(admin: true)
@@ -12,15 +12,15 @@ class SubscriptionCreated
       :subscribed => true, 
       :receipt_number => event.data.object.id,
       ) 
-
-    # Notify the client
-    SubscriptionMailer.subscription_created(client).deliver_later
     
+    # notify the client
+    SubscriptionMailer.subscription_invoice_paid(client).deliver_later
+
     # notify admins
     admin.each do |admin|
-      SubscriptionMailer.subscription_created(admin).deliver_later
+      SubscriptionMailer.subscription_invoice_paid(admin).deliver_later
     end
 
-  end  
+  end
 
 end
