@@ -17,6 +17,11 @@
     %main
       .ui.middle.aligned.center.aligned.grid.full-height
         .column.devise-wrapper
+          %div.login-screen-logo
+            = link_to(root_url, class: "link main-logo link__built") do
+              Built
+              %span> in
+              Code
           = semantic_flash
           .ui.segment
             / https://github.com/doabit/semantic-ui-sass  
