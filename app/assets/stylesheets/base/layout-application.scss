@@ -32,11 +32,14 @@ main {}
 
     .toc.item {
         order: 1;
-        flex: 50%;
+        flex: 20%;
+        .sidebar.icon{
+            color: rgba(0, 255, 222, 1);
+        }
     }
 
     .flexed-drop {
-        flex: 50%;
+        flex: 80%;
         order: 2;
 
         /* flex: 0 0 50%; */
