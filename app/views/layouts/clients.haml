@@ -1,13 +1,14 @@
 !!!
 %html
   %head
+    = set_meta_tags title: 'Client Dashboard', description: 'Client login page.', keywords: 'Dashboard, Clients, Hosting', nofollow: true
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     / Standard Meta
     %meta{:charset => "utf-8"}/
     %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
     %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0", :name => "viewport"}/
     / Site Properties
-    %title BUILTINCODE Client Dashboard
+    %title Built in Code Client Dashboard
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'

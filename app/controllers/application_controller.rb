@@ -2,15 +2,52 @@ class ApplicationController < ActionController::Base
   # before_action :authenticate_client!
   protect_from_forgery with: :exception
   # before_action :set_client
+
+  #META-TAGS: https://www.cookieshq.co.uk/posts/easy-seo-metatags-with-rails-4
+  before_action :prepare_meta_tags, if: "request.get?"
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_support_receiver
   # https://github.com/plataformatec/devise/wiki/How-To:-Create-custom-layouts
   layout :layout_by_resource
 
-  # def after_sign_in_path_for(resource)
-  #   # request.env['omniauth.origin'] || stored_location_for(resource) || root_path
-  #   dashboard_index_path
-  # end  
+  def prepare_meta_tags(options={})
+    site_name   = "Built in Code"
+    title       = [controller_name, action_name].join(" ")
+    description = "Built in Code creates enterprise-grade web software. We are Ruby developers in New York City."
+    image       = options[:image] || 'logos/Wide.png'
+    current_url = request.url
+
+    # Let's prepare a nice set of defaults
+    defaults = {
+      site:        site_name,
+      title:       title,
+      image:       image,
+      description: description,
+      keywords:    %w[web app software development ruby rails NYC website developers],
+      icon:        'favicon/favicon.ico',
+      publisher:   "https://plus.google.com/104777449937869768317",
+      twitter: {
+        site_name: site_name,
+        site: '@swishwebdev',
+        card: 'summary',
+        description: description,
+        image: image
+      },
+      og: {
+        url: current_url,
+        site_name: site_name,
+        title: title,
+        image: image,
+        description: description,
+        type: 'website'
+      }
+    }
+
+    options.reverse_merge!(defaults)
+
+    set_meta_tags options
+  end
 
   def after_sign_out_path_for(resource)
     new_client_session_path

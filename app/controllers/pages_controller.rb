@@ -1,19 +1,21 @@
 class PagesController < ApplicationController
-  
+
   def welcome
     render action: "welcome", layout: "welcome_layout"
+
+    prepare_meta_tags(title: "Built in Code")
   end
   
   def terms
     render action: "terms"
+
+    prepare_meta_tags(title: "Terms & Conditions")     
   end
   
   def privacy
     render action: "privacy"
-  end
-  
-  # def swish_privacy
-  #   render action: "swish_privacy"
-  # end
-  
+
+    prepare_meta_tags(title: "Privacy Policy")
+  end  
+
 end
