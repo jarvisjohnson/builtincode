@@ -10,6 +10,15 @@
     .two.column.row
       .left.floated.column
         %h2 Websites Summary
+        %div{:class => 'counter-wrapper'}
+          %h1 Counter
+          %form{:class => 'counter'}
+            %input{:id => 'counter', :name => 'counter', :type => 'number', :value => '0'}/
+            %button{:id => 'increment'} Increment            
+            %button{:id => 'decrement'} Decrement
+        = javascript_pack_tag 'counter'
+        = stylesheet_pack_tag 'counter'
+
       .right.floated.right.aligned.column
         = link_to "My Sites", client_websites_path(current_client), class: "ui basic button #{"disabled" if current_client.websites.empty?}"
   - if @websites.nil? || @websites.empty?
