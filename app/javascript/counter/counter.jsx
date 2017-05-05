@@ -11,6 +11,9 @@ const counter = {
       event.preventDefault();
       const currentValue = inputNode.value;
       inputNode.value = parseInt(currentValue, 0) + 1;
+      document.body.style.fontSize = inputNode.value + 'px';
+      console.log(inputNode.value);
+      console.log(document.body.style.fontSize);
     });
 
     decrementNode.addEventListener('click', (event) => {
@@ -18,6 +21,9 @@ const counter = {
       const currentValue = inputNode.value;
       if (currentValue > 0) {
         inputNode.value = parseInt(currentValue, 0) - 1;
+        document.body.style.fontSize = inputNode.value + 'px';
+        console.log(inputNode.value);
+        console.log(document.body.style.fontSize);
       }
     });
   }
